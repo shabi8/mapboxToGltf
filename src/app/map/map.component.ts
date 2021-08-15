@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, HostListener } from '@angular/core';
 import { LayerOption } from 'application-types';
 import { LngLatLike, LngLat } from 'mapbox-gl';
 import { SelectMarkerService } from '../select-marker/select-marker.service';
@@ -21,23 +21,55 @@ export class MapComponent implements OnInit {
   showMarker = false;
   markerLngLat: LngLatLike;
   markerDraggable: boolean = true;
-  markerClass: string = 'catImage'
-  markerImage =  "https://docs.mapbox.com/mapbox-gl-js/assets/washington-monument.jpg"
+  markerClass: string = 'catImage';
+  markerImage =  "https://docs.mapbox.com/mapbox-gl-js/assets/washington-monument.jpg";
+  markerSelectedOption: LayerOption;
 
+  object3D;
+  show3dPopUp: boolean;
 
   constructor(private selectMarkerService: SelectMarkerService, private ngZone: NgZone, private mapService: MapCustomService) { }
 
   ngOnInit(): void {
     this.selectMarkerService.layerOption$.subscribe((option: LayerOption) => {
       console.log(option);
+      console.log(this.map);
+      if (this.markerSelectedOption && this.markerSelectedOption.projection === 2) {
+        // this.map.removeLayer(this.markerSelectedOption.name);
+        window['tb'].clear(true);
+      }
+      this.show3dPopUp = false;
       if (option.projection === 1) {
+        if (this.object3D){
+          window['tb'].remove(this.object3D)
+        }
+        this.showMarker = true;
         this.markerImage = option.url;
       }
       if (option.projection === 2) {
         this.showMarker = false; // if you want to see 3d model change with marker comment this line
-        this.mapService.add3dLayer(this.map, option, this.markerLngLat)
+        this.mapService.add3dLayer(this.map, option, this.markerLngLat, this.onObjectChanged, this.onSelectedChange)
+
+
       }
+      this.markerSelectedOption = option;
     });
+  }
+
+
+  onSelectedChange = ( e ) => {
+    let selectedObject = e.detail; //we get the object selected/unselected
+    let selectedValue = selectedObject.selected; //we get if the object is selected after the event
+
+    this.show3dPopUp = selectedValue;
+    this.object3D = selectedObject;
+  }
+
+  onObjectChanged = ( e ) => {
+    let object = e.detail.object; // the object that has changed
+    let action = e.detail.action; // the action that defines the change
+
+    this.markerLngLat = new LngLat(action.position[0], action.position[1])
   }
 
   addMarker(event) {
@@ -46,15 +78,8 @@ export class MapComponent implements OnInit {
     const lat = event.lngLat.lat;
     const markLngLat = new LngLat(lng, lat);
     this.markerLngLat = markLngLat;
-    this.showMarker = true; // for 3d first commet this line
+    this.showMarker = true;
 
-    // and uncomment this block. !!! no options available when 3d first!!!
-    // this.mapService.add3dLayer(this.map, {
-    //   name: '3d-Buildeing',
-    //   url: 'https://dl.dropbox.com/s/di5vm2d6d55jzvd/Apartment%20Building_17_blend.gltf',
-    //   projection: 2,
-    //   type: 'gltf'
-    // }, this.markerLngLat)
   }
 
 

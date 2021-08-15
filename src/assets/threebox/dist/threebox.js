@@ -319,7 +319,7 @@ Threebox.prototype = {
 
 		this.objects = new Objects();
 
-		this.mapboxVersion = parseFloat(this.map.version); 
+		this.mapboxVersion = parseFloat(this.map.version);
 
 		// Set up a THREE.js scene
 		this.renderer = new THREE.WebGLRenderer({
@@ -424,7 +424,7 @@ Threebox.prototype = {
 			let lngDiff; // difference between cursor and model left corner
 			let latDiff; // difference between cursor and model bottom corner
 			let altDiff; // difference between cursor and model height
-			let rotationDiff; 
+			let rotationDiff;
 
 			// Return the xy coordinates of the mouse position
 			function mousePos(e) {
@@ -434,7 +434,7 @@ Threebox.prototype = {
 					y: e.originalEvent.clientY - rect.top - canvas.clientTop
 				};
 			}
-			
+
 			this.unselectObject = function () {
 				//deselect, reset and return
 				this.selectedObject.selected = false;
@@ -1249,7 +1249,7 @@ Threebox.prototype = {
 
 	//[jscastro] get the sun position (azimuth, altitude) from a given datetime, lng, lat
 	getSunPosition: function (date, coords) {
-		return SunCalc.getPosition(date || Date.now(), coords[1], coords[0]);  
+		return SunCalc.getPosition(date || Date.now(), coords[1], coords[0]);
 	},
 
 	//[jscastro] get the sun times for sunrise, sunset, etc.. from a given datetime, lng, lat and alt
@@ -1290,9 +1290,9 @@ Threebox.prototype = {
 		}
 
 		this.lightDateTime = date;
-		this.lightLng = this.mapCenter.lng; 
+		this.lightLng = this.mapCenter.lng;
 		this.lightLat = this.mapCenter.lat
-		this.sunPosition = this.getSunPosition(date, [this.mapCenter.lng, this.mapCenter.lat]);  
+		this.sunPosition = this.getSunPosition(date, [this.mapCenter.lng, this.mapCenter.lat]);
 		let altitude = this.sunPosition.altitude;
 		let azimuth = Math.PI + this.sunPosition.azimuth;
 		//console.log("Altitude: " + utils.degreeify(altitude) + ", Azimuth: " + (utils.degreeify(azimuth)));
@@ -1418,7 +1418,7 @@ Threebox.prototype = {
 		this.lights.dirLight.shadow.camera.bottom = this.lights.dirLight.shadow.camera.left = -d2;
 		this.lights.dirLight.shadow.camera.near = 1;
 		this.lights.dirLight.shadow.camera.visible = true;
-		this.lights.dirLight.shadow.camera.far = 400000000; 
+		this.lights.dirLight.shadow.camera.far = 400000000;
 
 		this.lights.hemiLight = new THREE.HemisphereLight(new THREE.Color(0xffffff), new THREE.Color(0xffffff), 0.6);
 		this.lights.hemiLight.color.setHSL(0.661, 0.96, 0.12);
@@ -1479,7 +1479,7 @@ const utils = require("../utils/utils.js");
 function AnimationManager(map) {
 
     this.map = map
-    this.enrolledObjects = [];    
+    this.enrolledObjects = [];
     this.previousFrameTime;
 
 };
@@ -1627,7 +1627,7 @@ AnimationManager.prototype = {
 				obj.isPlaying = false;
 				cancelAnimationFrame(obj.animationMethod);
 			}
-			//TODO: if this is removed, it produces an error in 
+			//TODO: if this is removed, it produces an error in
 			this.animationQueue = [];
 			return this;
 		}
@@ -1715,7 +1715,7 @@ AnimationManager.prototype = {
 				this.position.copy(w);
 				let p = utils.unprojectFromWorld(w);
 				this.coordinates = options.position = p;
-			} 
+			}
 
 			//Each time the object is positioned, project the floor and correct shadow plane
 			this.setBoundingBoxShadowFloor();
@@ -2043,7 +2043,7 @@ CameraSync.prototype = {
             // Furthest distance optimized by @jscastro76
             const topHalfSurfaceDistance = Math.sin(this.halfFov) * this.cameraToCenterDistance / Math.sin(Math.PI - groundAngle - this.halfFov);
 
-            // Calculate z distance of the farthest fragment that should be rendered. 
+            // Calculate z distance of the farthest fragment that should be rendered.
             furthestDistance = pitchAngle * topHalfSurfaceDistance + this.cameraToCenterDistance;
 
             // Add a bit extra to avoid precision problems when a fragment's distance is exactly `furthestDistance`
@@ -2073,7 +2073,7 @@ CameraSync.prototype = {
         if (t.elevation) cameraWorldMatrix.elements[14] = t._camera.position[2] * worldSize;
         //this.camera.matrixWorld.elements is equivalent to t._camera._transform
         this.camera.matrixWorld.copy(cameraWorldMatrix);
-        
+
         let zoomPow = t.scale * this.state.worldSizeRatio;
         // Handle scaling and translation of objects in the map in the world's matrix transform, not the camera
         let scale = new THREE.Matrix4;
@@ -2520,14 +2520,14 @@ function LabelRenderer(map) {
 	this.render = async function (scene, camera) {
 		this.scene = scene;
 		this.camera = camera;
-		return new Promise((resolve) => { resolve(this.renderer.render(scene, camera)) }); 
+		return new Promise((resolve) => { resolve(this.renderer.render(scene, camera)) });
 	}
 
 	//[jscastro] method to toggle Layer visibility
 	this.toggleLabels = async function (layerId, visible) {
 		return new Promise((resolve) => {
 			resolve(this.setVisibility(layerId, visible, this.scene, this.camera, this.renderer));
-		}) 
+		})
 	};
 
 	//[jscastro] method to set visibility
@@ -2701,8 +2701,8 @@ const THREE = require("../three.js");
 const Object3D = require('./Object3D.js');
 
 /**
- * 
- * @param {any} opt must fit the default defined in Objects.prototype._defaults.extrusion 
+ *
+ * @param {any} opt must fit the default defined in Objects.prototype._defaults.extrusion
  * @param {arr} opt.coordinates could receive a feature.geometry.coordinates
  */
 function extrusion(opt) {
@@ -2813,7 +2813,7 @@ function line(obj){
 		dashed: false,
 		opacity: obj.opacity
 	} );
-	
+
 	matLine.resolution.set( window.innerWidth, window.innerHeight );
 	matLine.isMaterial = true;
 	matLine.transparent = true;
@@ -17654,7 +17654,7 @@ Objects.prototype = {
 		}
 
 		else {
-			// Bestow this mesh with animation superpowers and keeps track of its movements in the global animation queue			
+			// Bestow this mesh with animation superpowers and keeps track of its movements in the global animation queue
 			root.animationManager.unenroll(obj);
 
 		}
@@ -17674,7 +17674,7 @@ Objects.prototype = {
 		}
 
 		else {
-			
+
 			if (!obj.coordinates) obj.coordinates = [0, 0, 0];
 
 			//[jscastro] added property for the internal 3D model
@@ -17696,10 +17696,10 @@ Objects.prototype = {
 				//set(value) { _animations = value}
 			});
 
-			// Bestow this mesh with animation superpowers and keeps track of its movements in the global animation queue			
+			// Bestow this mesh with animation superpowers and keeps track of its movements in the global animation queue
 			root.animationManager.enroll(obj);
 
-			// Place an object on the map at the given lnglat 
+			// Place an object on the map at the given lnglat
 			obj.setCoords = function (lnglat) {
 
 				// CSS2DObjects could bring an specific vertical positioning to correct in units
@@ -17850,7 +17850,7 @@ Objects.prototype = {
 				}
 			}
 
-			//[jscastro] Set the positional and pivotal anchor automatically from string param  
+			//[jscastro] Set the positional and pivotal anchor automatically from string param
 			obj.setAnchor = function (anchor) {
 				const b = obj.box3();
 				//const size = b.getSize(new THREE.Vector3());
@@ -17979,7 +17979,7 @@ Objects.prototype = {
 				}
 			});
 
-			//[jscastro] add CSS2 label method 
+			//[jscastro] add CSS2 label method
 			obj.addLabel = function (HTMLElement, visible, center, height) {
 				if (HTMLElement) {
 					//we add it to the first children to get same boxing and position
@@ -17988,7 +17988,7 @@ Objects.prototype = {
 				}
 			}
 
-			//[jscastro] remove CSS2 label method 
+			//[jscastro] remove CSS2 label method
 			obj.removeLabel = function () {
 				obj.removeCSS2D(labelName);
 			}
@@ -18002,7 +18002,7 @@ Objects.prototype = {
 				return label;
 			}
 
-			//[jscastro] add tooltip method 
+			//[jscastro] add tooltip method
 			obj.addTooltip = function (tooltipText, mapboxStyle, center, custom = true, height = 1) {
 				let t = obj.addHelp(tooltipText, tooltipName, mapboxStyle, center, height);
 				t.visible = false;
@@ -18014,7 +18014,7 @@ Objects.prototype = {
 				obj.removeCSS2D(tooltipName);
 			}
 
-			//[jscastro] add tooltip method 
+			//[jscastro] add tooltip method
 			obj.addHelp = function (helpText, objName = helpName, mapboxStyle = false, center = obj.anchor, height = 0) {
 				let divHelp = root.drawTooltip(helpText, mapboxStyle);
 				let h = obj.addCSS2D(divHelp, objName, center, height);
@@ -18027,7 +18027,7 @@ Objects.prototype = {
 				obj.removeCSS2D(helpName);
 			}
 
-			//[jscastro] add CSS2D help method 
+			//[jscastro] add CSS2D help method
 			obj.addCSS2D = function (element, objName, center = obj.anchor, height = 1) {
 				if (element) {
 					const box = obj.box3();
@@ -18036,7 +18036,7 @@ Objects.prototype = {
 					obj.removeCSS2D(objName);
 					let c = new CSS2D.CSS2DObject(element);
 					c.name = objName;
-					c.position.set(((-size.x * 0.5) - obj.model.position.x - center.x + bottomLeft.x), ((-size.y * 0.5) - obj.model.position.y - center.y + bottomLeft.y), size.z * height); 
+					c.position.set(((-size.x * 0.5) - obj.model.position.x - center.x + bottomLeft.x), ((-size.y * 0.5) - obj.model.position.y - center.y + bottomLeft.y), size.z * height);
 					c.visible = false; //only visible on mouseover or selected
 					obj.scaleGroup.add(c);
 					return c;
@@ -18069,7 +18069,7 @@ Objects.prototype = {
 						if (c.isMesh) c.castShadow = true;
 					});
 					if (value) {
-						// we add the shadow plane automatically 
+						// we add the shadow plane automatically
 						const s = obj.modelSize;
 						const sz = [s.x, s.y, s.z, obj.modelHeight];
 						const pSize = Math.max(...sz) * 10;
@@ -18083,7 +18083,7 @@ Objects.prototype = {
 						p.receiveShadow = value;
 						obj.add(p);
 					} else {
-						// or we remove it 
+						// or we remove it
 						obj.traverse(function (c) {
 							if (c.isMesh && c.material instanceof THREE.ShadowMaterial)
 								obj.remove(c);
@@ -18302,7 +18302,7 @@ Objects.prototype = {
 						obj.matrix.extractRotation(rm);
 						rmi.copy(rm).invert();
 						dup.setRotationFromMatrix(rmi);
-						//now the object inside will give us a NAABB Non-Axes Aligned Bounding Box 
+						//now the object inside will give us a NAABB Non-Axes Aligned Bounding Box
 						bounds = new THREE.Box3().setFromObject(model);
 					}
 				}
@@ -18344,7 +18344,7 @@ Objects.prototype = {
 			});
 
 			//[jscastro] added property to calculate the units per meter in a given latitude
-			//reduced to 7 decimals to avoid deviations on the size of the same object  
+			//reduced to 7 decimals to avoid deviations on the size of the same object
 			Object.defineProperty(obj, 'unitsPerMeter', {
 				get() { return Number(utils.projectedUnitsPerMeter(obj.coordinates[1]).toFixed(7)); }
 			});
@@ -18384,7 +18384,7 @@ Objects.prototype = {
 					if (scale) obj.userData.mapScale = scale;
 					obj.setFixedZoom(obj.userData.mapScale); //apply fixed zoom
 				} else obj.scale.set(1, 1, 1);
-			} 
+			}
 
 			function zoomScale(zoom) { return Math.pow(2, zoom); }
 
@@ -18393,7 +18393,7 @@ Objects.prototype = {
 				obj.setScale(scale);
 				obj.setBoundingBoxShadowFloor();
 				obj.setReceiveShadowFloor();
-			} 
+			}
 
 		}
 
@@ -18561,7 +18561,7 @@ Objects.prototype = {
 
 	animationManager: new AnimationManager,
 
-	//[jscastro] add tooltip method 
+	//[jscastro] add tooltip method
 	drawTooltip : function (tooltipText, mapboxStyle = false) {
 		if (tooltipText) {
 			let divToolTip;
@@ -18682,7 +18682,7 @@ Objects.prototype = {
 			units: 'scene',
 			anchor: 'bottom-left',
 			bbox: true,
-			tooltip: true, 
+			tooltip: true,
 			raycasted: true
 		},
 
@@ -18808,12 +18808,12 @@ const EARTH_CIRCUMFERENCE_EQUATOR = 40075017 //from Mapbox https://github.com/ma
 module.exports = exports = {
     WORLD_SIZE: WORLD_SIZE,
     PROJECTION_WORLD_SIZE: WORLD_SIZE / (EARTH_RADIUS * Math.PI * 2),
-    MERCATOR_A: EARTH_RADIUS, 
+    MERCATOR_A: EARTH_RADIUS,
     DEG2RAD: Math.PI / 180,
     RAD2DEG: 180 / Math.PI,
     EARTH_RADIUS: EARTH_RADIUS,
     EARTH_CIRCUMFERENCE: 2 * Math.PI * EARTH_RADIUS, //40075000, // In meters
-    EARTH_CIRCUMFERENCE_EQUATOR: EARTH_CIRCUMFERENCE_EQUATOR, 
+    EARTH_CIRCUMFERENCE_EQUATOR: EARTH_CIRCUMFERENCE_EQUATOR,
     FOV_ORTHO: FOV_ORTHO, // closest to 0
     FOV: FOV, // Math.atan(3/4) radians. If this value is changed, FOV_DEGREES must be calculated
     FOV_DEGREES: FOV * 180 / Math.PI, // Math.atan(3/4) in degrees
@@ -19637,7 +19637,7 @@ Validate.prototype = {
             console.error("Coords length must be at least 2")
             return
         }
-    
+
         for (const member of input) {
             if (member.constructor !== Number) {
                 console.error("Coords values must be numbers")
@@ -19647,7 +19647,7 @@ Validate.prototype = {
 
         if (Math.abs(input[1]) > 90) {
             console.error("Latitude must be between -90 and 90")
-            return                    
+            return
         }
 
         return input
@@ -19665,7 +19665,7 @@ Validate.prototype = {
         for (const coord of input){
             if (!scope.Coords(coord)) {
                 console.error("Each coordinate in a line must be a valid Coords type")
-                return                    
+                return
             }
 
         }
@@ -19683,7 +19683,7 @@ Validate.prototype = {
 
                 if (!['x', 'y', 'z'].includes(key)) {
                     console.error('Rotation parameters must be x, y, or z')
-                    return                            
+                    return
                 }
                 if (input[key].constructor !== Number) {
                     console.error('Individual rotation values must be numbers')
@@ -19705,14 +19705,14 @@ Validate.prototype = {
         if (input.constructor === Number) {
             input = {x:input, y:input, z: input}
         }
-        
+
         else if (input.constructor === Object) {
 
             for (const key of Object.keys(input)){
 
                 if (!['x', 'y', 'z'].includes(key)) {
                     console.error('Scale parameters must be x, y, or z')
-                    return                            
+                    return
                 }
                 if (input[key].constructor !== Number) {
                     console.error('Individual scale values must be numbers')
