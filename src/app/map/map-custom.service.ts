@@ -13,9 +13,10 @@ export class MapCustomService {
   add3dLayer(map, option: LayerOption, coord, cb, onSelectedCb) {
     if (map.getLayer(option.name)) {
       map.removeLayer(option.name);
+      window['tb'].clear(true);
       window['tb'].update()
     }
-    console.log(map);
+    // console.log(map);
     (window as any).tb = new Threebox(
       map,
       map.getCanvas().getContext('webgl'),
@@ -26,8 +27,8 @@ export class MapCustomService {
         enableDraggingObjects: true,
         enableRotatingObjects: true,
         enableTooltips: false,
-        multiLayer: true }
-      );
+        multiLayer: true
+      });
       map.fire('load');
       map.addLayer({
         id: option.name,
@@ -41,6 +42,11 @@ export class MapCustomService {
             units: 'meters',
             rotation: { x: 90, y: 0, z: 0 },
             raycasted: true
+          }
+
+          if (window['tb'].selectedObject) {
+            console.log("motherFucker!!!")
+            window['tb'].unselectObject()
           }
 
 

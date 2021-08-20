@@ -26,17 +26,17 @@ export class MapComponent implements OnInit {
   markerSelectedOption: LayerOption;
 
   object3D;
-  show3dPopUp: boolean;
+  show3dPopUp: boolean = false;
 
   constructor(private selectMarkerService: SelectMarkerService, private ngZone: NgZone, private mapService: MapCustomService) { }
 
   ngOnInit(): void {
     this.selectMarkerService.layerOption$.subscribe((option: LayerOption) => {
-      console.log(option);
-      console.log(this.map);
+      // console.log(option);
+      // console.log(this.map);
       if (this.markerSelectedOption && this.markerSelectedOption.projection === 2) {
         // this.map.removeLayer(this.markerSelectedOption.name);
-        window['tb'].clear(true);
+        window['tb'].clear(this.markerSelectedOption.name, true);
       }
       this.show3dPopUp = false;
       if (option.projection === 1) {
@@ -60,9 +60,13 @@ export class MapComponent implements OnInit {
   onSelectedChange = ( e ) => {
     let selectedObject = e.detail; //we get the object selected/unselected
     let selectedValue = selectedObject.selected; //we get if the object is selected after the event
-
-    this.show3dPopUp = selectedValue;
     this.object3D = selectedObject;
+    this.show3dPopUp = selectedValue;
+    // console.log(e);
+    // console.log(selectedObject);
+    // console.log(selectedValue)
+    // console.log("ff")
+    // console.log(this.show3dPopUp)
   }
 
   onObjectChanged = ( e ) => {
@@ -73,7 +77,7 @@ export class MapComponent implements OnInit {
   }
 
   addMarker(event) {
-    console.log(event);
+    // console.log(event);
     const lng = event.lngLat.lng;
     const lat = event.lngLat.lat;
     const markLngLat = new LngLat(lng, lat);
@@ -84,7 +88,7 @@ export class MapComponent implements OnInit {
 
 
   showDrag(marker) {
-    console.log(marker._lngLat);
+    // console.log(marker._lngLat);
     const lng = marker._lngLat.lng;
     const lat = marker._lngLat.lat;
     const markLngLat = new LngLat(lng, lat);
