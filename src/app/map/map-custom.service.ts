@@ -45,7 +45,6 @@ export class MapCustomService {
           }
 
           if (window['tb'].selectedObject) {
-            console.log("motherFucker!!!")
             window['tb'].unselectObject()
           }
 
