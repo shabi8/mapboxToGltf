@@ -1,8 +1,9 @@
 import { Component, OnInit, NgZone, HostListener } from '@angular/core';
 import { LayerOption } from 'application-types';
 import { LngLatLike, LngLat } from 'mapbox-gl';
-import { SelectMarkerService } from '../select-marker/select-marker.service';
 import { MapCustomService } from './map-custom.service';
+import * as dat from 'dat.gui';
+
 
 
 @Component({
@@ -11,6 +12,8 @@ import { MapCustomService } from './map-custom.service';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
+  private gui = new dat.GUI();
+  private guibuilt;
 
   map;
   mapStyle: string = "mapbox://styles/mapbox/streets-v9";
@@ -28,32 +31,18 @@ export class MapComponent implements OnInit {
   object3D;
   show3dPopUp: boolean = false;
 
-  constructor(private selectMarkerService: SelectMarkerService, private ngZone: NgZone, private mapService: MapCustomService) { }
+  parameters = {
+    color: 0xff0000,
+    dimensions: {x: 10, y: 10, z: 10},
+    exportGLTF: () => {
+      this.exportGltf();
+    }
+  }
+
+
+  constructor(private mapService: MapCustomService) { }
 
   ngOnInit(): void {
-    this.selectMarkerService.layerOption$.subscribe((option: LayerOption) => {
-      // console.log(option);
-      // console.log(this.map);
-      if (this.markerSelectedOption && this.markerSelectedOption.projection === 2) {
-        // this.map.removeLayer(this.markerSelectedOption.name);
-        window['tb'].clear(this.markerSelectedOption.name, true);
-      }
-      this.show3dPopUp = false;
-      if (option.projection === 1) {
-        if (this.object3D){
-          window['tb'].remove(this.object3D)
-        }
-        this.showMarker = true;
-        this.markerImage = option.url;
-      }
-      if (option.projection === 2) {
-        this.showMarker = false; // if you want to see 3d model change with marker comment this line
-        this.mapService.add3dLayer(this.map, option, this.markerLngLat, this.onObjectChanged, this.onSelectedChange)
-
-
-      }
-      this.markerSelectedOption = option;
-    });
   }
 
 
@@ -62,11 +51,6 @@ export class MapComponent implements OnInit {
     let selectedValue = selectedObject.selected; //we get if the object is selected after the event
     this.object3D = selectedObject;
     this.show3dPopUp = selectedValue;
-    // console.log(e);
-    // console.log(selectedObject);
-    // console.log(selectedValue)
-    // console.log("ff")
-    // console.log(this.show3dPopUp)
   }
 
   onObjectChanged = ( e ) => {
@@ -82,7 +66,9 @@ export class MapComponent implements OnInit {
     const lat = event.lngLat.lat;
     const markLngLat = new LngLat(lng, lat);
     this.markerLngLat = markLngLat;
-    this.showMarker = true;
+    // this.showMarker = true;
+    this.mapService.add3dBoxLayer(this.map, 'box', this.markerLngLat, this.parameters.dimensions, this.parameters.color, false);
+    this.buildGui();
 
   }
 
@@ -93,6 +79,32 @@ export class MapComponent implements OnInit {
     const lat = marker._lngLat.lat;
     const markLngLat = new LngLat(lng, lat);
     this.markerLngLat = markLngLat;
+  }
+
+  buildGui() {
+    if(this.guibuilt) {
+      return;
+    } else {
+      this.gui.addColor(this.parameters, 'color').onChange(() => {
+        this.mapService.add3dBoxLayer(this.map, 'box', this.markerLngLat, this.parameters.dimensions, this.parameters.color, false);
+      });
+      this.gui.add(this.parameters.dimensions, 'x').min(0.1).max(100).step(0.1).onChange(() => {
+        this.mapService.add3dBoxLayer(this.map, 'box', this.markerLngLat, this.parameters.dimensions, this.parameters.color, false);
+      });
+      this.gui.add(this.parameters.dimensions, 'y').min(0.1).max(100).step(0.1).onChange(() => {
+        this.mapService.add3dBoxLayer(this.map, 'box', this.markerLngLat, this.parameters.dimensions, this.parameters.color, false);
+      });
+      this.gui.add(this.parameters.dimensions, 'z').min(0.1).max(100).step(0.1).onChange(() => {
+        this.mapService.add3dBoxLayer(this.map, 'box', this.markerLngLat, this.parameters.dimensions, this.parameters.color, false);
+      });
+      this.gui.add(this.parameters, 'exportGLTF')
+      this.guibuilt = true;
+    }
+    
+  }
+
+  exportGltf() {
+    this.mapService.add3dBoxLayer(this.map, 'box', this.markerLngLat, this.parameters.dimensions, this.parameters.color, true);
   }
 
 }

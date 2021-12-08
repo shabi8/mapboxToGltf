@@ -10,29 +10,4 @@
   (mapLoad)="map = $event"
   (mapDblClick)="addMarker($event)"
 >
-  <div *ngIf="showMarker">
-    <mgl-marker
-      [lngLat]="markerLngLat"
-      [draggable]="markerDraggable"
-      #Amarker
-      (markerDrag)="showDrag($event)"
-    >
-      <div class="marker-image" [ngStyle]="{'background-image': 'url(' + markerImage + ')'}"></div>
-    </mgl-marker>
-    <mgl-popup
-      [marker]="Amarker"
-      [offset]="50"
-    >
-      Change Marker
-      <app-select-marker></app-select-marker>
-    </mgl-popup>
-  </div>
-
-  <mgl-popup *ngIf="show3dPopUp"
-    [lngLat]="markerLngLat"
-    [offset]="150"
-  >
-    Change Marker
-    <app-select-marker></app-select-marker>
-  </mgl-popup>
 </mgl-map>
