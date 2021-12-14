@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { cpuUsage } from 'process';
 import * as THREE from 'three';
 import {GLTFExporter} from 'three/examples/jsm/exporters/GLTFExporter'
 
@@ -12,7 +13,7 @@ export class MapCustomService {
 
   constructor( ) { }
 
-  add3dBoxLayer(map, layerName: string, coord, dimensions: {x: number, y: number, z: number}, color, downloadGltf: boolean) {
+  add3dBoxLayer(map, layerName: string, coord, dimensions: {x: number, y: number, z: number}, color, texturePath, downloadGltf: boolean) {
 
 
     if (map.getLayer(layerName)) {
@@ -26,6 +27,10 @@ export class MapCustomService {
       map.getCanvas().getContext('webgl'),
       {
         defaultLights: true,
+        // realSunlight: true,
+        // realSunlightHelper: true,
+        // sky: true,
+        // terrain: true,
         enableSelectingFeatures: true,
         enableSelectingObjects: true,
         enableDraggingObjects: true,
@@ -41,27 +46,32 @@ export class MapCustomService {
       renderingMode: '3d',
       onAdd: function(map, mbxContext) {
         console.log('custom layer now added')
-        const geometry = new THREE.BoxGeometry(dimensions.x, dimensions.y, dimensions.z);
-        let cube = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ color: color}));
-        cube = window['tb'].Object3D({ obj: cube, units: 'meters'});
-        cube.setCoords([coord.lng, coord.lat]);
-        window['tb'].add(cube);
-        console.log(window['tb']);
-        console.log(cube);
+        const textureLoader = new THREE.TextureLoader();
+        textureLoader.load(texturePath , (texture) => {
+          const geometry = new THREE.BoxGeometry(dimensions.x, dimensions.y, dimensions.z);
+          const material = new THREE.MeshStandardMaterial({ map: texture });
+          material.needsUpdate = true;
+          let cube = new THREE.Mesh(geometry, material);
+          cube = window['tb'].Object3D({ obj: cube, units: 'meters'});
+          cube.setCoords([coord.lng, coord.lat]);
+          window['tb'].add(cube);
 
-        if (downloadGltf) {
-          const exporter = new GLTFExporter();
-          exporter.parse(
-            cube,
-            (gltf) => {
-              if (gltf instanceof ArrayBuffer) {
-                saveArrayBuffer(gltf, 'object.glb')
-              } else {
-                const output = JSON.stringify(gltf, null, 2);
-                saveString(output, 'object.gltf');
+          if (downloadGltf) {
+            const exporter = new GLTFExporter();
+            exporter.parse(
+              cube,
+              (gltf) => {
+                if (gltf instanceof ArrayBuffer) {
+                  saveArrayBuffer(gltf, 'object.glb')
+                } else {
+                  const output = JSON.stringify(gltf, null, 2);
+                  saveString(output, 'object.gltf');
+                }
               }
-            }
-          )
+            )
+          }
+
+        
 
           const link = document.createElement( 'a' );
           link.style.display = 'none';
@@ -86,11 +96,7 @@ export class MapCustomService {
             save( new Blob( [ buffer ], { type: 'application/octet-stream' } ), filename );
 
           }
-        }
-
-        
-
-
+        });
       },
       render: function(gl, matrix) {
         window['tb'].update();
@@ -99,6 +105,7 @@ export class MapCustomService {
 
       
   }
+
 
   
 

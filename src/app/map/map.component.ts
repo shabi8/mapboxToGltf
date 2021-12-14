@@ -32,11 +32,18 @@ export class MapComponent implements OnInit {
   show3dPopUp: boolean = false;
 
   parameters = {
-    color: 0xff0000,
+    color: 0xffffff,
+    texture: 'assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg',
     dimensions: {x: 10, y: 10, z: 10},
     exportGLTF: () => {
       this.exportGltf();
     }
+  }
+
+  texturesPath = {
+    road: 'assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg',
+    offices: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Color.jpg',
+    bricks: 'assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg',
   }
 
 
@@ -67,7 +74,7 @@ export class MapComponent implements OnInit {
     const markLngLat = new LngLat(lng, lat);
     this.markerLngLat = markLngLat;
     // this.showMarker = true;
-    this.mapService.add3dBoxLayer(this.map, 'box', this.markerLngLat, this.parameters.dimensions, this.parameters.color, false);
+    this.mapService.add3dBoxLayer(this.map, 'box', this.markerLngLat, this.parameters.dimensions, this.parameters.color, this.parameters.texture, false);
     this.buildGui();
 
   }
@@ -86,25 +93,29 @@ export class MapComponent implements OnInit {
       return;
     } else {
       this.gui.addColor(this.parameters, 'color').onChange(() => {
-        this.mapService.add3dBoxLayer(this.map, 'box', this.markerLngLat, this.parameters.dimensions, this.parameters.color, false);
+        this.mapService.add3dBoxLayer(this.map, 'box', this.markerLngLat, this.parameters.dimensions, this.parameters.color, this.parameters.texture, false);
       });
       this.gui.add(this.parameters.dimensions, 'x').min(0.1).max(100).step(0.1).onChange(() => {
-        this.mapService.add3dBoxLayer(this.map, 'box', this.markerLngLat, this.parameters.dimensions, this.parameters.color, false);
+        this.mapService.add3dBoxLayer(this.map, 'box', this.markerLngLat, this.parameters.dimensions, this.parameters.color, this.parameters.texture, false);
       });
       this.gui.add(this.parameters.dimensions, 'y').min(0.1).max(100).step(0.1).onChange(() => {
-        this.mapService.add3dBoxLayer(this.map, 'box', this.markerLngLat, this.parameters.dimensions, this.parameters.color, false);
+        this.mapService.add3dBoxLayer(this.map, 'box', this.markerLngLat, this.parameters.dimensions, this.parameters.color, this.parameters.texture, false);
       });
       this.gui.add(this.parameters.dimensions, 'z').min(0.1).max(100).step(0.1).onChange(() => {
-        this.mapService.add3dBoxLayer(this.map, 'box', this.markerLngLat, this.parameters.dimensions, this.parameters.color, false);
+        this.mapService.add3dBoxLayer(this.map, 'box', this.markerLngLat, this.parameters.dimensions, this.parameters.color, this.parameters.texture, false);
       });
-      this.gui.add(this.parameters, 'exportGLTF')
+      this.gui.add(this.parameters, 'texture', this.texturesPath).onChange(() => {
+        this.mapService.add3dBoxLayer(this.map, 'box', this.markerLngLat, this.parameters.dimensions, this.parameters.color, this.parameters.texture, false);
+      });
+      this.gui.add(this.parameters, 'exportGLTF');
+
       this.guibuilt = true;
     }
     
   }
 
   exportGltf() {
-    this.mapService.add3dBoxLayer(this.map, 'box', this.markerLngLat, this.parameters.dimensions, this.parameters.color, true);
+    this.mapService.add3dBoxLayer(this.map, 'box', this.markerLngLat, this.parameters.dimensions, this.parameters.color, this.parameters.texture, true);
   }
 
 }
