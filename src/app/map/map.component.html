@@ -10,4 +10,24 @@
   (mapLoad)="map = $event"
   (mapDblClick)="addMarker($event)"
 >
+  <mgl-layer
+  id="3d-buildings"
+  source="composite"
+  sourceLayer="building"
+  [filter]="['==', 'extrude', 'true']"
+  type="fill-extrusion"
+  [minzoom]="15"
+  [paint]="{
+    'fill-extrusion-color': '#aaa',
+    'fill-extrusion-height': [
+      'case',
+      ['boolean', ['feature-state', 'clicked'], false],
+      0,
+      ['get', 'height']
+    ],
+    'fill-extrusion-base': ['interpolate', ['linear'], ['zoom'], 15, 0, 15.05, ['get', 'min_height']],
+    'fill-extrusion-opacity': 0.6
+  }"
+  (click)="clickOnLayer($event)">
+  </mgl-layer>
 </mgl-map>

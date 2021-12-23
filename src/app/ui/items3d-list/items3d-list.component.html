@@ -1,0 +1,24 @@
+<mat-selection-list #items3d [multiple]="false">
+    <div *ngFor="let item of items3dlist">
+        <mat-card class="item-card"><mat-list-option [value]="item">
+            <!-- <mat-card class="item-card"> -->
+            <mat-card-title>{{item}}</mat-card-title>
+            <mat-card-content>
+                <div>
+                    x dimensions: 2
+                </div>
+                <div>
+                    y dimensions: 3
+                </div>
+            </mat-card-content>
+            <!-- </mat-card> -->
+            <!-- <mat-divider></mat-divider> -->
+        </mat-list-option></mat-card>
+    </div>
+    
+    
+</mat-selection-list>
+  
+<p>
+    Option selected: {{items3d.selectedOptions.selected[0]?.value}}
+</p>

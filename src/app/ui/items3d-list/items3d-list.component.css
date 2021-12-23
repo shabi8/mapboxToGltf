@@ -1,0 +1,11 @@
+.item-card {
+    border: 1px solid slateblue;
+    margin: 2px;
+    background-color: slateblue;
+}
+
+mat-list-option {
+    height: 100%;
+    margin: 0%;
+}
+
