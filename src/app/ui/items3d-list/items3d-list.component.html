@@ -1,19 +1,32 @@
-<mat-selection-list #items3d [multiple]="false">
+<!-- <mat-selection-list #items3d [multiple]="false">
     <div *ngFor="let item of items3dlist">
-        <mat-card class="item-card"><mat-list-option [value]="item">
+        <mat-card class="item-card"><mat-list-option [value]="item"> -->
             <!-- <mat-card class="item-card"> -->
-            <mat-card-title>{{item}}</mat-card-title>
+            <!-- <mat-card-title>{{ item.name | uppercase }}</mat-card-title>
             <mat-card-content>
                 <div>
-                    x dimensions: 2
+                    {{ item.coordinates.lng }}
+                    {{ item.coordinates.lat }}
                 </div>
-                <div>
-                    y dimensions: 3
-                </div>
-            </mat-card-content>
+                <div *ngIf="item.type === 'office building'">
+                    <mat-form-field appearance="fill">
+                        <mat-label>X</mat-label>
+                        <input type="number" placeholder="{{ item.parameters.dimensions.x }}"  min="0.1">
+                    </mat-form-field>
+                </div> -->
+                <!-- <div>
+                    dimensions: {{ item.parameters.dimensions.x}}
+                </div> -->
+                <!-- <div *ngFor="let key of Object.keys(item.parameters)">
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{ key }}</mat-label>
+                        <mat-input></mat-input>
+                    </mat-form-field>
+                </div> -->
+            <!-- </mat-card-content> -->
             <!-- </mat-card> -->
             <!-- <mat-divider></mat-divider> -->
-        </mat-list-option></mat-card>
+        <!-- </mat-list-option></mat-card>
     </div>
     
     
@@ -21,4 +34,126 @@
   
 <p>
     Option selected: {{items3d.selectedOptions.selected[0]?.value}}
-</p>
+</p> -->
+
+
+<!-- <mat-accordion class="example-headers-align" multi>
+    <div *ngFor="let item of items3dlist; let i = index; trackBy: trackByIndex">
+        <form #itemForm="ngForm" (ngModelChange)="onChange($event)">
+            {{ itemForm.value | json }}
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    {{ item.name | uppercase }}
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    <div>
+                        {{ item.coordinates.lng | number: '1.0-5'}}
+                        {{ item.coordinates.lat | number: '1.0-5'}}
+                    </div>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+    
+                <div *ngIf="item.type !== 'tree'">
+                    <mat-form-field appearance="fill">
+                        <mat-label>X</mat-label>
+                        <input matInput type="number" min="0.1" name="x{{i}}" step="0.1" [(ngModel)]="items3dlist[i].parameters.dimensions.x" (ngModelChange)="onChange($event, i)">
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="fill">
+                        <mat-label>Y</mat-label>
+                        <input matInput type="number" min="0.1" name="y" step="0.1" [(ngModel)]="item.parameters.dimensions.y">
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="fill">
+                        <mat-label>Z</mat-label>
+                        <input matInput type="number" min="0.1" name="z" step="0.1" [(ngModel)]="item.parameters.dimensions.z">
+                    </mat-form-field>
+                </div>
+    
+                <mat-form-field appearance="fill" *ngIf="item.parameters.texture">
+                    <mat-label>Texture</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let texture of textures" [value]="texture.value">
+                          {{texture.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            
+                <mat-form-field appearance="fill" *ngIf="item.parameters.color">
+                  <mat-label>Color</mat-label>
+                  <input matInput type="color">
+                </mat-form-field>
+            
+                <mat-form-field appearance="fill">
+                  <mat-label>Scale</mat-label>
+                  <input matInput type="number" min="1">
+                </mat-form-field>
+            
+            </mat-expansion-panel>
+        </form>
+        
+    </div>
+    
+</mat-accordion> -->
+
+<mat-accordion class="example-headers-align" multi>
+    <div *ngFor="let item of items3dlist; let i = index; trackBy: trackByIndex">
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                {{ item.name | uppercase }}
+                </mat-panel-title>
+                <mat-panel-description>
+                <div>
+                    {{ item.coordinates.lng | number: '1.0-5'}}
+                    {{ item.coordinates.lat | number: '1.0-5'}}
+                </div>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div *ngIf="item.type !== 'tree'">
+                <mat-form-field appearance="fill">
+                    <mat-label>X</mat-label>
+                    <input matInput type="number" min="0.1" name="x" step="0.1" [(ngModel)]="item.parameters.dimensions.x" (ngModelChange)="onChange($event, i)">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Y</mat-label>
+                    <input matInput type="number" min="0.1" name="y" step="0.1" [(ngModel)]="item.parameters.dimensions.y" (ngModelChange)="onChange($event, i)">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Z</mat-label>
+                    <input matInput type="number" min="0.1" name="z" step="0.1" [(ngModel)]="item.parameters.dimensions.z" (ngModelChange)="onChange($event, i)">
+                </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="fill" *ngIf="item.parameters.texture">
+                <mat-label>Texture</mat-label>
+                <mat-select [(ngModel)]="item.parameters.texture" (ngModelChange)="onChange($event, i)">
+                    <mat-option *ngFor="let texture of textures" [value]="texture.value">
+                        {{texture.viewValue}}
+                    </mat-option>
+                </mat-select>
+                </mat-form-field>
+        
+            <mat-form-field appearance="fill" *ngIf="item.parameters.color">
+                <mat-label>Color</mat-label>
+                <input matInput type="color" [(ngModel)]="item.parameters.color" (ngModelChange)="onChange($event, i)">
+            </mat-form-field>
+        
+            <mat-form-field appearance="fill" *ngIf="item.parameters.scale">
+                <mat-label>Scale</mat-label>
+                <input matInput type="number" min="0.1" step="0.1" [(ngModel)]="item.parameters.scale" (ngModelChange)="onChange($event, i)">
+            </mat-form-field>
+        
+        </mat-expansion-panel>
+
+        
+    </div>
+    
+</mat-accordion>
+
+

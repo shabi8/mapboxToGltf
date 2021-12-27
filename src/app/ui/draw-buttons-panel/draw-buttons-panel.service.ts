@@ -48,7 +48,7 @@ export class DrawButtonsPanelService implements OnDestroy {
     this.scene.add(this.light);
 
     const geometry = new THREE.BoxGeometry(2, 2, 2);
-    const material = new THREE.MeshBasicMaterial({color: 'deeppink', wireframe: true});
+    const material = new THREE.MeshBasicMaterial({color: 'white', wireframe: true});
     this.cube = new THREE.Mesh(geometry, material);
     this.scene.add(this.cube);
 

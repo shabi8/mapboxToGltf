@@ -3,8 +3,9 @@ import { Subject } from 'rxjs';
 import { LngLatLike, LngLat } from 'mapbox-gl';
 import * as THREE from 'three';
 import {GLTFExporter} from 'three/examples/jsm/exporters/GLTFExporter';
-import  { Item3d }  from './map.component';
-import { MatOptgroup } from '@angular/material/core';
+import { Item3d } from './map.component';
+
+
 
 declare const Threebox: any;
 
@@ -29,7 +30,7 @@ export class MapCustomService {
     enableRotatingObjects: true,
     enableTooltips: false,
     multiLayer: true
-  }
+  };
 
   threeBox;
 
@@ -53,11 +54,18 @@ export class MapCustomService {
     }
 
     if (item3d.type === 'tree') {
-      map.addLayer(this.createLoadObjectCustomLayer(item3d.name, item3d.coordinates, item3d.parameters.modelPath, downloadGltf))
+      map.addLayer(this.createLoadObjectCustomLayer(item3d.name, item3d.coordinates, item3d.parameters.modelPath, item3d.parameters.scale, downloadGltf))
     } else if (!item3d.parameters.texture) {
       map.addLayer(this.createCustomLayer(item3d.name, item3d.coordinates, item3d.parameters.dimensions, item3d.parameters.color, downloadGltf));
     } else {
       map.addLayer(this.createLoadTextureCustomLayer(item3d.name, item3d.coordinates, item3d.parameters.dimensions, item3d.parameters.color, item3d.parameters.texture, downloadGltf));
+    }
+
+    const layerAdded = map.getLayer(item3d.name);
+    if (layerAdded) {
+      return true;
+    } else {
+      false;
     }
 
 
@@ -322,7 +330,7 @@ export class MapCustomService {
     }
   }
 
-  createLoadObjectCustomLayer(layerName, coord, objPath, downloadGltf) {
+  createLoadObjectCustomLayer(layerName, coord, objPath, scale, downloadGltf) {
     return {
       id: layerName,
       type: 'custom',
@@ -331,7 +339,7 @@ export class MapCustomService {
         const options = {
           obj: objPath,
           type: 'gltf',
-          scale: 1,
+          scale: scale,
           units: 'meters',
           rotation: { x: 90, y: 0, z: 0 }
         }
