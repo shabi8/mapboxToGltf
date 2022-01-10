@@ -6,6 +6,7 @@ import * as turf from '@turf/turf';
 
 import { Obj3dButtonsService } from '../ui/services/obj3d-buttons.service';
 import { Item3dListService } from '../ui/services/item3d-list.service';
+import { PolygonItems3dService } from '../services/polygon-items3d.service';
 
 
 
@@ -20,6 +21,7 @@ export interface Item3d {
     modelPath?: string,
     scale?: number
   };
+  polygon?: Array<[]>
 }
 
 
@@ -49,23 +51,14 @@ export class MapComponent implements OnInit {
 
   object3D: Item3d;
 
-  // objectSelected: string = 'Fuck';
-
-  // parameters = {
-  //   color: 0xffffff,
-  //   texture: 'assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg',
-  //   dimensions: {x: 7, y: 20, z: 0.1},
-  //   exportGLTF: () => {
-  //     this.exportGltf();
-  //   }
-  // }
 
   item3dAdded = {
     'office building': [],
     'Residential building': [],
     road: [],
     tree: [],
-    commercial: []
+    commercial: [],
+    polygon: []
   };
 
   configItemParam = {
@@ -73,7 +66,8 @@ export class MapComponent implements OnInit {
     'Residential building': {texture: 'assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg', dimensions: { x: 8, y: 8, z: 12}},
     road: {texture: 'assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg', dimensions: { x: 7, y: 10, z: 0.1}},
     tree: {modelPath: 'assets/models/tree.glb', scale: 1},
-    commercial: {color: 0xff0000, dimensions: { x: 10, y: 10, z: 10}}
+    commercial: {color: 0xff0000, dimensions: { x: 10, y: 10, z: 10}},
+    polygon: {color: 0xff0000, texture: ''}
   };
 
   texturesPath = {
@@ -88,15 +82,52 @@ export class MapComponent implements OnInit {
   constructor(
     private mapService: MapCustomService,
     private obj3dButtonService: Obj3dButtonsService,
-    private item3dListService: Item3dListService) { }
+    private item3dListService: Item3dListService,
+    private polygonItem3dService: PolygonItems3dService) { }
 
   ngOnInit(): void {
     this.item3dListService.item3dToEdit$.subscribe((item) => {
       this.mapService.add3dBoxLayer(this.map, item, false);
     });
     this.obj3dButtonService.obj3dButtonOn$.subscribe(buttonName => {
-      this.obj3dButtonOn = buttonName;
-      console.log('YYYY', this.obj3dButtonOn);
+      if (buttonName === 'polygon service') {
+        this.obj3dButtonOn === buttonName;
+        this.polygonItem3dService.getPolygonsItem3d().subscribe(data => {
+
+          let polygonsItemsArray = data.features;
+
+          polygonsItemsArray.forEach( pol => {
+            const polygonArray = pol.geometry.coordinates;
+            this.createPolygon3dItem('polygon', polygonArray);
+            // const turfPolygon = turf.polygon(pol.geometry.coordinates)
+            // const centerOfPolygon = turf.centerOfMass(turfPolygon);
+
+            // const centerCoords = centerOfPolygon.geometry.coordinates;
+            // const a3dItem: Item3d = {
+            //   name: 'polygon' + (this.item3dAdded['polygon'].length + 1),
+            //   type: 'polygon',
+            //   coordinates: new LngLat(centerCoords[0], centerCoords[1]),
+            //   parameters: {color: 0xff0000, texture: ''},
+            //   polygon: pol.geometry.coordinates
+            // };
+            // this.mapService.add3dBoxLayer(this.map, a3dItem, false);
+            // this.item3dAdded['polygon'].push(a3dItem);
+            // this.layerCount += 1;
+
+            // this.item3dListService.sendItem3dAdded(a3dItem);
+          });
+        });
+      }
+      if (buttonName ==='polygon') {
+        this.obj3dButtonOn = buttonName;
+        this.initDraw();
+      } else if (this.obj3dButtonOn === 'polygon' && buttonName !== 'polygon') {
+        this.removeDrawControl();
+        this.obj3dButtonOn = buttonName;
+      } else {
+        this.obj3dButtonOn = buttonName;
+        console.log('YYYY', this.obj3dButtonOn);
+      }
     });
     this.mapService.objectSelected$.subscribe((objectSelected) => {
       console.log('ggg', objectSelected);
@@ -109,7 +140,7 @@ export class MapComponent implements OnInit {
 
 
   addMarker(event): void {
-    // console.log(event);
+
     const lng = event.lngLat.lng;
     const lat = event.lngLat.lat;
     const markLngLat = new LngLat(lng, lat);
@@ -132,11 +163,9 @@ export class MapComponent implements OnInit {
   }
 
 
-
-
-  // exportGltf() {
-  //   this.mapService.add3dBoxLayer(this.map, this.item3d1, true);
-  // }
+  removeDrawControl() {
+    return this.map.removeControl(this.draw);
+  }
 
   /// draw polygon add to onload
   initDraw(): void {
@@ -153,29 +182,54 @@ export class MapComponent implements OnInit {
       defaultMode: 'draw_polygon'
     });
     this.map.addControl(this.draw);
-    this.map.on('draw.create', this.updateArea);
-    this.map.on('draw.delete', this.updateArea);
-    this.map.on('draw.update', this.updateArea);
+    this.map.on('draw.create', (e) => {
+
+      const data = this.draw.getAll();
+
+      const polygonArray = data.features[0].geometry.coordinates;
+      console.log(polygonArray)
+      this.createPolygon3dItem(this.obj3dButtonOn, polygonArray)
+
+      // const turfPolygon = turf.polygon(polygonArray)
+      // const centerOfPolygon = turf.centerOfMass(turfPolygon);
+      // console.log('center of polygon ', centerOfPolygon.geometry.coordinates)
+      // const centerCoords = centerOfPolygon.geometry.coordinates;
+      // const a3dItem: Item3d = {
+      //   name: this.obj3dButtonOn + (this.item3dAdded[this.obj3dButtonOn].length + 1),
+      //   type: this.obj3dButtonOn,
+      //   coordinates: new LngLat(centerCoords[0], centerCoords[1]),
+      //   parameters: this.configItemParam[this.obj3dButtonOn],
+      //   polygon: polygonArray
+      // };
+      // this.mapService.add3dBoxLayer(this.map, a3dItem, false);
+      // this.item3dAdded[this.obj3dButtonOn].push(a3dItem);
+      // this.layerCount += 1;
+
+      // this.item3dListService.sendItem3dAdded(a3dItem);
+    });
+
   }
 
-  updateArea(e): void {
-    const data = this.draw.getAll();
-    const answer = document.getElementById('calculated-area');
-    if (data.features.length > 0) {
-    const area = turf.area(data);
-    // Restrict the area to 2 decimal points.
-    const roundedArea = Math.round(area * 100) / 100;
-    answer.innerHTML = `<p><strong>${roundedArea}</strong></p><p>square meters</p>`;
-    } else {
-    answer.innerHTML = '';
-    if (e.type !== 'draw.delete') {
-     alert('Click the map to draw a polygon.');
-    }
-    }
-    }
+  createPolygon3dItem(type: string, polygonArray) {
+    const turfPolygon = turf.polygon(polygonArray)
+    const centerOfPolygon = turf.centerOfMass(turfPolygon);
+    const centerCoords = centerOfPolygon.geometry.coordinates;
+    const a3dItem: Item3d = {
+      name: type + (this.item3dAdded[type].length + 1),
+      type: type,
+      coordinates: new LngLat(centerCoords[0], centerCoords[1]),
+      parameters: this.configItemParam[type],
+      polygon: polygonArray
+    };
+    this.mapService.add3dBoxLayer(this.map, a3dItem, false);
+    this.item3dAdded[type].push(a3dItem);
+    this.layerCount += 1;
+
+    this.item3dListService.sendItem3dAdded(a3dItem);
+  }
 
 
-   clickOnLayer(event): any {
+  clickOnLayer(event): any {
     if (event.features.length > 0) {
       const feature = event.features[0];
       if (feature.state.clicked) {

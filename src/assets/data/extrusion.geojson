@@ -1,0 +1,187 @@
+{
+	"features": [
+		{
+			"geometry": {
+				"type": "Polygon",
+				"coordinates": [
+					[
+						[ 34.78352673616135, 32.08570488782095 ],
+						[ 34.783395762534155, 32.08507627355415 ],
+						[ 34.78401194296251, 32.08496226765054 ],
+						[ 34.78415888170602, 32.085580013770624],
+						[ 34.78352673616135, 32.08570488782095 ]
+					]
+				]
+			},
+			"type": "Feature",
+			"properties": {
+				"extrude": "true",
+				"iso_3166_1": "US",
+				"underground": "false",
+				"height": 30.5,
+				"type": "building",
+				"min_height": 0,
+				"iso_3166_2": "US-NY",
+				"uuid": "802C4B41-D2F4-4A51-B2F7-18894CF2C6FE",
+				"center": [ -74.001234, 40.715092 ],
+				"tooltip": "The Louis J. Lefkowitz - State Office Building"
+			},
+			"id": 3359447,
+			"layer": {
+				"id": "3d-buildings",
+				"type": "fill-extrusion",
+				"source": "composite",
+				"source-layer": "building",
+				"minzoom": 12,
+				"filter": [ "==", "extrude", "true" ],
+				"paint": {
+					"fill-extrusion-color": {
+						"r": 0.5647058823529412,
+						"g": 0.9333333333333333,
+						"b": 0.5647058823529412,
+						"a": 1
+					},
+					"fill-extrusion-height": 30.5,
+					"fill-extrusion-base": 0,
+					"fill-extrusion-opacity": 0.9
+				},
+				"layout": {}
+			},
+			"source": "composite",
+			"sourceLayer": "building",
+			"state": {
+				"hover": true,
+				"select": true
+			},
+			"tooltip": null,
+			"label": null
+		},
+		{
+			"geometry": {
+				"type": "Polygon",
+
+				"coordinates": [
+					[
+						[ 34.78120519882958, 32.08676071769423 ],
+						[ 34.7819159187672, 32.08666766674173 ],
+						[ 34.78168528065163, 32.085441879535324 ],
+						[ 34.780964762831104, 32.08561063841226 ],
+						[ 34.78120519882958, 32.08676071769423 ]
+
+					],
+					[
+						[ 34.78152683789776, 32.08632764089438 ],
+						[ 34.78163913873087, 32.0860736892642 ],
+						[ 34.781579348083625, 32.085792512991915 ],
+						[ 34.78134138528617, 32.08588218719815 ],
+						[ 34.78136877321961, 32.086218372207696 ],
+						[ 34.78152683789776, 32.08632764089438 ]
+					]
+				]
+			},
+			"type": "Feature",
+			"properties": {
+				"extrude": "true",
+				"iso_3166_1": "US",
+				"underground": "false",
+				"height": 44,
+				"type": "building",
+				"min_height": 0,
+				"iso_3166_2": "US-NY",
+				"uuid": "82594BCA-C3AD-4440-84A4-8EE82BA3073D",
+				"center": [ -74.00157, 40.714276 ],
+				"tooltip": "New York Supreme Court"
+			},
+			"id": 3696430,
+			"layer": {
+				"id": "3d-buildings",
+				"type": "fill-extrusion",
+				"source": "composite",
+				"source-layer": "building",
+				"minzoom": 12,
+				"filter": [ "==", "extrude", "true" ],
+				"paint": {
+					"fill-extrusion-color": {
+						"r": 0.5647058823529412,
+						"g": 0.9333333333333333,
+						"b": 0.5647058823529412,
+						"a": 1
+					},
+					"fill-extrusion-height": 44,
+					"fill-extrusion-base": 0,
+					"fill-extrusion-opacity": 0.9
+				},
+				"layout": {}
+			},
+			"source": "composite",
+			"sourceLayer": "building",
+			"state": {
+				"hover": true,
+				"select": true
+			},
+			"tooltip": null,
+			"label": null
+		},
+		{
+			"geometry": {
+				"type": "Polygon",
+				"coordinates": [
+					[
+						[ 34.78054555149248, 32.08503918229957 ],
+						[ 34.78087215711412, 32.084506191454125 ],
+						[ 34.78124249156326, 32.0844295569583 ],
+						[ 34.781208997955304, 32.08462207787649 ],
+						[ 34.78136623947435, 32.08460383284175 ],
+						[ 34.78132007903085, 32.08492618117269 ],
+						[ 34.78104012100536, 32.085338187722726 ],
+						[ 34.78060798800493, 32.0853319607469 ],
+						[ 34.78054555149248, 32.08503918229957]
+					]
+				]
+			},
+			"type": "Feature",
+			"properties": {
+				"extrude": "true",
+				"iso_3166_1": "US",
+				"underground": "false",
+				"height": 20,
+				"type": "public",
+				"min_height": 0,
+				"iso_3166_2": "US-NY",
+				"uuid": "170894F0-BA9C-43AE-AFC5-45C669DDA0DD",
+				"center": [ -74.002338, 40.713651 ],
+				"tooltip": "Thurgood Marshall United States Courthouse"
+			},
+			"id": 3696564,
+			"layer": {
+				"id": "3d-buildings",
+				"type": "fill-extrusion",
+				"source": "composite",
+				"source-layer": "building",
+				"minzoom": 12,
+				"filter": [ "==", "extrude", "true" ],
+				"paint": {
+					"fill-extrusion-color": {
+						"r": 0.5647058823529412,
+						"g": 0.9333333333333333,
+						"b": 0.5647058823529412,
+						"a": 1
+					},
+					"fill-extrusion-height": 20,
+					"fill-extrusion-base": 0,
+					"fill-extrusion-opacity": 0.9
+				},
+				"layout": {}
+			},
+			"source": "composite",
+			"sourceLayer": "building",
+			"state": {
+				"hover": true,
+				"select": true
+			},
+			"tooltip": null,
+			"label": null
+		}
+	],
+	"type": "FeatureCollection"
+}

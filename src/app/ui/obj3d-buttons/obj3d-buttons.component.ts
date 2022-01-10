@@ -8,7 +8,7 @@ import { Obj3dButtonsService } from '../services/obj3d-buttons.service';
 })
 export class Obj3dButtonsComponent implements OnInit {
 
-  obj3dButtonsList = ['office building', 'Residential building', 'commercial', 'road', 'tree'];
+  obj3dButtonsList = ['office building', 'Residential building', 'commercial', 'road', 'tree', 'polygon', 'polygon service'];
   obj3d: string = 'office building';
 
   constructor(private obj3dButtonService: Obj3dButtonsService) { }

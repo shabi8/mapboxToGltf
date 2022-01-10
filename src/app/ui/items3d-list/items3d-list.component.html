@@ -113,7 +113,7 @@
                 </mat-panel-description>
             </mat-expansion-panel-header>
 
-            <div *ngIf="item.type !== 'tree'">
+            <div *ngIf="item.parameters.dimensions">
                 <mat-form-field appearance="fill">
                     <mat-label>X</mat-label>
                     <input matInput type="number" min="0.1" name="x" step="0.1" [(ngModel)]="item.parameters.dimensions.x" (ngModelChange)="onChange($event, i)">
@@ -130,7 +130,7 @@
                 </mat-form-field>
             </div>
 
-            <mat-form-field appearance="fill" *ngIf="item.parameters.texture">
+            <mat-form-field appearance="fill">
                 <mat-label>Texture</mat-label>
                 <mat-select [(ngModel)]="item.parameters.texture" (ngModelChange)="onChange($event, i)">
                     <mat-option *ngFor="let texture of textures" [value]="texture.value">

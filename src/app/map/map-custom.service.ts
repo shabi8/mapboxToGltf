@@ -7,6 +7,7 @@ import { Item3d } from './map.component';
 
 
 
+
 declare const Threebox: any;
 
 @Injectable({
@@ -38,7 +39,6 @@ export class MapCustomService {
 
   add3dBoxLayer(map, item3d: Item3d, downloadGltf: boolean) {
 
-
     if (map.getLayer(item3d.name)) {
       map.removeLayer(item3d.name);
       window['tb'].removeByName(item3d.name);
@@ -55,10 +55,10 @@ export class MapCustomService {
 
     if (item3d.type === 'tree') {
       map.addLayer(this.createLoadObjectCustomLayer(item3d.name, item3d.coordinates, item3d.parameters.modelPath, item3d.parameters.scale, downloadGltf))
-    } else if (!item3d.parameters.texture) {
-      map.addLayer(this.createCustomLayer(item3d.name, item3d.coordinates, item3d.parameters.dimensions, item3d.parameters.color, downloadGltf));
+    } else if (item3d.type === 'polygon'){
+      map.addLayer(this.createExtrudeShapeCustomLayer(item3d.name, item3d.coordinates, item3d.polygon, item3d.parameters.color, item3d.parameters.texture, downloadGltf))
     } else {
-      map.addLayer(this.createLoadTextureCustomLayer(item3d.name, item3d.coordinates, item3d.parameters.dimensions, item3d.parameters.color, item3d.parameters.texture, downloadGltf));
+      map.addLayer(this.createCustomLayer(item3d.name, item3d.coordinates, item3d.parameters.dimensions, item3d.parameters.color, item3d.parameters.texture, downloadGltf));
     }
 
     const layerAdded = map.getLayer(item3d.name);
@@ -68,8 +68,6 @@ export class MapCustomService {
       false;
     }
 
-
-      
   }
 
   createCustomLayerFirstDraft(layerName, coord, dimensions, color, texturePath, downloadGltf) {
@@ -180,66 +178,56 @@ export class MapCustomService {
   }
 
 
-  createCustomLayer(layerName, coord, dimensions, color, downloadGltf) {
+  createCustomLayer(layerName, coord, dimensions, color, texturePath, downloadGltf) {
     return {
       id: layerName,
       type: 'custom',
       renderingMode: '3d',
       onAdd: (map, mbxContext) => {
-        const geometry = new THREE.BoxGeometry(dimensions.x, dimensions.y, dimensions.z);
-        const material = new THREE.MeshStandardMaterial({ color: color });
 
-        let cube = new THREE.Mesh(geometry, material);
-        cube = window['tb'].Object3D({ obj: cube, units: 'meters'});
-        
-        cube.castShadow = true;
-        cube.name = layerName
-        cube.addEventListener('ObjectChanged', (e) => {
-          console.log('ObjectChange', e);
-        }, false)
-        cube.addEventListener('ObjectDragged', (e) => {
-          console.log('Dragged', e);
-        }, false)
-        cube.addEventListener('SelectedChange', (e) => {
-          console.log('Selected', e);
-          const objectName = e.detail.name;
-          const objectCoord = e.detail.coordinates.slice(0, 2);
-          const object = {
-            name: objectName,
-            coordinates: new LngLat(objectCoord[0], objectCoord[1]),
-            parameters: {color: color, dimensions: dimensions}
-          }
-          console.log(object, objectCoord);
-          this.sendObjectSelected(object);
-        }, false)
-        cube.setCoords([coord.lng, coord.lat]);
-        window['tb'].add(cube);
-        window['tb'].lights.dirLight.target = cube;
-
-
-        if (downloadGltf) {
-          this.downloadAsGltf(cube);
-        }
-
-      },
-      render: function(gl, matrix) {
-      }
-    }
-  }
+        if (texturePath) {
+          const textureLoader = new THREE.TextureLoader();
+          textureLoader.load(texturePath , (texture) => {
+            const geometry = new THREE.BoxGeometry(dimensions.x, dimensions.y, dimensions.z);
+            const material = new THREE.MeshStandardMaterial({ map: texture });
+            material.needsUpdate = true;
+            let cube = new THREE.Mesh(geometry, material);
+            cube = window['tb'].Object3D({ obj: cube, units: 'meters'});
+            
+            cube.castShadow = true;
+            cube.name = layerName
+            cube.addEventListener('ObjectChanged', (e) => {
+              console.log('ObjectChange', e);
+            }, false)
+            cube.addEventListener('ObjectDragged', (e) => {
+              console.log('Dragged', e);
+            }, false)
+            cube.addEventListener('SelectedChange', (e) => {
+              console.log('Selected', e);
+              const objectName = e.detail.name;
+              const objectCoord = e.detail.coordinates.slice(0, 2);
+              const object = {
+                name: objectName,
+                coordinates: new LngLat(objectCoord[0], objectCoord[1]),
+                parameters: {color: color, texture: texturePath, dimensions: dimensions}
+              }
+              console.log(object, objectCoord);
+              this.sendObjectSelected(object);
+            }, false)
+            cube.setCoords([coord.lng, coord.lat]);
+            window['tb'].add(cube);
+            window['tb'].lights.dirLight.target = cube;
 
 
-  createLoadTextureCustomLayer(layerName, coord, dimensions, color, texturePath, downloadGltf) {
-    return {
-      id: layerName,
-      type: 'custom',
-      renderingMode: '3d',
-      onAdd: (map, mbxContext) => {
-        console.log('custom layer now added')
-        const textureLoader = new THREE.TextureLoader();
-        textureLoader.load(texturePath , (texture) => {
+            if (downloadGltf) {
+              this.downloadAsGltf(cube);
+            }
+
+          });
+        } else {
           const geometry = new THREE.BoxGeometry(dimensions.x, dimensions.y, dimensions.z);
-          const material = new THREE.MeshStandardMaterial({ map: texture });
-          material.needsUpdate = true;
+          const material = new THREE.MeshStandardMaterial({ color: color });
+
           let cube = new THREE.Mesh(geometry, material);
           cube = window['tb'].Object3D({ obj: cube, units: 'meters'});
           
@@ -258,7 +246,7 @@ export class MapCustomService {
             const object = {
               name: objectName,
               coordinates: new LngLat(objectCoord[0], objectCoord[1]),
-              parameters: {color: color, texture: texturePath, dimensions: dimensions}
+              parameters: {color: color, dimensions: dimensions}
             }
             console.log(object, objectCoord);
             this.sendObjectSelected(object);
@@ -271,64 +259,117 @@ export class MapCustomService {
           if (downloadGltf) {
             this.downloadAsGltf(cube);
           }
+        }
+        
 
-        });
       },
       render: function(gl, matrix) {
       }
     }
   }
 
-  createRoadCustomLayer(layerName, coord, dimensions, color, texturePath, downloadGltf) {
-    return {
-      id: layerName,
-      type: 'custom',
-      renderingMode: '3d',
-      onAdd: (map, mbxContext) => {
-        console.log('custom layer now added')
-        const textureLoader = new THREE.TextureLoader();
-        textureLoader.load(texturePath , (texture) => {
-          const geometry = new THREE.PlaneGeometry(7, 10);
-          const material = new THREE.MeshStandardMaterial({ map: texture });
-          material.needsUpdate = true;
-          let cube = new THREE.Mesh(geometry, material);
-          cube = window['tb'].Object3D({ obj: cube, units: 'meters'});
+
+  // createLoadTextureCustomLayer(layerName, coord, dimensions, color, texturePath, downloadGltf) {
+  //   return {
+  //     id: layerName,
+  //     type: 'custom',
+  //     renderingMode: '3d',
+  //     onAdd: (map, mbxContext) => {
+  //       console.log('custom layer now added')
+  //       const textureLoader = new THREE.TextureLoader();
+  //       textureLoader.load(texturePath , (texture) => {
+  //         const geometry = new THREE.BoxGeometry(dimensions.x, dimensions.y, dimensions.z);
+  //         const material = new THREE.MeshStandardMaterial({ map: texture });
+  //         material.needsUpdate = true;
+  //         let cube = new THREE.Mesh(geometry, material);
+  //         cube = window['tb'].Object3D({ obj: cube, units: 'meters'});
           
-          cube.castShadow = true;
-          cube.name = layerName
-          cube.addEventListener('ObjectChanged', (e) => {
-            console.log('ObjectChange', e);
-          }, false)
-          cube.addEventListener('ObjectDragged', (e) => {
-            console.log('Dragged', e);
-          }, false)
-          cube.addEventListener('SelectedChange', (e) => {
-            console.log('Selected', e);
-            const objectName = e.detail.name;
-            const objectCoord = e.detail.coordinates.slice(0, 2);
-            const object = {
-              name: objectName,
-              coordinates: new LngLat(objectCoord[0], objectCoord[1]),
-              parameters: {color: color, texture: texturePath, dimensions: dimensions}
-            }
-            console.log(object, objectCoord);
-            this.sendObjectSelected(object);
-          }, false)
-          cube.setCoords([coord.lng, coord.lat]);
-          window['tb'].add(cube);
-          window['tb'].lights.dirLight.target = cube;
+  //         cube.castShadow = true;
+  //         cube.name = layerName
+  //         cube.addEventListener('ObjectChanged', (e) => {
+  //           console.log('ObjectChange', e);
+  //         }, false)
+  //         cube.addEventListener('ObjectDragged', (e) => {
+  //           console.log('Dragged', e);
+  //         }, false)
+  //         cube.addEventListener('SelectedChange', (e) => {
+  //           console.log('Selected', e);
+  //           const objectName = e.detail.name;
+  //           const objectCoord = e.detail.coordinates.slice(0, 2);
+  //           const object = {
+  //             name: objectName,
+  //             coordinates: new LngLat(objectCoord[0], objectCoord[1]),
+  //             parameters: {color: color, texture: texturePath, dimensions: dimensions}
+  //           }
+  //           console.log(object, objectCoord);
+  //           this.sendObjectSelected(object);
+  //         }, false)
+  //         cube.setCoords([coord.lng, coord.lat]);
+  //         window['tb'].add(cube);
+  //         window['tb'].lights.dirLight.target = cube;
 
 
-          if (downloadGltf) {
-            this.downloadAsGltf(cube);
-          }
+  //         if (downloadGltf) {
+  //           this.downloadAsGltf(cube);
+  //         }
 
-        });
-      },
-      render: function(gl, matrix) {
-      }
-    }
-  }
+  //       });
+  //     },
+  //     render: function(gl, matrix) {
+  //     }
+  //   }
+  // }
+
+  // createRoadCustomLayer(layerName, coord, dimensions, color, texturePath, downloadGltf) {
+  //   return {
+  //     id: layerName,
+  //     type: 'custom',
+  //     renderingMode: '3d',
+  //     onAdd: (map, mbxContext) => {
+  //       console.log('custom layer now added')
+  //       const textureLoader = new THREE.TextureLoader();
+  //       textureLoader.load(texturePath , (texture) => {
+  //         const geometry = new THREE.PlaneGeometry(7, 10);
+  //         const material = new THREE.MeshStandardMaterial({ map: texture });
+  //         material.needsUpdate = true;
+  //         let cube = new THREE.Mesh(geometry, material);
+  //         cube = window['tb'].Object3D({ obj: cube, units: 'meters'});
+          
+  //         cube.castShadow = true;
+  //         cube.name = layerName
+  //         cube.addEventListener('ObjectChanged', (e) => {
+  //           console.log('ObjectChange', e);
+  //         }, false)
+  //         cube.addEventListener('ObjectDragged', (e) => {
+  //           console.log('Dragged', e);
+  //         }, false)
+  //         cube.addEventListener('SelectedChange', (e) => {
+  //           console.log('Selected', e);
+  //           const objectName = e.detail.name;
+  //           const objectCoord = e.detail.coordinates.slice(0, 2);
+  //           const object = {
+  //             name: objectName,
+  //             coordinates: new LngLat(objectCoord[0], objectCoord[1]),
+  //             parameters: {color: color, texture: texturePath, dimensions: dimensions}
+  //           }
+  //           console.log(object, objectCoord);
+  //           this.sendObjectSelected(object);
+  //         }, false)
+  //         cube.setCoords([coord.lng, coord.lat]);
+  //         window['tb'].add(cube);
+  //         window['tb'].lights.dirLight.target = cube;
+
+
+  //         if (downloadGltf) {
+  //           this.downloadAsGltf(cube);
+  //         }
+
+  //       });
+  //     },
+  //     render: function(gl, matrix) {
+  //     }
+  //   }
+  // }
 
   createLoadObjectCustomLayer(layerName, coord, objPath, scale, downloadGltf) {
     return {
@@ -373,6 +414,176 @@ export class MapCustomService {
           }
 
         })
+
+      },
+      render: function(gl, matrix) {
+      }
+    }
+  }
+
+
+  // createShapeCustomLayer(layerName, coord, dimensions, polygon, color, downloadGltf) {
+  //   return {
+  //     id: layerName,
+  //     type: 'custom',
+  //     renderingMode: '3d',
+  //     onAdd: (map, mbxContext) => {
+
+  //       const shape = new THREE.Shape();
+  //       console.log('Spread', ...polygon[0]);
+  //       let polygonStart = [polygon[0][0] * 111111, polygon[0][1] * 111111]
+  //       shape.moveTo(...polygonStart)
+  //       for (let crd of polygon.slice(1)) {
+  //         console.log( crd, ...crd)
+  //         let crd1 = [crd[0] * 111111, crd[1] * 111111]
+  //         shape.lineTo(...crd1)
+  //       }
+  //       const geometry = new THREE.ShapeGeometry(shape);
+  //       const material = new THREE.MeshStandardMaterial({ color: color });
+
+  //       let cube = new THREE.Mesh(geometry, material);
+  //       cube = window['tb'].Object3D({ obj: cube, units: 'meters'});
+        
+  //       cube.castShadow = true;
+  //       cube.name = layerName
+  //       cube.addEventListener('ObjectChanged', (e) => {
+  //         console.log('ObjectChange', e);
+  //       }, false)
+  //       cube.addEventListener('ObjectDragged', (e) => {
+  //         console.log('Dragged', e);
+  //       }, false)
+  //       cube.addEventListener('SelectedChange', (e) => {
+  //         console.log('Selected', e);
+  //         const objectName = e.detail.name;
+  //         const objectCoord = e.detail.coordinates.slice(0, 2);
+  //         const object = {
+  //           name: objectName,
+  //           coordinates: new LngLat(objectCoord[0], objectCoord[1]),
+  //           parameters: {color: color}
+  //         }
+  //         console.log(object, objectCoord);
+  //         this.sendObjectSelected(object);
+  //       }, false)
+  //       cube.setCoords([coord.lng, coord.lat]);
+  //       window['tb'].add(cube);
+  //       window['tb'].lights.dirLight.target = cube;
+
+
+  //       if (downloadGltf) {
+  //         this.downloadAsGltf(cube);
+  //       }
+
+  //     },
+  //     render: function(gl, matrix) {
+  //     }
+  //   }
+  // }
+
+
+  createExtrudeShapeCustomLayer(layerName, coord, polygon, color, texturePath, downloadGltf) {
+    return {
+      id: layerName,
+      type: 'custom',
+      renderingMode: '3d',
+      onAdd: (map, mbxContext) => {
+
+        if (texturePath) {
+          const textureLoader = new THREE.TextureLoader();
+          textureLoader.load(texturePath , (texture) => {
+
+            const material = new THREE.MeshStandardMaterial({ map: texture, color: color });
+            material.needsUpdate = true;
+            let center = [ coord.lng, coord.lat ];
+            let s = window['tb'].projectedUnitsPerMeter(center[1]);
+   
+
+            let extrusion = window['tb'].extrusion({
+              coordinates: polygon,
+              geometryOptions: { curveSegments: 1, bevelEnabled: false, depth: 30.5 * s },
+              anchor: 'center',
+              materials: material
+            });
+            // extrusion.addTooltip(b.properties.tooltip, true);
+            extrusion.setCoords([center[0], center[1], 0]);
+            extrusion.castShadow = true;
+
+            window['tb'].add(extrusion);
+
+            
+            extrusion.name = layerName
+            extrusion.addEventListener('ObjectChanged', (e) => {
+              console.log('ObjectChange', e);
+            }, false)
+            extrusion.addEventListener('ObjectDragged', (e) => {
+              console.log('Dragged', e);
+            }, false)
+            extrusion.addEventListener('SelectedChange', (e) => {
+              console.log('Selected', e);
+              const objectName = e.detail.name;
+              const objectCoord = e.detail.coordinates.slice(0, 2);
+              const object = {
+                name: objectName,
+                coordinates: new LngLat(objectCoord[0], objectCoord[1]),
+                parameters: {color: color, texture: texturePath}
+              }
+              console.log(object, objectCoord);
+              this.sendObjectSelected(object);
+            }, false)
+
+      
+            window['tb'].lights.dirLight.target = extrusion;
+
+
+            if (downloadGltf) {
+              this.downloadAsGltf(extrusion);
+            }
+
+          });
+        } else {
+          let center = [ coord.lng, coord.lat ];
+          let s = window['tb'].projectedUnitsPerMeter(center[1]);
+          console.log(center);
+          console.log(s)
+          const redMaterial = new THREE.MeshStandardMaterial({ color: color });
+
+          let extrusion = window['tb'].extrusion({
+            coordinates: polygon,
+            geometryOptions: { curveSegments: 1, bevelEnabled: false, depth: 30.5 * s },
+            anchor: 'center',
+            materials: redMaterial
+          });
+          // extrusion.addTooltip(b.properties.tooltip, true);
+          extrusion.setCoords([center[0], center[1], 0]);
+          window['tb'].add(extrusion);
+
+          extrusion.name = layerName
+          extrusion.addEventListener('ObjectChanged', (e) => {
+            console.log('ObjectChange', e);
+          }, false)
+          extrusion.addEventListener('ObjectDragged', (e) => {
+            console.log('Dragged', e);
+          }, false)
+          extrusion.addEventListener('SelectedChange', (e) => {
+            console.log('Selected', e);
+            const objectName = e.detail.name;
+            const objectCoord = e.detail.coordinates.slice(0, 2);
+            const object = {
+              name: objectName,
+              coordinates: new LngLat(objectCoord[0], objectCoord[1]),
+              parameters: {color: color, texture: texturePath}
+            }
+            console.log(object, objectCoord);
+            this.sendObjectSelected(object);
+          }, false)
+
+    
+          window['tb'].lights.dirLight.target = extrusion;
+
+
+          if (downloadGltf) {
+            this.downloadAsGltf(extrusion);
+          }
+        }
 
       },
       render: function(gl, matrix) {
