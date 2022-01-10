@@ -99,22 +99,6 @@ export class MapComponent implements OnInit {
           polygonsItemsArray.forEach( pol => {
             const polygonArray = pol.geometry.coordinates;
             this.createPolygon3dItem('polygon', polygonArray);
-            // const turfPolygon = turf.polygon(pol.geometry.coordinates)
-            // const centerOfPolygon = turf.centerOfMass(turfPolygon);
-
-            // const centerCoords = centerOfPolygon.geometry.coordinates;
-            // const a3dItem: Item3d = {
-            //   name: 'polygon' + (this.item3dAdded['polygon'].length + 1),
-            //   type: 'polygon',
-            //   coordinates: new LngLat(centerCoords[0], centerCoords[1]),
-            //   parameters: {color: 0xff0000, texture: ''},
-            //   polygon: pol.geometry.coordinates
-            // };
-            // this.mapService.add3dBoxLayer(this.map, a3dItem, false);
-            // this.item3dAdded['polygon'].push(a3dItem);
-            // this.layerCount += 1;
-
-            // this.item3dListService.sendItem3dAdded(a3dItem);
           });
         });
       }
@@ -190,22 +174,6 @@ export class MapComponent implements OnInit {
       console.log(polygonArray)
       this.createPolygon3dItem(this.obj3dButtonOn, polygonArray)
 
-      // const turfPolygon = turf.polygon(polygonArray)
-      // const centerOfPolygon = turf.centerOfMass(turfPolygon);
-      // console.log('center of polygon ', centerOfPolygon.geometry.coordinates)
-      // const centerCoords = centerOfPolygon.geometry.coordinates;
-      // const a3dItem: Item3d = {
-      //   name: this.obj3dButtonOn + (this.item3dAdded[this.obj3dButtonOn].length + 1),
-      //   type: this.obj3dButtonOn,
-      //   coordinates: new LngLat(centerCoords[0], centerCoords[1]),
-      //   parameters: this.configItemParam[this.obj3dButtonOn],
-      //   polygon: polygonArray
-      // };
-      // this.mapService.add3dBoxLayer(this.map, a3dItem, false);
-      // this.item3dAdded[this.obj3dButtonOn].push(a3dItem);
-      // this.layerCount += 1;
-
-      // this.item3dListService.sendItem3dAdded(a3dItem);
     });
 
   }
@@ -251,11 +219,6 @@ export class MapComponent implements OnInit {
     }
   }
 
-  /**
-   * This function is for setting all removed features to state 'clicked'.
-   * Setting in paint and not in filter enable the option to remove state.
-   * @param featuresIdList  this is the list of feature id that where removed should be loaded from a service.
-   */
 
   removeFeaturesFromList(featuresIdList: string[]): void {
     if (featuresIdList.length > 0) {
