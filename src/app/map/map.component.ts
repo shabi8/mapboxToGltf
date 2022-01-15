@@ -14,6 +14,7 @@ export interface Item3d {
   name: string;
   type?: string;
   coordinates: LngLatLike;
+  selected?: boolean;
   parameters: {
     color?: any,
     texture?: string,

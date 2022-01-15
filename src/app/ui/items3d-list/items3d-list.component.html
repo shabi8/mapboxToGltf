@@ -1,8 +1,8 @@
+<!-- <div *ngFor="let item of items3dlist; let i = index; trackBy: trackByIndex"> -->
+<mat-accordion class="example-headers-align" *ngFor="let item of items3dlist; let i = index; trackBy: trackByIndex" multi>
+    <!-- <div *ngFor="let item of items3dlist; let i = index; trackBy: trackByIndex"> -->
 
-<mat-accordion class="example-headers-align" multi>
-    <div *ngFor="let item of items3dlist; let i = index; trackBy: trackByIndex">
-
-        <mat-expansion-panel>
+        <mat-expansion-panel [expanded]="item.name === itemSelected">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                 {{ item.name | uppercase }}
@@ -54,8 +54,9 @@
         </mat-expansion-panel>
 
         
-    </div>
+    <!-- </div> -->
     
 </mat-accordion>
+<!-- </div> -->
 
 

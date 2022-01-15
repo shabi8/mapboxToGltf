@@ -174,6 +174,7 @@ export class MapCustomService {
 
 
   sendObjectSelected(object3d: Item3d) {
+    console.log('Sending item: ', object3d);
     this._objectSelectedSource.next(object3d);
   }
 

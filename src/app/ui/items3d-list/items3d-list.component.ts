@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Item3dListService } from '../services/item3d-list.service';
 import { Item3d } from 'src/app/map/map.component';
+import { MapCustomService } from 'src/app/map/map-custom.service';
 
 @Component({
   selector: 'app-items3d-list',
@@ -11,7 +12,9 @@ export class Items3dListComponent implements OnInit {
 
   items3dlist: Item3d[] = [];
 
-  constructor(private item3dListService: Item3dListService) { }
+  itemSelected;
+
+  constructor(private item3dListService: Item3dListService, private mapCustomService: MapCustomService, private ngZone: NgZone) { }
 
   textures: any[] = [
     {value: 'assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg', viewValue: 'Bricks'},
@@ -24,6 +27,16 @@ export class Items3dListComponent implements OnInit {
     this.item3dListService.item3Added$.subscribe(item => {
       this.items3dlist.push(item);
       console.log(item);
+    });
+    this.mapCustomService.objectSelected$.subscribe(item => {
+      this.ngZone.run(() => {
+        this.items3dlist.sort((a, b) => {return a.name == item.name ? -1 : b.name == item.name ? 1 : 0 });
+        this.itemSelected = item.name;
+      });
+      // let index = this.items3dlist.findIndex(obj => obj.name == item.name);
+      // this.items3dlist[index].selected = true
+      // this.itemSelected = item.name;
+      // console.log('UUUU', this.itemSelected);
     });
   }
 

@@ -30,6 +30,7 @@ import { MatSelectModule } from '@angular/material/select';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,7 @@ import { MatSelectModule } from '@angular/material/select';
     DrawButtonsPanelComponent,
     SidePanelComponent,
     Obj3dButtonsComponent,
-    Items3dListComponent,
+    Items3dListComponent
   ],
   imports: [
     BrowserModule,
