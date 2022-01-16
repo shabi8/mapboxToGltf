@@ -38,6 +38,12 @@ export class Items3dListComponent implements OnInit {
       // this.itemSelected = item.name;
       // console.log('UUUU', this.itemSelected);
     });
+    this.item3dListService.item3dChanged$.subscribe(item => {
+      this.ngZone.run(() => {
+        this.items3dlist.sort((a, b) => {return a.name == item.name ? -1 : b.name == item.name ? 1 : 0 });
+        this.itemSelected = item.name;
+      });
+    })
   }
 
   onChange(event, index) {
