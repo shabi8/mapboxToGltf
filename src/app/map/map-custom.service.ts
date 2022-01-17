@@ -4,6 +4,7 @@ import { LngLatLike, LngLat } from 'mapbox-gl';
 import * as THREE from 'three';
 import {GLTFExporter} from 'three/examples/jsm/exporters/GLTFExporter';
 import { Item3d } from './map.component';
+import { Item3dListService } from '../ui/services/item3d-list.service';
 
 
 
@@ -35,7 +36,7 @@ export class MapCustomService {
 
   threeBox;
 
-  constructor( ) { }
+  constructor( private item3dListService: Item3dListService) { }
 
   add3dBoxLayer(map, item3d: Item3d, downloadGltf: boolean) {
 
@@ -200,11 +201,9 @@ export class MapCustomService {
             // cube.addEventListener('ObjectChanged', (e) => {
             //   console.log('ObjectChange', e);
             // }, false)
-            // cube.addEventListener('ObjectDragged', (e) => {
-            //   console.log('This cube dragged: ', cube);
-
-            //   console.log('Dragged', e);
-            // }, false)
+            cube.addEventListener('ObjectDragged', (e) => {
+              this.onObjectDragged(e, item3d);
+            }, false)
             cube.addEventListener('SelectedChange', (e) => {
               this.onObjectSelected(e, item3d);
 
@@ -231,9 +230,9 @@ export class MapCustomService {
           // cube.addEventListener('ObjectChanged', (e) => {
           //   console.log('ObjectChange', e);
           // }, false)
-          // cube.addEventListener('ObjectDragged', (e) => {
-          //   console.log('Dragged', e);
-          // }, false)
+          cube.addEventListener('ObjectDragged', (e) => {
+            this.onObjectDragged(e, item3d);
+          }, false)
           cube.addEventListener('SelectedChange', (e) => {
             this.onObjectSelected(e, item3d);
           }, false)
@@ -277,9 +276,9 @@ export class MapCustomService {
           // loadedItem.addEventListener('ObjectChanged', (e) => {
           //   console.log('ObjectChange', e);
           // }, false)
-          // loadedItem.addEventListener('ObjectDragged', (e) => {
-          //   console.log('Dragged', e);
-          // }, false)
+          loadedItem.addEventListener('ObjectDragged', (e) => {
+            this.onObjectDragged(e, item3d);
+          }, false)
           loadedItem.addEventListener('SelectedChange', (e) => {
             this.onObjectSelected(e, item3d);
           }, false)
@@ -332,9 +331,9 @@ export class MapCustomService {
             // extrusion.addEventListener('ObjectChanged', (e) => {
             //   console.log('ObjectChange', e);
             // }, false)
-            // extrusion.addEventListener('ObjectDragged', (e) => {
-            //   console.log('Dragged', e);
-            // }, false)
+            extrusion.addEventListener('ObjectDragged', (e) => {
+              this.onObjectDragged(e, item3d);
+            }, false)
             extrusion.addEventListener('SelectedChange', (e) => {
               this.onObjectSelected(e, item3d);
             }, false)
@@ -369,9 +368,9 @@ export class MapCustomService {
           // extrusion.addEventListener('ObjectChanged', (e) => {
           //   console.log('ObjectChange', e);
           // }, false)
-          // extrusion.addEventListener('ObjectDragged', (e) => {
-          //   console.log('Dragged', e);
-          // }, false)
+          extrusion.addEventListener('ObjectDragged', (e) => {
+            this.onObjectDragged(e, item3d);
+          }, false)
           extrusion.addEventListener('SelectedChange', (e) => {
             this.onObjectSelected(e, item3d);
           }, false)
@@ -392,31 +391,16 @@ export class MapCustomService {
   }
 
   onObjectSelected(e, obj: Item3d) {
-    console.log('Selected', e);
-    console.log(obj)
-    const objectName = e.detail.name;
-    let objectCoord;
-    if (e.detail.coordinates instanceof Array) {
-      objectCoord = e.detail.coordinates.slice(0, 2);
-      obj.coordinates = new LngLat(objectCoord[0], objectCoord[1]);
-      console.log("1", objectCoord)
-      console.log(obj.coordinates)
-    } else {
-      objectCoord = e.detail.coordinates;
-      obj.coordinates = objectCoord;
-      console.log("2", objectCoord)
-      console.log(obj.coordinates)
-    }
-    // const objectCoord = e.detail.coordinates;
-    // console.log("ObjectCoord:", objectCoord)
-    // const object = {
-    //   name: objectName,
-    //   coordinates: new LngLat(objectCoord[0], objectCoord[1]),
-    //   parameters: {color: '', texture: '', dimensions: ''}
-    // }
-    
-
+    let objectCoord = e.detail.coordinates.slice(0, 2);
+    obj.coordinates = new LngLat(objectCoord[0], objectCoord[1]);
     this.sendObjectSelected(obj);
+  }
+
+  onObjectDragged(e, obj: Item3d) {
+    console.log('Dragged ',e);
+    let objectCoord = e.detail.draggedObject.coordinates.slice(0, 2);
+    obj.coordinates = new LngLat(objectCoord[0], objectCoord[1]);
+    this.item3dListService.sendItem3dChanged(obj);
   }
 
 
