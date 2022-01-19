@@ -9,6 +9,7 @@
   antialias="true"
   (mapLoad)="map = $event"
   (mapDblClick)="addMarker($event)"
+  (render)="onRender($event)"
 >
   <mgl-layer
   id="3d-buildings"

@@ -1,5 +1,5 @@
 <!-- <div *ngFor="let item of items3dlist; let i = index; trackBy: trackByIndex"> -->
-<mat-accordion class="example-headers-align" *ngFor="let item of items3dlist; let i = index; trackBy: trackByIndex" multi>
+<mat-accordion class="example-headers-align" *ngFor="let item of items3dlist;index as i; trackBy: trackByIndex" multi>
     <!-- <div *ngFor="let item of items3dlist; let i = index; trackBy: trackByIndex"> -->
 
         <mat-expansion-panel [expanded]="item.name === itemSelected">
@@ -18,17 +18,17 @@
             <div *ngIf="item.parameters.dimensions">
                 <mat-form-field appearance="fill">
                     <mat-label>X</mat-label>
-                    <input matInput type="number" min="0.1" name="x" step="0.1" [(ngModel)]="item.parameters.dimensions.x" (ngModelChange)="onChange($event, i)">
+                    <input matInput type="number" min="0.1" name="{{'x' + i}}" step="0.1" [(ngModel)]="item.parameters.dimensions.x" (ngModelChange)="onChange($event, i)">
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
                     <mat-label>Y</mat-label>
-                    <input matInput type="number" min="0.1" name="y" step="0.1" [(ngModel)]="item.parameters.dimensions.y" (ngModelChange)="onChange($event, i)">
+                    <input matInput type="number" min="0.1" name="{{'y' + i}}" step="0.1" [(ngModel)]="item.parameters.dimensions.y" (ngModelChange)="onChange($event, i)">
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
                     <mat-label>Z</mat-label>
-                    <input matInput type="number" min="0.1" name="z" step="0.1" [(ngModel)]="item.parameters.dimensions.z" (ngModelChange)="onChange($event, i)">
+                    <input matInput type="number" min="0.1" name="{{'z' + i}}" step="0.1" [(ngModel)]="item.parameters.dimensions.z" (ngModelChange)="onChange($event, i)">
                 </mat-form-field>
             </div>
 

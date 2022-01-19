@@ -7,6 +7,8 @@ import * as turf from '@turf/turf';
 import { Obj3dButtonsService } from '../ui/services/obj3d-buttons.service';
 import { Item3dListService } from '../ui/services/item3d-list.service';
 import { PolygonItems3dService } from '../services/polygon-items3d.service';
+import { TimeSliderService } from '../ui/services/time-slider.service';
+
 
 
 
@@ -44,13 +46,15 @@ export class MapComponent implements OnInit {
 
   draw;
 
+  date;
+
 
   markerLngLat: LngLatLike;
 
 
   removedFeatureList: string[] = ['149384668', '149271823', '149368834'];
 
-  object3D: Item3d;
+  // object3D: Item3d;
 
 
   item3dAdded = {
@@ -84,11 +88,21 @@ export class MapComponent implements OnInit {
     private mapService: MapCustomService,
     private obj3dButtonService: Obj3dButtonsService,
     private item3dListService: Item3dListService,
-    private polygonItem3dService: PolygonItems3dService) { }
+    private polygonItem3dService: PolygonItems3dService,
+    private timeSliderService: TimeSliderService) { }
 
   ngOnInit(): void {
+    this.timeSliderService.timeSimulation$.subscribe((date) => {
+      console.log("DATE PASSED", date);
+      this.date = date;
+      // if (this.map) {
+      //   console.log('TRIGGER REPAINT')
+        // this.map.triggerRepaint();
+      // }
+    });
     this.item3dListService.item3dToEdit$.subscribe((item) => {
-      this.mapService.add3dBoxLayer(this.map, item, false);
+      this.mapService.add3dBoxLayer(this.map, item, false, this.date);
+      console.log('YES it is edited!!')
     });
     this.obj3dButtonService.obj3dButtonOn$.subscribe(buttonName => {
       if (buttonName === 'polygon service') {
@@ -114,12 +128,20 @@ export class MapComponent implements OnInit {
         console.log('YYYY', this.obj3dButtonOn);
       }
     });
-    this.mapService.objectSelected$.subscribe((objectSelected) => {
-      console.log('ggg', objectSelected);
-      this.object3D = objectSelected;
+    // this.mapService.objectSelected$.subscribe((objectSelected) => {
+    //   console.log('ggg', objectSelected);
+    //   this.object3D = objectSelected;
       // this.parameters.color = objectSelected.parameters.color;
       // this.parameters.dimensions = objectSelected.parameters.dimensions;
-    });
+    // });
+  }
+
+  onRender(event) {
+    console.log(event)
+    if (window['tb'] && this.obj3dButtonOn !== 'polygon') {
+      console.log('SUNLIGHT')
+      window['tb'].setSunlight(this.date);
+    }
   }
 
 
@@ -139,7 +161,7 @@ export class MapComponent implements OnInit {
 
     };
 
-    this.mapService.add3dBoxLayer(this.map, a3dItem, false);
+    this.mapService.add3dBoxLayer(this.map, a3dItem, false, this.date);
     // this.buildGui();
     this.item3dAdded[this.obj3dButtonOn].push(a3dItem);
     this.layerCount += 1;
@@ -176,6 +198,15 @@ export class MapComponent implements OnInit {
       this.createPolygon3dItem(this.obj3dButtonOn, polygonArray)
 
     });
+    // this.map.on('draw.update', (e) => {
+
+    //   const data = this.draw.getAll();
+
+    //   const polygonArray = data.features[0].geometry.coordinates;
+    //   console.log(polygonArray)
+    //   this.createPolygon3dItem(this.obj3dButtonOn, polygonArray)
+
+    // });
 
   }
 
@@ -190,7 +221,7 @@ export class MapComponent implements OnInit {
       parameters: this.configItemParam[type],
       polygon: polygonArray
     };
-    this.mapService.add3dBoxLayer(this.map, a3dItem, false);
+    this.mapService.add3dBoxLayer(this.map, a3dItem, false, this.date);
     this.item3dAdded[type].push(a3dItem);
     this.layerCount += 1;
 

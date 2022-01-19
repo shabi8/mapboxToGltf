@@ -1,0 +1,9 @@
+<mat-slider
+  thumbLabel
+  [displayWith]="formatLabel"
+  step="100"
+  min="0"
+  max="86400"
+  [(ngModel)]="value"
+  aria-label="units"
+  (input)="onInput($event)"></mat-slider>

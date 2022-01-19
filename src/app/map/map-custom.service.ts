@@ -9,6 +9,7 @@ import { Item3dListService } from '../ui/services/item3d-list.service';
 
 
 
+
 declare const Threebox: any;
 
 @Injectable({
@@ -38,7 +39,7 @@ export class MapCustomService {
 
   constructor( private item3dListService: Item3dListService) { }
 
-  add3dBoxLayer(map, item3d: Item3d, downloadGltf: boolean) {
+  add3dBoxLayer(map, item3d: Item3d, downloadGltf: boolean, date) {
 
     if (map.getLayer(item3d.name)) {
       map.removeLayer(item3d.name);
@@ -55,11 +56,11 @@ export class MapCustomService {
     }
 
     if (item3d.type === 'tree') {
-      map.addLayer(this.createLoadObjectCustomLayer(item3d, downloadGltf))
+      map.addLayer(this.createLoadObjectCustomLayer(item3d, downloadGltf, date))
     } else if (item3d.type === 'polygon'){
-      map.addLayer(this.createExtrudeShapeCustomLayer(item3d, downloadGltf))
+      map.addLayer(this.createExtrudeShapeCustomLayer(item3d, downloadGltf, date))
     } else {
-      map.addLayer(this.createCustomLayer(item3d, downloadGltf));
+      map.addLayer(this.createCustomLayer(item3d, downloadGltf, date));
     }
 
     const layerAdded = map.getLayer(item3d.name);
@@ -180,7 +181,7 @@ export class MapCustomService {
   }
 
 
-  createCustomLayer(item3d: Item3d, downloadGltf) {
+  createCustomLayer(item3d: Item3d, downloadGltf, date) {
     return {
       id: item3d.name,
       type: 'custom',
@@ -249,12 +250,14 @@ export class MapCustomService {
 
       },
       render: function(gl, matrix) {
+        // window['tb'].setSunlight(date, item3d.coordinates);
+        // window['tb'].update();
       }
     }
   }
 
 
-  createLoadObjectCustomLayer(item3d: Item3d, downloadGltf) {
+  createLoadObjectCustomLayer(item3d: Item3d, downloadGltf, date) {
     return {
       id: item3d.name,
       type: 'custom',
@@ -292,12 +295,14 @@ export class MapCustomService {
 
       },
       render: function(gl, matrix) {
+        // window['tb'].setSunlight(date, item3d.coordinates);
+        // window['tb'].update();       
       }
     }
   }
 
 
-  createExtrudeShapeCustomLayer(item3d: Item3d, downloadGltf) {
+  createExtrudeShapeCustomLayer(item3d: Item3d, downloadGltf, date) {
     return {
       id: item3d.name,
       type: 'custom',
@@ -386,6 +391,8 @@ export class MapCustomService {
 
       },
       render: function(gl, matrix) {
+        // window['tb'].setSunlight(date, item3d.coordinates);
+        // window['tb'].update();
       }
     }
   }

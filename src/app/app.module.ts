@@ -25,6 +25,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
+import { TimeSliderComponent } from './ui/time-slider/time-slider.component';
+
 
 
 
@@ -39,7 +42,8 @@ import { MatSelectModule } from '@angular/material/select';
     DrawButtonsPanelComponent,
     SidePanelComponent,
     Obj3dButtonsComponent,
-    Items3dListComponent
+    Items3dListComponent,
+    TimeSliderComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +62,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatDividerModule,
     MatListModule,
     MatExpansionModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSliderModule
   ],
   providers: [
     { provide: Window, useValue: window }
