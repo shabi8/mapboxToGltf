@@ -137,7 +137,7 @@ export class MapComponent implements OnInit {
   }
 
   onRender(event) {
-    console.log(event)
+    // console.log(event)
     if (window['tb'] && this.obj3dButtonOn !== 'polygon') {
       console.log('SUNLIGHT')
       window['tb'].setSunlight(this.date);
@@ -176,28 +176,50 @@ export class MapComponent implements OnInit {
 
   /// draw polygon add to onload
   initDraw(): void {
-    console.log('INIT Draw');
-    this.draw = new MapboxDraw({
-      displayControlsDefault: false,
-      // Select which mapbox-gl-draw control buttons to add to the map.
-      controls: {
-      polygon: true,
-      trash: true
-      },
-      // Set mapbox-gl-draw to draw by default.
-      // The user does not have to click the polygon control button first.
-      defaultMode: 'draw_polygon'
-    });
+    
+    if (!this.draw) {
+
+      this.draw = new MapboxDraw({
+        displayControlsDefault: false,
+        // Select which mapbox-gl-draw control buttons to add to the map.
+        controls: {
+        polygon: true,
+        trash: true
+        },
+        // Set mapbox-gl-draw to draw by default.
+        // The user does not have to click the polygon control button first.
+        defaultMode: 'draw_polygon'
+      });
+
+      this.map.on('draw.create', (e) => {
+        console.log(e);
+  
+        const polygonArray = e.features[0].geometry.coordinates;
+        console.log(polygonArray)
+        this.createPolygon3dItem(this.obj3dButtonOn, polygonArray)
+  
+      });
+    }
+    
     this.map.addControl(this.draw);
-    this.map.on('draw.create', (e) => {
+    // this.map.on('draw.create', (e) => {
+    //   console.log(e);
 
-      const data = this.draw.getAll();
+      // const data = this.draw.getAll();
+      // console.log(data);
 
-      const polygonArray = data.features[0].geometry.coordinates;
-      console.log(polygonArray)
-      this.createPolygon3dItem(this.obj3dButtonOn, polygonArray)
+      // let polygonsItemsArray = data.features;
 
-    });
+      //     polygonsItemsArray.forEach( pol => {
+      //       const polygonArray = pol.geometry.coordinates;
+      //       this.createPolygon3dItem('polygon', polygonArray);
+      //     });
+
+    //   const polygonArray = e.features[0].geometry.coordinates;
+    //   console.log(polygonArray)
+    //   this.createPolygon3dItem(this.obj3dButtonOn, polygonArray)
+
+    // });
     // this.map.on('draw.update', (e) => {
 
     //   const data = this.draw.getAll();
