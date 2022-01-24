@@ -18,7 +18,7 @@ export class Items3dListComponent implements OnInit {
 
   textures: any[] = [
     {value: 'assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg', viewValue: 'Bricks'},
-    {value: 'road', viewValue: 'Road'},
+    {value: 'assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg', viewValue: 'Road'},
     {value: 'assets/textures/JerusalemStone/Bricks075A_1K_Color.jpg', viewValue: 'Stone'},
     {value: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Color.jpg', viewValue: 'Office'},
   ];
@@ -33,24 +33,24 @@ export class Items3dListComponent implements OnInit {
         this.items3dlist.sort((a, b) => {return a.name == item.name ? -1 : b.name == item.name ? 1 : 0 });
         this.itemSelected = item.name;
       });
-      // let index = this.items3dlist.findIndex(obj => obj.name == item.name);
-      // this.items3dlist[index].selected = true
-      // this.itemSelected = item.name;
-      // console.log('UUUU', this.itemSelected);
     });
     this.item3dListService.item3dChanged$.subscribe(item => {
       this.ngZone.run(() => {
         this.items3dlist.sort((a, b) => {return a.name == item.name ? -1 : b.name == item.name ? 1 : 0 });
         this.itemSelected = item.name;
       });
+    });
+    this.item3dListService.itemWasRemoved$.subscribe(item => {
+      const indexToRemove = this.items3dlist.findIndex(obj => obj.name === item.name );
+      this.items3dlist.splice(indexToRemove, 1);
     })
   }
 
-  onChange(event, index) {
-    console.log(event);
-    console.log(this.items3dlist[index]);
-    this.item3dListService.sendItem3dToEdit(this.items3dlist[index]);
-  }
+  // onChange(event, index) {
+  //   console.log(event);
+  //   console.log(this.items3dlist[index]);
+  //   this.item3dListService.sendItem3dToEdit(this.items3dlist[index]);
+  // }
 
   trackByIndex(index: number, item: any): any {
     return item.name;

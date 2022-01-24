@@ -16,6 +16,12 @@ export class Item3dListService {
   private item3dChangedSource = new Subject<Item3d>();
   item3dChanged$ = this.item3dChangedSource.asObservable();
 
+  private item3dToRemoveSource = new Subject<Item3d>();
+  itemToRemove$ = this.item3dToRemoveSource.asObservable();
+
+  private item3dWasRemovedSource = new Subject<Item3d>();
+  itemWasRemoved$ = this.item3dWasRemovedSource.asObservable();
+
   constructor() { }
 
   sendItem3dAdded(item3d: Item3d): void {
@@ -28,5 +34,13 @@ export class Item3dListService {
 
   sendItem3dChanged(item3d: Item3d): void {
     this.item3dChangedSource.next(item3d);
+  }
+
+  sendItemToRemove(item3d: Item3d): void {
+    this.item3dToRemoveSource.next(item3d);
+  }
+
+  sendItemWasRemoved(item3d: Item3d): void {
+    this.item3dWasRemovedSource.next(item3d);
   }
 }

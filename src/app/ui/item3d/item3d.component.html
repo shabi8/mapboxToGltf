@@ -1,16 +1,15 @@
-<!-- <div *ngFor="let item of items3dlist; let i = index; trackBy: trackByIndex"> -->
-<!-- <mat-accordion class="example-headers-align" *ngFor="let item of items3dlist;index as i; trackBy: trackByIndex" multi> -->
+<mat-accordion class="example-headers-align" multi>
     <!-- <div *ngFor="let item of items3dlist; let i = index; trackBy: trackByIndex"> -->
 
-        <!-- <mat-expansion-panel [expanded]="item.name === itemSelected">
+        <mat-expansion-panel [expanded]="expand">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                 {{ item.name | uppercase }}
                 </mat-panel-title>
                 <mat-panel-description>
                 <div>
-                    {{ item.coordinates.lng | number: '1.0-5'}}
-                    {{ item.coordinates.lat | number: '1.0-5'}}
+                    {{ item.coordinates['lng'] | number: '1.0-5'}}
+                    {{ item.coordinates['lat'] | number: '1.0-5'}}
                 </div>
                 </mat-panel-description>
             </mat-expansion-panel-header>
@@ -18,23 +17,23 @@
             <div *ngIf="item.parameters.dimensions">
                 <mat-form-field appearance="fill">
                     <mat-label>X</mat-label>
-                    <input matInput type="number" min="0.1" name="{{'x' + i}}" step="0.1" [(ngModel)]="item.parameters.dimensions.x" (ngModelChange)="onChange($event, i)">
+                    <input matInput type="number" min="0.1" name="{{'x' + i}}" step="0.1" [(ngModel)]="item.parameters.dimensions.x" (ngModelChange)="onChange($event)">
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
                     <mat-label>Y</mat-label>
-                    <input matInput type="number" min="0.1" name="{{'y' + i}}" step="0.1" [(ngModel)]="item.parameters.dimensions.y" (ngModelChange)="onChange($event, i)">
+                    <input matInput type="number" min="0.1" name="{{'y' + i}}" step="0.1" [(ngModel)]="item.parameters.dimensions.y" (ngModelChange)="onChange($event)">
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
                     <mat-label>Z</mat-label>
-                    <input matInput type="number" min="0.1" name="{{'z' + i}}" step="0.1" [(ngModel)]="item.parameters.dimensions.z" (ngModelChange)="onChange($event, i)">
+                    <input matInput type="number" min="0.1" name="{{'z' + i}}" step="0.1" [(ngModel)]="item.parameters.dimensions.z" (ngModelChange)="onChange($event)">
                 </mat-form-field>
             </div>
 
             <mat-form-field appearance="fill">
                 <mat-label>Texture</mat-label>
-                <mat-select [(ngModel)]="item.parameters.texture" (ngModelChange)="onChange($event, i)">
+                <mat-select [(ngModel)]="item.parameters.texture" (ngModelChange)="onChange($event)">
                     <mat-option *ngFor="let texture of textures" [value]="texture.value">
                         {{texture.viewValue}}
                     </mat-option>
@@ -43,23 +42,22 @@
         
             <mat-form-field appearance="fill" *ngIf="item.parameters.color">
                 <mat-label>Color</mat-label>
-                <input matInput type="color" [(ngModel)]="item.parameters.color" (ngModelChange)="onChange($event, i)">
+                <input matInput type="color" [(ngModel)]="item.parameters.color" (ngModelChange)="onChange($event)">
             </mat-form-field>
         
             <mat-form-field appearance="fill" *ngIf="item.parameters.scale">
                 <mat-label>Scale</mat-label>
-                <input matInput type="number" min="0.1" step="0.1" [(ngModel)]="item.parameters.scale" (ngModelChange)="onChange($event, i)">
+                <input matInput type="number" min="0.1" step="0.1" [(ngModel)]="item.parameters.scale" (ngModelChange)="onChange($event)">
             </mat-form-field>
+
+            <mat-action-row>
+                <button mat-button color="primary"><mat-icon>import_export</mat-icon></button>
+                <button mat-button color="warn" (click)="itemToRemove()"><mat-icon>delete</mat-icon></button>
+            </mat-action-row>
         
-        </mat-expansion-panel> -->
+        </mat-expansion-panel>
 
         
     <!-- </div> -->
     
-<!-- </mat-accordion> -->
-<!-- </div> -->
-
-<app-item3d *ngFor="let item of items3dlist; let i = index; trackBy: trackByIndex" [item]="item" [expand]="item.name === itemSelected"></app-item3d>
-
-
-
+</mat-accordion>

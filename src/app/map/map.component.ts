@@ -57,14 +57,23 @@ export class MapComponent implements OnInit {
   // object3D: Item3d;
 
 
-  item3dAdded = {
-    'office building': [],
-    'Residential building': [],
-    road: [],
-    tree: [],
-    commercial: [],
-    polygon: []
-  };
+  // item3dAdded = {
+  //   'office building': [],
+  //   'Residential building': [],
+  //   road: [],
+  //   tree: [],
+  //   commercial: [],
+  //   polygon: []
+  // };
+
+  counter = {
+    'office building': 0,
+    'Residential building': 0,
+    road: 0,
+    tree: 0,
+    commercial: 0,
+    polygon: 0
+  }
 
   configItemParam = {
     'office building': {texture: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Color.jpg', dimensions: { x: 10, y: 10, z: 25}},
@@ -100,8 +109,12 @@ export class MapComponent implements OnInit {
         // this.map.triggerRepaint();
       // }
     });
+    this.item3dListService.itemToRemove$.subscribe((item) => {
+      this.mapService.remove3dBoxLayer(this.map, item);
+    });
     this.item3dListService.item3dToEdit$.subscribe((item) => {
       this.mapService.add3dBoxLayer(this.map, item, false, this.date);
+      console.log(item)
       console.log('YES it is edited!!')
     });
     this.obj3dButtonService.obj3dButtonOn$.subscribe(buttonName => {
@@ -128,12 +141,6 @@ export class MapComponent implements OnInit {
         console.log('YYYY', this.obj3dButtonOn);
       }
     });
-    // this.mapService.objectSelected$.subscribe((objectSelected) => {
-    //   console.log('ggg', objectSelected);
-    //   this.object3D = objectSelected;
-      // this.parameters.color = objectSelected.parameters.color;
-      // this.parameters.dimensions = objectSelected.parameters.dimensions;
-    // });
   }
 
   onRender(event) {
@@ -141,6 +148,7 @@ export class MapComponent implements OnInit {
     if (window['tb'] && this.obj3dButtonOn !== 'polygon') {
       console.log('SUNLIGHT')
       window['tb'].setSunlight(this.date);
+      window['tb'].update();
     }
   }
 
@@ -154,19 +162,15 @@ export class MapComponent implements OnInit {
     this.markerLngLat = markLngLat;
 
     const a3dItem: Item3d = {
-      name: this.obj3dButtonOn + (this.item3dAdded[this.obj3dButtonOn].length + 1),
+      name: this.obj3dButtonOn + (this.counter[this.obj3dButtonOn] + 1),
       type: this.obj3dButtonOn,
       coordinates: this.markerLngLat,
       parameters: this.configItemParam[this.obj3dButtonOn]
-
     };
 
+    this.counter[this.obj3dButtonOn] += 1;
+
     this.mapService.add3dBoxLayer(this.map, a3dItem, false, this.date);
-    // this.buildGui();
-    this.item3dAdded[this.obj3dButtonOn].push(a3dItem);
-    this.layerCount += 1;
-    console.log(this.item3dAdded);
-    this.item3dListService.sendItem3dAdded(a3dItem);
   }
 
 
@@ -174,11 +178,8 @@ export class MapComponent implements OnInit {
     return this.map.removeControl(this.draw);
   }
 
-  /// draw polygon add to onload
   initDraw(): void {
-    
     if (!this.draw) {
-
       this.draw = new MapboxDraw({
         displayControlsDefault: false,
         // Select which mapbox-gl-draw control buttons to add to the map.
@@ -202,34 +203,6 @@ export class MapComponent implements OnInit {
     }
     
     this.map.addControl(this.draw);
-    // this.map.on('draw.create', (e) => {
-    //   console.log(e);
-
-      // const data = this.draw.getAll();
-      // console.log(data);
-
-      // let polygonsItemsArray = data.features;
-
-      //     polygonsItemsArray.forEach( pol => {
-      //       const polygonArray = pol.geometry.coordinates;
-      //       this.createPolygon3dItem('polygon', polygonArray);
-      //     });
-
-    //   const polygonArray = e.features[0].geometry.coordinates;
-    //   console.log(polygonArray)
-    //   this.createPolygon3dItem(this.obj3dButtonOn, polygonArray)
-
-    // });
-    // this.map.on('draw.update', (e) => {
-
-    //   const data = this.draw.getAll();
-
-    //   const polygonArray = data.features[0].geometry.coordinates;
-    //   console.log(polygonArray)
-    //   this.createPolygon3dItem(this.obj3dButtonOn, polygonArray)
-
-    // });
-
   }
 
   createPolygon3dItem(type: string, polygonArray) {
@@ -237,17 +210,17 @@ export class MapComponent implements OnInit {
     const centerOfPolygon = turf.centerOfMass(turfPolygon);
     const centerCoords = centerOfPolygon.geometry.coordinates;
     const a3dItem: Item3d = {
-      name: type + (this.item3dAdded[type].length + 1),
+      name: type + (this.counter[type] + 1),
       type: type,
       coordinates: new LngLat(centerCoords[0], centerCoords[1]),
       parameters: this.configItemParam[type],
       polygon: polygonArray
     };
-    this.mapService.add3dBoxLayer(this.map, a3dItem, false, this.date);
-    this.item3dAdded[type].push(a3dItem);
-    this.layerCount += 1;
 
-    this.item3dListService.sendItem3dAdded(a3dItem);
+    this.counter[type] += 1;
+
+    this.mapService.add3dBoxLayer(this.map, a3dItem, false, this.date);
+
   }
 
 

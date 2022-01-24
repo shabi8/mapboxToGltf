@@ -65,11 +65,22 @@ export class MapCustomService {
 
     const layerAdded = map.getLayer(item3d.name);
     if (layerAdded) {
+      this.item3dListService.sendItem3dAdded(item3d);
       return true;
     } else {
       false;
     }
 
+  }
+
+  remove3dBoxLayer(map, item3d: Item3d) {
+    if (map.getLayer(item3d.name)) {
+      map.removeLayer(item3d.name);
+      window['tb'].removeByName(item3d.name);
+      window['tb'].clear(true);
+      // window['tb'].update()
+      this.item3dListService.sendItemWasRemoved(item3d);
+    }
   }
 
   // createCustomLayerFirstDraft(layerName, coord, dimensions, color, texturePath, downloadGltf) {
