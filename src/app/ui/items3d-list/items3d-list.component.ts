@@ -25,7 +25,9 @@ export class Items3dListComponent implements OnInit {
 
   ngOnInit(): void {
     this.item3dListService.item3Added$.subscribe(item => {
-      this.items3dlist.push(item);
+      if (!this.items3dlist.find(obj => obj.name === item.name)) {
+        this.items3dlist.push(item);
+      }
       console.log(item);
     });
     this.mapCustomService.objectSelected$.subscribe(item => {
@@ -46,11 +48,6 @@ export class Items3dListComponent implements OnInit {
     })
   }
 
-  // onChange(event, index) {
-  //   console.log(event);
-  //   console.log(this.items3dlist[index]);
-  //   this.item3dListService.sendItem3dToEdit(this.items3dlist[index]);
-  // }
 
   trackByIndex(index: number, item: any): any {
     return item.name;

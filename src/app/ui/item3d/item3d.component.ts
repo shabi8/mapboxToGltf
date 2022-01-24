@@ -36,4 +36,8 @@ export class Item3dComponent implements OnInit {
     this.item3dListService.sendItemToRemove(this.item);
   }
 
+  itemToExport() {
+    this.item3dListService.sendItemToExport(this.item);
+  }
+
 }

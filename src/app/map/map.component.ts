@@ -109,6 +109,9 @@ export class MapComponent implements OnInit {
         // this.map.triggerRepaint();
       // }
     });
+    this.item3dListService.item3dToExport$.subscribe((item) => {
+      this.mapService.add3dBoxLayer(this.map, item, true, this.date)
+    });
     this.item3dListService.itemToRemove$.subscribe((item) => {
       this.mapService.remove3dBoxLayer(this.map, item);
     });
