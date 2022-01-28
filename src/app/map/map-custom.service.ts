@@ -285,6 +285,7 @@ export class MapCustomService {
           });
           // extrusion.addTooltip(b.properties.tooltip, true);
           extrusion.setCoords([center[0], center[1], 0]);
+          console.log(extrusion);
           window['tb'].add(extrusion);
 
           extrusion.name = item3d.name;
@@ -323,6 +324,7 @@ export class MapCustomService {
 
   onObjectDragged(e, obj: Item3d) {
     console.log('Dragged ',e);
+    console.log('Obj dragged', obj)
     let objectCoord = e.detail.draggedObject.coordinates.slice(0, 2);
     obj.coordinates = new LngLat(objectCoord[0], objectCoord[1]);
     this.item3dListService.sendItem3dChanged(obj);

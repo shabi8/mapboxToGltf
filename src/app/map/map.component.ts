@@ -24,7 +24,8 @@ export interface Item3d {
     modelPath?: string,
     scale?: number
   };
-  polygon?: Array<[]>
+  polygon?: Array<[]>,
+  polygonId?: string
 }
 
 
@@ -54,17 +55,9 @@ export class MapComponent implements OnInit {
 
   removedFeatureList: string[] = ['149384668', '149271823', '149368834'];
 
-  // object3D: Item3d;
+  polygonFeatureList = [];
+  polygonFeature;
 
-
-  // item3dAdded = {
-  //   'office building': [],
-  //   'Residential building': [],
-  //   road: [],
-  //   tree: [],
-  //   commercial: [],
-  //   polygon: []
-  // };
 
   counter = {
     'office building': 0,
@@ -128,8 +121,7 @@ export class MapComponent implements OnInit {
           let polygonsItemsArray = data.features;
 
           polygonsItemsArray.forEach( pol => {
-            const polygonArray = pol.geometry.coordinates;
-            this.createPolygon3dItem('polygon', polygonArray);
+            this.createPolygon3dItem(pol);
           });
         });
       }
@@ -196,31 +188,41 @@ export class MapComponent implements OnInit {
       });
 
       this.map.on('draw.create', (e) => {
-        console.log(e);
-  
-        const polygonArray = e.features[0].geometry.coordinates;
-        console.log(polygonArray)
-        this.createPolygon3dItem(this.obj3dButtonOn, polygonArray)
+        this.polygonFeature = e.features[0];
+        this.createPolygon3dItem(this.polygonFeature)
   
       });
+      this.map.on('draw.update', (e) => {
+        this.polygonFeature = e.features[0];
+        this.createPolygon3dItem(this.polygonFeature)
+      })
     }
     
     this.map.addControl(this.draw);
   }
 
-  createPolygon3dItem(type: string, polygonArray) {
+  createPolygon3dItem(feature) {
+    const polygonArray = feature.geometry.coordinates;
     const turfPolygon = turf.polygon(polygonArray)
     const centerOfPolygon = turf.centerOfMass(turfPolygon);
     const centerCoords = centerOfPolygon.geometry.coordinates;
+    let itemFeature = this.polygonFeatureList.find(item => item.polygonId === feature.id)
+    let type = feature.geometry.type.toLowerCase();
+    console.log(type);
+    let name = itemFeature ? itemFeature.name : type + (this.counter[type] +1);
+    console.log(name);
     const a3dItem: Item3d = {
-      name: type + (this.counter[type] + 1),
+      name: name,
       type: type,
       coordinates: new LngLat(centerCoords[0], centerCoords[1]),
       parameters: this.configItemParam[type],
-      polygon: polygonArray
+      polygon: polygonArray,
+      polygonId: feature.id
     };
 
     this.counter[type] += 1;
+
+    this.polygonFeatureList.push(a3dItem);
 
     this.mapService.add3dBoxLayer(this.map, a3dItem, false, this.date);
 
