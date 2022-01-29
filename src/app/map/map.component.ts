@@ -22,7 +22,8 @@ export interface Item3d {
     texture?: string,
     dimensions?: any,
     modelPath?: string,
-    scale?: number
+    scale?: number,
+    polygonExtrusionHeight?: number
   };
   polygon?: Array<[]>,
   polygonId?: string
@@ -74,7 +75,7 @@ export class MapComponent implements OnInit {
     road: {texture: 'assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg', dimensions: { x: 7, y: 10, z: 0.1}},
     tree: {modelPath: 'assets/models/tree.glb', scale: 1},
     commercial: {color: 0xff0000, dimensions: { x: 10, y: 10, z: 10}},
-    polygon: {color: 0xff0000, texture: ''}
+    polygon: {color: 0xff0000, texture: '', polygonExtrusionHeight: 30}
   };
 
   texturesPath = {

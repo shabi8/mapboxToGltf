@@ -239,7 +239,7 @@ export class MapCustomService {
 
             let extrusion = window['tb'].extrusion({
               coordinates: item3d.polygon,
-              geometryOptions: { curveSegments: 1, bevelEnabled: false, depth: 30.5 * s },
+              geometryOptions: { curveSegments: 1, bevelEnabled: false, depth: item3d.parameters.polygonExtrusionHeight * s },
               anchor: 'center',
               materials: material
             });
@@ -279,7 +279,7 @@ export class MapCustomService {
 
           let extrusion = window['tb'].extrusion({
             coordinates: item3d.polygon,
-            geometryOptions: { curveSegments: 1, bevelEnabled: false, depth: 30.5 * s },
+            geometryOptions: { curveSegments: 1, bevelEnabled: false, depth: item3d.parameters.polygonExtrusionHeight * s },
             anchor: 'center',
             materials: redMaterial
           });
