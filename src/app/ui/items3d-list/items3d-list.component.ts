@@ -2,6 +2,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { Item3dListService } from '../services/item3d-list.service';
 import { Item3d } from 'src/app/map/map.component';
 import { MapCustomService } from 'src/app/map/map-custom.service';
+import { IItem3d } from 'application-types';
 
 @Component({
   selector: 'app-items3d-list',
@@ -10,7 +11,7 @@ import { MapCustomService } from 'src/app/map/map-custom.service';
 })
 export class Items3dListComponent implements OnInit {
 
-  items3dlist: Item3d[] = [];
+  items3dlist: IItem3d[] = [];
 
   itemSelected;
 
@@ -28,7 +29,8 @@ export class Items3dListComponent implements OnInit {
       if (!this.items3dlist.find(obj => obj.name === item.name)) {
         this.items3dlist.push(item);
       }
-      console.log(item);
+      console.log('ADDED', item);
+      console.log(this.items3dlist);
     });
     this.mapCustomService.objectSelected$.subscribe(item => {
       this.ngZone.run(() => {
@@ -40,7 +42,9 @@ export class Items3dListComponent implements OnInit {
       this.ngZone.run(() => {
         this.items3dlist.sort((a, b) => {return a.name == item.name ? -1 : b.name == item.name ? 1 : 0 });
         this.itemSelected = item.name;
+        console.log(item);
       });
+      console.log(this.items3dlist);
     });
     this.item3dListService.itemWasRemoved$.subscribe(item => {
       const indexToRemove = this.items3dlist.findIndex(obj => obj.name === item.name );

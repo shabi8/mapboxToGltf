@@ -1,7 +1,7 @@
-<app-item3d 
+<app-item3d-reactive 
     *ngFor="let item of items3dlist; let i = index; trackBy: trackByIndex" 
     [item]="item" 
-    [expand]="item.name === itemSelected"></app-item3d>
+    [expand]="item.name === itemSelected"></app-item3d-reactive>
 
 
 

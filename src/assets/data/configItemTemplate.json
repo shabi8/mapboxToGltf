@@ -1,0 +1,673 @@
+{
+    "templates" : [
+        {
+            "templateName" : "office building",
+            "itemType": "office building",
+            "materials" : [
+                {
+                    "textures": [
+                        {
+                            "type": "map",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Color.jpg"     
+                        },
+                        {
+                            "type": "displacementMap",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.jpg"     
+                        },
+                        {
+                            "type": "emmissiveMap",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.jpg"     
+                        },
+                        {
+                            "type": "normalMap",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.jpg"     
+                        },
+                        {
+                            "type": "roughnessMap",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.jpg"     
+                        }
+
+                    ],
+                    "color": "grey",
+                    "displacamentScale": 0.05,
+                    "displacementBias": 1,
+                    "emissiveIntensity": 1,
+                    "emissive": "black",
+                    "normalScaleX": 1,
+                    "normalScaleY": 1,
+                    "roughness": 1.0
+                },
+                {
+                    "textures": [
+                        {
+                            "type": "map",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Color.jpg"     
+                        },
+                        {
+                            "type": "displacementMap",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.jpg"     
+                        },
+                        {
+                            "type": "emmissiveMap",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.jpg"     
+                        },
+                        {
+                            "type": "normalMap",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.jpg"     
+                        },
+                        {
+                            "type": "roughnessMap",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.jpg"     
+                        }
+
+                    ],
+                    "color": "grey",
+                    "displacamentScale": 0.05,
+                    "displacementBias": 1,
+                    "emissiveIntensity": 1,
+                    "emissive": "black",
+                    "normalScaleX": 1,
+                    "normalScaleY": 1,
+                    "roughness": 1.0
+                },
+                {
+                    "textures": [
+                        {
+                            "type": "map",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Color.jpg"     
+                        },
+                        {
+                            "type": "displacementMap",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.jpg"     
+                        },
+                        {
+                            "type": "emmissiveMap",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.jpg"     
+                        },
+                        {
+                            "type": "normalMap",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.jpg"     
+                        },
+                        {
+                            "type": "roughnessMap",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.jpg"     
+                        }
+
+                    ],
+                    "color": "grey",
+                    "displacamentScale": 0.05,
+                    "displacementBias": 1,
+                    "emissiveIntensity": 1,
+                    "emissive": "black",
+                    "normalScaleX": 1,
+                    "normalScaleY": 1,
+                    "roughness": 1.0
+                },
+                {
+                    "textures": [
+                        {
+                            "type": "map",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Color.jpg"     
+                        },
+                        {
+                            "type": "displacementMap",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.jpg"     
+                        },
+                        {
+                            "type": "emmissiveMap",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.jpg"     
+                        },
+                        {
+                            "type": "normalMap",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.jpg"     
+                        },
+                        {
+                            "type": "roughnessMap",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.jpg"     
+                        }
+
+                    ],
+                    "color": "grey",
+                    "displacamentScale": 0.05,
+                    "displacementBias": 1,
+                    "emissiveIntensity": 1,
+                    "emissive": "black",
+                    "normalScaleX": 1,
+                    "normalScaleY": 1,
+                    "roughness": 1.0
+                },
+                {
+                    "textures": [
+                        {
+                            "type": "map",
+                            "path": "assets/textures/concrete_floor/concrete_floor_01_diff_4k.jpg"     
+                        },
+                        {
+                            "type": "displacementMap",
+                            "path": "assets/textures/concrete_floor/concrete_floor_01_disp_4k.png"     
+                        },
+                        {
+                            "type": "roughnessMap",
+                            "path": "assets/textures/concrete_floor/concrete_floor_01_rough_4k.jpg"     
+                        }
+
+                    ],
+                    "color": "grey",
+                    "displacamentScale": 0.05,
+                    "displacementBias": 1,
+                    "emissiveIntensity": 1,
+                    "emissive": "black",
+                    "normalScaleX": 1,
+                    "normalScaleY": 1,
+                    "roughness": 1.0
+                },
+                {
+                    "textures": [
+                        {
+                            "type": "map",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Color.jpg"     
+                        },
+                        {
+                            "type": "displacementMap",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.jpg"     
+                        },
+                        {
+                            "type": "emmissiveMap",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.jpg"     
+                        },
+                        {
+                            "type": "normalMap",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.jpg"     
+                        },
+                        {
+                            "type": "roughnessMap",
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.jpg"     
+                        }
+
+                    ],
+                    "color": "grey",
+                    "displacamentScale": 0.05,
+                    "displacementBias": 1,
+                    "emissiveIntensity": 1,
+                    "emissive": "black",
+                    "normalScaleX": 1,
+                    "normalScaleY": 1,
+                    "roughness": 1.0
+                }
+                
+            ],
+            "dimensions": {
+                "x" : 10,
+                "y" : 10,
+                "z" : 25
+            },
+            "segments": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            },
+            "textureNeedRepeat": { 
+                "x": 10,
+                "y": 10, 
+                "z": 25
+            }
+        },
+        {
+            "templateName" : "Residential building",
+            "itemType": "Residential building",
+            "materials" : [
+                {
+                    "textures": [
+                        {
+                            "type": "map",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg"     
+                        },
+                        {
+                            "type": "displacementMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.jpg"    
+                        },
+                        {
+                            "type": "aoMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.jpg"    
+                        },
+                        {
+                            "type": "normalMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.jpg"     
+                        },
+                        {
+                            "type": "roughnessMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.jpg"     
+                        }
+
+                    ],
+                    "color": "grey",
+                    "displacamentScale": 0.05,
+                    "displacementBias": 1,
+                    "emissiveIntensity": 1,
+                    "emissive": "black",
+                    "normalScaleX": 1,
+                    "normalScaleY": 1,
+                    "roughness": 1.0
+                },
+                {
+                    "textures": [
+                        {
+                            "type": "map",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg"     
+                        },
+                        {
+                            "type": "displacementMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.jpg"    
+                        },
+                        {
+                            "type": "aoMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.jpg"    
+                        },
+                        {
+                            "type": "normalMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.jpg"     
+                        },
+                        {
+                            "type": "roughnessMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.jpg"     
+                        }
+
+                    ],
+                    "color": "grey",
+                    "displacamentScale": 0.05,
+                    "displacementBias": 1,
+                    "emissiveIntensity": 1,
+                    "emissive": "black",
+                    "normalScaleX": 1,
+                    "normalScaleY": 1,
+                    "roughness": 1.0
+                },
+                {
+                    "textures": [
+                        {
+                            "type": "map",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg"     
+                        },
+                        {
+                            "type": "displacementMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.jpg"    
+                        },
+                        {
+                            "type": "aoMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.jpg"    
+                        },
+                        {
+                            "type": "normalMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.jpg"     
+                        },
+                        {
+                            "type": "roughnessMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.jpg"     
+                        }
+
+                    ],
+                    "color": "grey",
+                    "displacamentScale": 0.05,
+                    "displacementBias": 1,
+                    "emissiveIntensity": 1,
+                    "emissive": "black",
+                    "normalScaleX": 1,
+                    "normalScaleY": 1,
+                    "roughness": 1.0
+                },
+                {
+                    "textures": [
+                        {
+                            "type": "map",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg"     
+                        },
+                        {
+                            "type": "displacementMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.jpg"    
+                        },
+                        {
+                            "type": "aoMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.jpg"    
+                        },
+                        {
+                            "type": "normalMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.jpg"     
+                        },
+                        {
+                            "type": "roughnessMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.jpg"     
+                        }
+
+                    ],
+                    "color": "grey",
+                    "displacamentScale": 0.05,
+                    "displacementBias": 1,
+                    "emissiveIntensity": 1,
+                    "emissive": "black",
+                    "normalScaleX": 1,
+                    "normalScaleY": 1,
+                    "roughness": 1.0
+                },
+                {
+                    "textures": [
+                        {
+                            "type": "map",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg"     
+                        },
+                        {
+                            "type": "displacementMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.jpg"    
+                        },
+                        {
+                            "type": "aoMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.jpg"    
+                        },
+                        {
+                            "type": "normalMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.jpg"     
+                        },
+                        {
+                            "type": "roughnessMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.jpg"     
+                        }
+
+                    ],
+                    "color": "grey",
+                    "displacamentScale": 0.05,
+                    "displacementBias": 1,
+                    "emissiveIntensity": 1,
+                    "emissive": "black",
+                    "normalScaleX": 1,
+                    "normalScaleY": 1,
+                    "roughness": 1.0
+                },
+                {
+                    "textures": [
+                        {
+                            "type": "map",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg"     
+                        },
+                        {
+                            "type": "displacementMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.jpg"    
+                        },
+                        {
+                            "type": "aoMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.jpg"    
+                        },
+                        {
+                            "type": "normalMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.jpg"     
+                        },
+                        {
+                            "type": "roughnessMap",
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.jpg"     
+                        }
+
+                    ],
+                    "color": "grey",
+                    "displacamentScale": 0.05,
+                    "displacementBias": 1,
+                    "emissiveIntensity": 1,
+                    "emissive": "black",
+                    "normalScaleX": 1,
+                    "normalScaleY": 1,
+                    "roughness": 1.0
+                }
+            ],
+            "dimensions": {
+                "x" : 8,
+                "y" : 8,
+                "z" : 12
+            },
+            "segments": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            },
+            "textureNeedRepeat": { 
+                "x" : 8,
+                "y" : 8,
+                "z" : 12
+            }
+        },
+        {
+            "templateName" : "road",
+            "itemType": "road",
+            "materials" : [
+                {
+                    "textures": [
+                        {
+                            "type": "map",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg"     
+                        },
+                        {
+                            "type": "displacementMap",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Displacement.jpg"     
+                        },
+                        {
+                            "type": "normalMap",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.jpg"     
+                        },
+                        {
+                            "type": "roughnessMap",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Roughness.jpg"     
+                        }
+
+                    ],
+                    "color": "grey",
+                    "displacamentScale": 0.05,
+                    "displacementBias": 1,
+                    "emissiveIntensity": 1,
+                    "emissive": "black",
+                    "normalScaleX": 1,
+                    "normalScaleY": 1,
+                    "roughness": 1.0
+                },
+                {
+                    "textures": [
+                        {
+                            "type": "map",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg"     
+                        },
+                        {
+                            "type": "displacementMap",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Displacement.jpg"     
+                        },
+                        {
+                            "type": "normalMap",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.jpg"     
+                        },
+                        {
+                            "type": "roughnessMap",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Roughness.jpg"     
+                        }
+
+                    ],
+                    "color": "grey",
+                    "displacamentScale": 0.05,
+                    "displacementBias": 1,
+                    "emissiveIntensity": 1,
+                    "emissive": "black",
+                    "normalScaleX": 1,
+                    "normalScaleY": 1,
+                    "roughness": 1.0
+                },
+                {
+                    "textures": [
+                        {
+                            "type": "map",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg"     
+                        },
+                        {
+                            "type": "displacementMap",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Displacement.jpg"     
+                        },
+                        {
+                            "type": "normalMap",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.jpg"     
+                        },
+                        {
+                            "type": "roughnessMap",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Roughness.jpg"     
+                        }
+
+                    ],
+                    "color": "grey",
+                    "displacamentScale": 0.05,
+                    "displacementBias": 1,
+                    "emissiveIntensity": 1,
+                    "emissive": "black",
+                    "normalScaleX": 1,
+                    "normalScaleY": 1,
+                    "roughness": 1.0
+                },
+                {
+                    "textures": [
+                        {
+                            "type": "map",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg"     
+                        },
+                        {
+                            "type": "displacementMap",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Displacement.jpg"     
+                        },
+                        {
+                            "type": "normalMap",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.jpg"     
+                        },
+                        {
+                            "type": "roughnessMap",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Roughness.jpg"     
+                        }
+
+                    ],
+                    "color": "grey",
+                    "displacamentScale": 0.05,
+                    "displacementBias": 1,
+                    "emissiveIntensity": 1,
+                    "emissive": "black",
+                    "normalScaleX": 1,
+                    "normalScaleY": 1,
+                    "roughness": 1.0
+                },
+                {
+                    "textures": [
+                        {
+                            "type": "map",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg"     
+                        },
+                        {
+                            "type": "displacementMap",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Displacement.jpg"     
+                        },
+                        {
+                            "type": "normalMap",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.jpg"     
+                        },
+                        {
+                            "type": "roughnessMap",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Roughness.jpg"     
+                        }
+
+                    ],
+                    "color": "grey",
+                    "displacamentScale": 0.05,
+                    "displacementBias": 1,
+                    "emissiveIntensity": 1,
+                    "emissive": "black",
+                    "normalScaleX": 1,
+                    "normalScaleY": 1,
+                    "roughness": 1.0
+                },
+                {
+                    "textures": [
+                        {
+                            "type": "map",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg"     
+                        },
+                        {
+                            "type": "displacementMap",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Displacement.jpg"     
+                        },
+                        {
+                            "type": "normalMap",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.jpg"     
+                        },
+                        {
+                            "type": "roughnessMap",
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Roughness.jpg"     
+                        }
+
+                    ],
+                    "color": "grey",
+                    "displacamentScale": 0.05,
+                    "displacementBias": 1,
+                    "emissiveIntensity": 1,
+                    "emissive": "black",
+                    "normalScaleX": 1,
+                    "normalScaleY": 1,
+                    "roughness": 1.0
+                }
+            ],
+            "dimensions": {
+                "x" : 7,
+                "y" : 10,
+                "z" : 0.1
+            },
+            "segments": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            },
+            "textureNeedRepeat": { 
+                "x": 7,
+                "y": 10
+            }
+        },
+        {
+            "templateName": "tree",
+            "itemType": "tree",
+            "modelPath": "assets/models/tree.glb",
+            "scale": 1
+        },
+        {
+            "templateName" : "commercial",
+            "itemType": "commercial",
+            "materials" : [
+                {
+                    "color": "blue"
+                }
+            ],
+            "dimensions": {
+                "x" : 10,
+                "y" : 10,
+                "z" : 10
+            },
+            "segments": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            },
+            "textureNeedRepeat": { 
+                "x": 10,
+                "y": 10, 
+                "z": 10
+            }
+        },
+        {
+            "templateName" : "polygon",
+            "itemType": "polygon",
+            "materials" : [
+                {
+                    "color": "red"
+                }
+            ],
+            "textureNeedRepeat": { 
+                "x": 10,
+                "y": 10
+            },
+            "polygonExtrusionHeight": 30
+        }  
+    ]
+}

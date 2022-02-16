@@ -1,0 +1,310 @@
+<!-- <mat-accordion class="example-headers-align" multi> -->
+    <!-- <form [formGroup]="form">
+        <mat-expansion-panel [expanded]="expand">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                {{ item.name | uppercase }}
+                </mat-panel-title>
+                <mat-panel-description>
+                <div>
+                    {{ item.coordinates['lng'] | number: '1.0-5'}}
+                    {{ item.coordinates['lat'] | number: '1.0-5'}}
+                </div>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div *ngIf="item.dimensions">
+                <mat-form-field appearance="fill">
+                    <mat-label>X</mat-label>
+                    <input matInput type="number" step="0.1" formControlName="dimensionsX">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Y</mat-label>
+                    <input matInput type="number" step="0.1" formControlName="dimensionsY">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Z</mat-label>
+                    <input matInput type="number" step="0.1" formControlName="dimensionsZ">
+                </mat-form-field>
+            </div>
+
+            <mat-form-field  *ngIf="item.polygonExtrusionHeight" appearance="fill">
+                <mat-label>Polygon Height</mat-label>
+                <input matInput type="number" step="0.1" formControlName="polygonHeight">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Texture</mat-label>
+                <mat-select formControlName="texture">
+                    <ng-container *ngFor="let texture of textures">
+                        <mat-option [value]="texture.value">
+                        {{texture.viewValue}}
+                        </mat-option>
+                    </ng-container> -->
+                    <!-- <mat-option *ngFor="let texture of textures" [value]="texture.value">
+                        {{texture.viewValue}}
+                    </mat-option> -->
+                <!-- </mat-select>
+                </mat-form-field>
+        
+            <mat-form-field appearance="fill" *ngIf="item.materials[0].color">
+                <mat-label>Color</mat-label>
+                <input matInput type="color" formControlName="color">
+            </mat-form-field>
+        
+            <mat-form-field appearance="fill" *ngIf="item.scale">
+                <mat-label>Scale</mat-label>
+                <input matInput type="number" step="0.1" formControlName="scale">
+            </mat-form-field>
+
+            <mat-action-row>
+                <button mat-button color="primary" (click)="itemToExport()"><mat-icon>import_export</mat-icon></button>
+                <button mat-button color="warn" (click)="itemToRemove()"><mat-icon>delete</mat-icon></button>
+            </mat-action-row>
+        
+        </mat-expansion-panel>
+    </form>
+
+    
+</mat-accordion> -->
+
+
+<mat-accordion class="example-headers-align" multi>
+    <!-- <div *ngFor="let item of items3dlist; let i = index; trackBy: trackByIndex"> -->
+    <form [formGroup]="form">
+        <mat-expansion-panel [expanded]="expand">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                {{ item.name | uppercase }}
+                </mat-panel-title>
+                <!-- <mat-panel-description>
+                <div>
+                    {{ item.coordinates['lng'] | number: '1.0-5'}}
+                    {{ item.coordinates['lat'] | number: '1.0-5'}}
+                </div>
+                </mat-panel-description> -->
+            </mat-expansion-panel-header>
+            <mat-tab-group mat-align-tabs="center">
+                <mat-tab label="Data">
+                    <mat-card>
+                        <div>
+                            <div>
+                                Langtitude: {{ item.coordinates['lng'] | number: '1.0-5'}}
+                            </div>
+                            <div>
+                                Latitude: {{ item.coordinates['lat'] | number: '1.0-5'}}
+                            </div>
+                            <div>
+                                Type: 
+                            </div>
+                            <div>
+                                Description:
+                            </div>
+                        </div>
+                    </mat-card>     
+                </mat-tab>
+                <mat-tab label="Geometry">
+                    <mat-card>
+                        <div>
+                            <div *ngIf="item.dimensions">
+                                <div class="dimension-class">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>X</mat-label>
+                                        <input matInput type="number" step="0.1" formControlName="dimensionsX">
+                                    </mat-form-field>
+    
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>X seg</mat-label>
+                                        <input matInput type="number" step="1" formControlName="segmentsX">
+                                    </mat-form-field>
+                                </div>
+                                <div class="dimension-class">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Y</mat-label>
+                                        <input matInput type="number" step="0.1" formControlName="dimensionsY">
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Y seg</mat-label>
+                                        <input matInput type="number" step="1" formControlName="segmentsY">
+                                    </mat-form-field>
+                                </div>
+                                <div class="dimension-class">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Z</mat-label>
+                                        <input matInput type="number" step="0.1" formControlName="dimensionsZ">
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Z seg</mat-label>
+                                        <input matInput type="number" step="1" formControlName="segmentsZ">
+                                    </mat-form-field>
+                                </div> 
+                            </div>
+                            <div *ngIf="item.polygonExtrusionHeight">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Polygon Height</mat-label>
+                                    <input matInput type="number" step="0.1" formControlName="polygonHeight">
+                                </mat-form-field>
+                            </div>
+                            <div *ngIf="item.scale">
+                                <mat-form-field appearance="outline" >
+                                    <mat-label>Scale</mat-label>
+                                    <input matInput type="number" step="0.1" formControlName="scale">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </mat-card>
+                </mat-tab>
+                <mat-tab label="Materials">
+                    <mat-card *ngIf="materials.controls.length > 0" formArrayName="materials">
+                        <mat-tab-group>
+                            <ng-container *ngFor="let materialForm of materials.controls; let index = index">
+                                <mat-tab  label="Mat{{index + 1}}" [formGroup]="materialForm">
+
+                                    <div class="texture-selector">
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Textures</mat-label>
+                                            <mat-select [(value)]="selectedTexture" (selectionChange)="changeTexture($event, index)"> 
+                                                <ng-container *ngFor="let texture of texturesSelection">
+                                                    <mat-option [value]="texture">
+                                                        {{ texture.texturesName}}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                    </div>
+
+                                    <div class="textures-chips-list">
+                                        <mat-chip-list *ngIf="materialForm.get('textures')?.controls.length > 0" formArrayName="textures" class="mat-chip-list-stacked">
+                                            <ng-container *ngFor="let textureForm of materialForm.get('textures').controls; let j = index">
+                                                <ng-container [formGroup]="textureForm">
+                                                    <mat-chip
+                                                        ngDefaultControl 
+                                                        color="primary" 
+                                                        selected matTooltip="{{textureForm.controls.type.value}}" 
+                                                        formControlName="type">{{textureForm.controls.type.value}}
+    
+                                                        <mat-icon matChipRemove (click)="removeTexture(materialForm.get('textures'), j)">cancel</mat-icon>
+    
+                                                    </mat-chip>
+                                                </ng-container>
+
+                                            </ng-container>
+                                            
+                                        </mat-chip-list>
+                                    </div>
+                                    <!-- <mat-divider></mat-divider> -->
+                                    
+                                        <!-- <mat-form-field appearance="outline">
+                                            <mat-label>Textures</mat-label> -->
+                                            <!-- formControlName="textures" -->
+                                            <!-- <mat-select> 
+                                                <ng-container *ngFor="let texture of textures">
+                                                    <mat-option [value]="texture.value">
+                                                    {{texture.viewValue}}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field> -->
+                                        <!-- <mat-button-toggle-group name="textures" aria-label="Textures" multiple>
+                                            <ng-container *ngFor="let txtr of material.textures">
+                                                <mat-button-toggle value="txtr.type">
+                                                    <button mat-icon-button matTooltip="{{txtr.type}}" color="accent">
+                                                        <mat-icon>texture</mat-icon>
+                                                    </button>
+                                                </mat-button-toggle>
+                                            </ng-container>
+                                        </mat-button-toggle-group> -->
+                                    <div>
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Color</mat-label>
+                                            <input matInput type="color" formControlName="color">
+                                        </mat-form-field>
+                                    </div>
+                                    <div>
+                                        <mat-form-field appearance="outline" >
+                                            <mat-label>Displacament Scale</mat-label>
+                                            <input matInput type="number" step="0.1" formControlName="displacamentScale">
+                                        </mat-form-field>
+                                    </div>
+                                    <div>
+                                        <mat-form-field appearance="outline" >
+                                            <mat-label>Displacament Bias</mat-label>
+                                            <input matInput type="number" step="0.1" formControlName="displacementBias">
+                                        </mat-form-field>
+                                    </div>
+                                    <div>
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Emissive Intensity</mat-label>
+                                            <input matInput type="number" step="0.1" formControlName="emissiveIntensity">
+                                        </mat-form-field>
+                                    </div>
+                                    <div>
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>emissive</mat-label>
+                                            <input matInput type="color" formControlName="emissive">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="dimension-class">
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Normal scale x</mat-label>
+                                            <input matInput type="number" step="0.1" formControlName="normalScaleX">
+                                        </mat-form-field>
+    
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Normal scale y</mat-label>
+                                            <input matInput type="number" step="0.1" formControlName="normalScaleY">
+                                        </mat-form-field>
+                                    </div> 
+                                    <div>
+                                        <mat-form-field appearance="outline" >
+                                            <mat-label>Roughness</mat-label>
+                                            <input matInput type="number" step="0.1" formControlName="roughness">
+                                        </mat-form-field>
+                                    </div>
+                                    <div>
+                                        <mat-form-field appearance="outline" >
+                                            <mat-label>Metalness</mat-label>
+                                            <input matInput type="number" step="0.1" formControlName="metalness">
+                                        </mat-form-field>
+                                    </div>
+                                    <div>
+                                        <mat-form-field appearance="outline" >
+                                            <mat-label>Bump Scale</mat-label>
+                                            <input matInput type="number" step="0.1" formControlName="bumpScale">
+                                        </mat-form-field>
+                                    </div>
+    
+                                </mat-tab>
+                            </ng-container>
+                            
+                        </mat-tab-group>
+                    </mat-card>
+                </mat-tab>
+            </mat-tab-group>
+
+
+
+
+
+        
+            <!-- <mat-form-field appearance="fill" *ngIf="item.materials[0].color">
+                <mat-label>Color</mat-label>
+                <input matInput type="color" formControlName="color">
+            </mat-form-field>
+  -->
+
+            <mat-action-row>
+                <button mat-button color="primary" (click)="itemToExport()"><mat-icon>import_export</mat-icon></button>
+                <button mat-button color="warn" (click)="itemToRemove()"><mat-icon>delete</mat-icon></button>
+            </mat-action-row>
+        
+        </mat-expansion-panel>
+    </form>
+
+    
+</mat-accordion>

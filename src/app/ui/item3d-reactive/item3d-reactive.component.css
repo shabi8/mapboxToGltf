@@ -1,0 +1,42 @@
+mat-expansion-panel {
+    border: 2px solid rgb(113,126,200);
+    margin: 2px 3px;
+}
+
+mat-form-field {
+    display: inline-block;
+    width: 95%;
+}
+
+mat-chip {
+    max-width: fit-content;
+}
+
+.texture-selector{
+    margin-top: 20px;
+}
+
+::ng-deep.textures-chips-list {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 10px;
+}
+
+::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active{
+    min-width: 0!important;
+    padding: 3px!important;
+    margin: 3px!important;
+}
+
+::ng-deep .dimension-class .mat-form-field{
+    width: 40% !important;
+    margin: 5%;
+  }
+
+::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0px !important;}
+::ng-deep .mat-form-field-label-wrapper { top: -1.5em; }
+
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.75);
+    /* width: 133.33333%; */
+}

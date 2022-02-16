@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { environment } from 'src/environments/environment';
@@ -28,6 +29,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { TimeSliderComponent } from './ui/time-slider/time-slider.component';
 import { Item3dComponent } from './ui/item3d/item3d.component';
+import { Item3dReactiveComponent } from './ui/item3d-reactive/item3d-reactive.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatChipsModule } from '@angular/material/chips';
+
 
 
 
@@ -45,7 +51,8 @@ import { Item3dComponent } from './ui/item3d/item3d.component';
     Obj3dButtonsComponent,
     Items3dListComponent,
     TimeSliderComponent,
-    Item3dComponent
+    Item3dComponent,
+    Item3dReactiveComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +62,7 @@ import { Item3dComponent } from './ui/item3d/item3d.component';
     }),
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
@@ -65,7 +73,10 @@ import { Item3dComponent } from './ui/item3d/item3d.component';
     MatListModule,
     MatExpansionModule,
     MatSelectModule,
-    MatSliderModule
+    MatSliderModule,
+    MatTabsModule,
+    MatTooltipModule,
+    MatChipsModule
   ],
   providers: [
     { provide: Window, useValue: window }
