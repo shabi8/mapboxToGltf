@@ -81,6 +81,7 @@ declare module "application-types" {
     roughness?: number;
     metalness?: number;
     bumpScale?: number;
+    wireframe?: boolean;
   }
 
   export interface ITexture {

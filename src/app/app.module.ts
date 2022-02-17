@@ -33,6 +33,7 @@ import { Item3dReactiveComponent } from './ui/item3d-reactive/item3d-reactive.co
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 
@@ -76,7 +77,8 @@ import { MatChipsModule } from '@angular/material/chips';
     MatSliderModule,
     MatTabsModule,
     MatTooltipModule,
-    MatChipsModule
+    MatChipsModule,
+    MatCheckboxModule
   ],
   providers: [
     { provide: Window, useValue: window }
