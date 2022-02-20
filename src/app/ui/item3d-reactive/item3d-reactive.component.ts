@@ -6,10 +6,6 @@ import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 
-// interface TextureSelection {
-//   value: string,
-//   viewValue: string
-// }
 
 @Component({
   selector: 'app-item3d-reactive',
@@ -330,23 +326,29 @@ export class Item3dReactiveComponent implements OnInit {
       transparent: [''],
       aoMapIntensity: ['', [
         Validators.min(0),
-        Validators.max(10),
+        Validators.max(2),
       ]],
       displacamentScale: ['', [
         Validators.min(0),
-        Validators.max(10),
+        Validators.max(2),
       ]],
       displacementBias: ['', [
         Validators.min(0),
-        Validators.max(10),
+        Validators.max(2),
       ]],
       emissiveIntensity: ['', [
         Validators.min(0),
-        Validators.max(10),
+        Validators.max(3),
       ]],
       emissive: [''],// color
-      normalScaleX: [''],
-      normalScaleY: [''], // vector2
+      normalScaleX: ['', [
+        Validators.min(0),
+        Validators.max(1),
+      ]],
+      normalScaleY: ['', [
+        Validators.min(0),
+        Validators.max(1),
+      ]], // vector2
       roughness: ['', [
         Validators.min(0),
         Validators.max(1),

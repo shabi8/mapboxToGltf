@@ -40,3 +40,14 @@ mat-chip {
     transform: translateY(-1.1em) scale(.75);
     /* width: 133.33333%; */
 }
+
+
+/* ::ng-deep.add-button {
+    margin-left: auto; 
+    margin-right: 0;
+} */
+
+.add-button-container{
+    display: flex;
+    justify-content: end;
+}

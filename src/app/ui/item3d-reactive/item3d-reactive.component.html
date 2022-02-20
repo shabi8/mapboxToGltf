@@ -159,7 +159,18 @@
                     </mat-card>
                 </mat-tab>
                 <mat-tab label="Materials">
+                    <!-- <div class="add-button-container">
+                        <button mat-mini-fab class="add-button">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div> -->
+                    
                     <mat-card *ngIf="materials.controls.length > 0" formArrayName="materials">
+                        <div class="add-button-container">
+                            <button mat-mini-fab class="add-button" (click)="addMaterial()">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </div>
                         <mat-tab-group>
                             <ng-container *ngFor="let materialForm of materials.controls; let index = index">
                                 <mat-tab  label="Mat{{index + 1}}" [formGroup]="materialForm">
