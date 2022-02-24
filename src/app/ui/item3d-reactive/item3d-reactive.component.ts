@@ -153,6 +153,18 @@ export class Item3dReactiveComponent implements OnInit {
       Validators.min(1),
       Validators.max(999)
     ]],
+    repeatX: ['', [
+      Validators.min(1),
+      Validators.max(999)
+    ]],
+    repeatY: ['', [
+      Validators.min(0),
+      Validators.max(999)
+    ]],
+    repeatZ: ['', [
+      Validators.min(1),
+      Validators.max(999)
+    ]],
     polygonHeight: ['', [
       Validators.min(0.1),
       Validators.max(999),
@@ -239,6 +251,15 @@ export class Item3dReactiveComponent implements OnInit {
             case 'segmentsZ':
               this.item.segments.z = val.segmentsZ;
               break;
+            case 'repeatX':
+              this.item.textureNeedRepeat.x = val.repeatX;
+              break;
+            case 'repeatY':
+              this.item.textureNeedRepeat.y = val.repeatY;
+              break;
+            case 'repeatZ':
+              this.item.textureNeedRepeat.z = val.repeatZ;
+              break;           
             case 'scale': 
               this.item.scale = val.scale;
               break;
@@ -266,6 +287,9 @@ export class Item3dReactiveComponent implements OnInit {
       segmentsY: item.segments?.y,
       dimensionsZ: item.dimensions?.z,
       segmentsZ: item.segments?.z,
+      repeatX: item.textureNeedRepeat?.x,
+      repeatY: item.textureNeedRepeat?.y,
+      repeatZ: item.textureNeedRepeat?.z,
       polygonHeight: item.polygonExtrusionHeight,
       scale: item.scale
     });

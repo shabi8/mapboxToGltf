@@ -141,6 +141,22 @@
                                         <mat-label>Z seg</mat-label>
                                         <input matInput type="number" step="1" formControlName="segmentsZ">
                                     </mat-form-field>
+                                </div>
+                                <div class="repeat-class">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>repeat X</mat-label>
+                                        <input matInput type="number" step="0.1" formControlName="repeatX">
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>repeat Y</mat-label>
+                                        <input matInput type="number" step="1" formControlName="repeatY">
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>repeat Z</mat-label>
+                                        <input matInput type="number" step="1" formControlName="repeatZ">
+                                    </mat-form-field>
                                 </div> 
                             </div>
                             <div *ngIf="item.polygonExtrusionHeight">
