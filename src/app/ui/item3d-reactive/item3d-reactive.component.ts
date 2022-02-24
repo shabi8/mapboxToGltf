@@ -26,7 +26,6 @@ export class Item3dReactiveComponent implements OnInit {
     {value: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Color.jpg', viewValue: 'Office'},
   ];
 
-  // texturesSelection$: Observable<TextureSelection[]>;
 
   texturesSelection = [
     {
@@ -169,49 +168,7 @@ export class Item3dReactiveComponent implements OnInit {
       Validators.min(0.1),
       Validators.max(999),
     ]],
-    materials: this.fb.array([
-      // this.fb.group({
-      //   textures: this.fb.array([
-      //     this.fb.group({
-      //       type: [''],
-      //       path: ['']
-      //     })
-      //   ]),
-      //   color: [''],
-      //   transparent: [''],
-      //   aoMapIntensity: ['', [
-      //     Validators.min(0),
-      //     Validators.max(10),
-      //   ]],
-      //   displacamentScale: ['', [
-      //     Validators.min(0),
-      //     Validators.max(10),
-      //   ]],
-      //   displacementBias: ['', [
-      //     Validators.min(0),
-      //     Validators.max(10),
-      //   ]],
-      //   emissiveIntensity: ['', [
-      //     Validators.min(0),
-      //     Validators.max(10),
-      //   ]],
-      //   emissive: [''],// color
-      //   normalScaleX: [''], // vector2
-      //   normalScaleY: [''],
-      //   roughness: ['', [
-      //     Validators.min(0),
-      //     Validators.max(1),
-      //   ]],
-      //   metalness: ['', [
-      //     Validators.min(0),
-      //     Validators.max(1),
-      //   ]],
-      //   bumpScale: ['', [
-      //     Validators.min(0),
-      //     Validators.max(1),
-      //   ]]
-      // }),
-    ]),
+    materials: this.fb.array([]),
     scale: ['', [
       Validators.min(0.1),
       Validators.max(10),
@@ -219,6 +176,8 @@ export class Item3dReactiveComponent implements OnInit {
   });
 
   selectedTexture;
+
+  selectedTab;
 
 
 
@@ -392,6 +351,7 @@ export class Item3dReactiveComponent implements OnInit {
     });
 
     this.materials.push(materialForm);
+    this.selectedTab = this.materials.length - 1;
   }
 
   removeMaterial(index: number) {

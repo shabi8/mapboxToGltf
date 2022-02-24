@@ -187,7 +187,7 @@
                                 <mat-icon>add</mat-icon>
                             </button>
                         </div>
-                        <mat-tab-group>
+                        <mat-tab-group [selectedIndex]="selectedTab">
                             <ng-container *ngFor="let materialForm of materials.controls; let index = index">
                                 <mat-tab  label="Mat{{index + 1}}" [formGroup]="materialForm">
 
@@ -310,6 +310,16 @@
                                     </div>
                                     <div>
                                         <mat-checkbox formControlName="flipY">flip Y</mat-checkbox>
+                                    </div>
+
+                                    <div class="add-button-container">
+                                        <button 
+                                            mat-icon-button color="warn"
+                                            (click)="removeMaterial(j)"
+                                            matTooltip="Remove Material"
+                                            >
+                                            <mat-icon>layers_clear</mat-icon>
+                                        </button>
                                     </div>
     
                                 </mat-tab>
