@@ -133,8 +133,8 @@ export class MapCustomService {
 
           item3d.materials.forEach((mat, index) => {
             const material = new THREE.MeshStandardMaterial();
-            let flip = index == 0 || index == 1 ? false : true;
-            this.setMaterial(textureLoader, mat, material, repeatTexure, flip)
+            // let flip = index == 0 || index == 1 ? false : true;
+            this.setMaterial(textureLoader, mat, material, repeatTexure)
             materials.push(material)
           });
           console.log(materials)
@@ -241,7 +241,7 @@ export class MapCustomService {
           
           const repeatTexure = new THREE.Vector2(xRepeat, yRepeat)
           const material = new THREE.MeshStandardMaterial();
-          this.setMaterial(textureLoader,item3d.materials[0], material, repeatTexure, true)
+          this.setMaterial(textureLoader,item3d.materials[0], material, repeatTexure)
 
           material.needsUpdate = true;
           let center = [item3d.coordinates['lng'], item3d.coordinates['lat']];
@@ -349,7 +349,7 @@ export class MapCustomService {
       texture.wrapS = THREE.RepeatWrapping;
       texture.wrapT = THREE.RepeatWrapping;
 
-      if (!flipY) {
+      if (flipY) {
         // texture.flipY = flipY;
         texture.rotation = Math.PI / 2;
         console.log(texture);
@@ -358,10 +358,10 @@ export class MapCustomService {
     });
   }
 
-  setMaterial(loader, materialConfig: IMaterial, material, repeatTexure, flipY) {
+  setMaterial(loader, materialConfig: IMaterial, material, repeatTexure) {
     for (const [key, value] of Object.entries(materialConfig)) {
       if (key === 'textures') {
-        this.loadAlltextures(loader, materialConfig.textures, material, repeatTexure, flipY)
+        this.loadAlltextures(loader, materialConfig.textures, material, repeatTexure, materialConfig.flipY)
       } else if (key === 'color' || key === 'emissive') {
         const color = new THREE.Color(value);
         material[key] = color;

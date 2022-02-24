@@ -35,7 +35,8 @@
                     "emissive": "black",
                     "normalScaleX": 1,
                     "normalScaleY": 1,
-                    "roughness": 1.0
+                    "roughness": 1.0,
+                    "flipY": true
                 },
                 {
                     "textures": [
@@ -68,7 +69,8 @@
                     "emissive": "black",
                     "normalScaleX": 1,
                     "normalScaleY": 1,
-                    "roughness": 1.0
+                    "roughness": 1.0,
+                    "flipY": true
                 },
                 {
                     "textures": [

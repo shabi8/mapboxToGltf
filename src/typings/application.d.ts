@@ -82,6 +82,7 @@ declare module "application-types" {
     metalness?: number;
     bumpScale?: number;
     wireframe?: boolean;
+    flipY?: boolean;
   }
 
   export interface ITexture {

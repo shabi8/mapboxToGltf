@@ -314,7 +314,8 @@ export class Item3dReactiveComponent implements OnInit {
         roughness: m.roughness,
         metalness: m.metalness,
         bumpScale: m.bumpScale,
-        wireframe: m.wireframe
+        wireframe: m.wireframe,
+        flipY: m.flipY
       });
       if (m.textures) {
         materialFormGroup.setControl('textures', this.setExistingTextures(m.textures))
@@ -385,7 +386,9 @@ export class Item3dReactiveComponent implements OnInit {
         Validators.min(0),
         Validators.max(1),
       ]],
-      wireframe: ['']
+      wireframe: [''],
+      flipY: ['']
+
     });
 
     this.materials.push(materialForm);
