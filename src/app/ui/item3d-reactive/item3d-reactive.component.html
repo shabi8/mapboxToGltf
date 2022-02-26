@@ -143,7 +143,7 @@
                                     </mat-form-field>
                                 </div>
                                 <div class="repeat-class">
-                                    <mat-form-field appearance="outline">
+                                    <mat-form-field appearance="outline" class="repeat-left-input">
                                         <mat-label>repeat X</mat-label>
                                         <input matInput type="number" step="0.1" formControlName="repeatX">
                                     </mat-form-field>
@@ -175,11 +175,6 @@
                     </mat-card>
                 </mat-tab>
                 <mat-tab label="Materials">
-                    <!-- <div class="add-button-container">
-                        <button mat-mini-fab class="add-button">
-                            <mat-icon>add</mat-icon>
-                        </button>
-                    </div> -->
                     
                     <mat-card *ngIf="materials.controls.length > 0" formArrayName="materials">
                         <div class="add-button-container">
@@ -202,7 +197,6 @@
                                                 </ng-container>
                                             </mat-select>
                                         </mat-form-field>
-
                                     </div>
 
                                     <div class="textures-chips-list">
@@ -213,8 +207,9 @@
                                                         ngDefaultControl 
                                                         color="primary" 
                                                         selected matTooltip="{{textureForm.controls.type.value}}" 
-                                                        formControlName="type">{{textureForm.controls.type.value}}
-    
+                                                        formControlName="type"
+                                                        >
+                                                            {{textureForm.controls.type.value}}
                                                         <mat-icon matChipRemove (click)="removeTexture(materialForm.get('textures'), j)">cancel</mat-icon>
     
                                                     </mat-chip>
@@ -315,7 +310,7 @@
                                     <div class="add-button-container">
                                         <button 
                                             mat-icon-button color="warn"
-                                            (click)="removeMaterial(j)"
+                                            (click)="removeMaterial(index)"
                                             matTooltip="Remove Material"
                                             >
                                             <mat-icon>layers_clear</mat-icon>
@@ -330,16 +325,6 @@
                 </mat-tab>
             </mat-tab-group>
 
-
-
-
-
-        
-            <!-- <mat-form-field appearance="fill" *ngIf="item.materials[0].color">
-                <mat-label>Color</mat-label>
-                <input matInput type="color" formControlName="color">
-            </mat-form-field>
-  -->
 
             <mat-action-row>
                 <button mat-button color="primary" (click)="itemToExport()"><mat-icon>import_export</mat-icon></button>

@@ -1,4 +1,48 @@
-mat-card {
-    background-color: #7ad574;
-    margin: 2px;
+
+/* mat-grid-list {
+    background-color: white;
+} */
+
+mat-grid-tile {
+    border: 1px solid black;
 }
+
+
+mat-radio-button {
+    background: rgb(63,81,181);
+    background: linear-gradient(157deg, rgba(63,81,181,0.10407913165266103) 0%, rgba(249,252,252,0.9976365546218487) 100%);
+    height: 80%;
+    width: 80%;
+    border: 3px outset #3f51b5;
+    /* border-radius: 3px; */
+    display: flex;
+    justify-content: center;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+    -webkit-box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+    -moz-box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+}
+
+:host ::ng-deep .mat-radio-label {
+    width: fit-content;
+}
+
+:host ::ng-deep .mat-radio-container {
+    display: none;
+}
+
+:host ::ng-deep .radio-button-icon-container{
+    /* width: 100%; */
+    text-align: center;
+    /* white-space: normal; */
+}
+
+:host ::ng-deep .radio-button-text-container{
+    /* width: 100%; */
+    text-align: center;
+    white-space: normal;
+}
+
+/* :host ::ng-deep .mat-radio-label-content {
+    display: flex;
+    justify-content: center;
+} */

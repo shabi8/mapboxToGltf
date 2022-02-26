@@ -34,6 +34,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
+
 
 
 
@@ -78,7 +82,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatTabsModule,
     MatTooltipModule,
     MatChipsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatGridListModule,
+    MatButtonToggleModule
   ],
   providers: [
     { provide: Window, useValue: window }
