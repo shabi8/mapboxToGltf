@@ -289,7 +289,6 @@ export class Item3dReactiveComponent implements OnInit {
   setExistingTextures(texturesLIst: ITexture[]): FormArray {
     const formArray = new FormArray([]);
     texturesLIst.forEach( t => {
-      console.log(t);
       formArray.push(this.fb.group({
         type: t.type,
         path: t.path

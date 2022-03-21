@@ -17,7 +17,7 @@ declare module "application-types" {
 
   // enum ItemType {
   //   'office building', 
-  //   'Residential building', 
+  //   'residential', 
   //   'commercial', 
   //   'road', 
   //   'tree', 

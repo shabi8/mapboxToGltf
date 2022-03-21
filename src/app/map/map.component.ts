@@ -87,8 +87,8 @@ export class MapComponent implements OnInit {
 
 
   counter = {
-    'office building': 0,
-    'Residential building': 0,
+    office: 0,
+    residential: 0,
     road: 0,
     tree: 0,
     commercial: 0,
@@ -96,92 +96,92 @@ export class MapComponent implements OnInit {
   }
 
 
-  configItemParam = {
-    'office building': {
-      material: {
-        textures: {
-          map: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Color.jpg',
-          // displacementMap: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.jpg',
-          emmissiveMap: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.jpg',
-          normalMap: 'assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.jpg',
-          roughnessMap: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.jpg',
-        },
-        // color: 'grey',
-        // displacamentScale: 0.05,
-        // displacementBias: 1,
-        emissiveIntensity: 1.,
-        emissive: 'black',
-        normalScale: [1, 1],
-        roughness: 1.0,
-      }, 
-      dimensions: { x: 10, y: 10, z: 25},
-      textureRepeat: {x: 10, y: 10, z: 25}
-    },
-    'Residential building': {
-      material: {
-        textures: {
-          map: 'assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg',
-          aoMap: 'assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.jpg',
-          displacementMap: 'assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.jpg',
-          normalMap: 'assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.jpg',
-          roughnessMap: 'assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.jpg',
-        },
-        displacamentScale: 0.5,
-        displacementBias: 0.,
-        emissiveIntensity: 1.,
-        emissive: 'black',
-        normalScale: [1, 1],
-        roughness: 1.0,
-      },  
-      dimensions: { x: 8, y: 8, z: 12},
-      textureRepeat: {x: 8, y: 8}
-    },
-    road: {
-      material: {
-        textures: {
-          map: 'assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg',
-          // displacementMap: 'assets/textures/Road007_1K-JPG/Road007_1K_Displacement.jpg',
-          normalMap: 'assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.jpg',
-          roughnessMap: 'assets/textures/Road007_1K-JPG/Road007_1K_Roughness.jpg',
-        },
-        // displacamentScale: 0.5,
-        // displacementBias: 0.,
-        emissiveIntensity: 1.,
-        emissive: 'black',
-        normalScale: [1, 1],
-        roughness: 1.0,
-      },
-      dimensions: { x: 7, y: 10, z: 0.1},
-      textureRepeat: {x: 7, y: 10}
-    },
-    tree: {modelPath: 'assets/models/tree.glb', scale: 1},
-    commercial: {
-      material: {
+  // configItemParam = {
+  //   'office building': {
+  //     material: {
+  //       textures: {
+  //         map: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Color.jpg',
+  //         // displacementMap: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.jpg',
+  //         emmissiveMap: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.jpg',
+  //         normalMap: 'assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.jpg',
+  //         roughnessMap: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.jpg',
+  //       },
+  //       // color: 'grey',
+  //       // displacamentScale: 0.05,
+  //       // displacementBias: 1,
+  //       emissiveIntensity: 1.,
+  //       emissive: 'black',
+  //       normalScale: [1, 1],
+  //       roughness: 1.0,
+  //     }, 
+  //     dimensions: { x: 10, y: 10, z: 25},
+  //     textureRepeat: {x: 10, y: 10, z: 25}
+  //   },
+  //   residential: {
+  //     material: {
+  //       textures: {
+  //         map: 'assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg',
+  //         aoMap: 'assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.jpg',
+  //         displacementMap: 'assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.jpg',
+  //         normalMap: 'assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.jpg',
+  //         roughnessMap: 'assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.jpg',
+  //       },
+  //       displacamentScale: 0.5,
+  //       displacementBias: 0.,
+  //       emissiveIntensity: 1.,
+  //       emissive: 'black',
+  //       normalScale: [1, 1],
+  //       roughness: 1.0,
+  //     },  
+  //     dimensions: { x: 8, y: 8, z: 12},
+  //     textureRepeat: {x: 8, y: 8}
+  //   },
+  //   road: {
+  //     material: {
+  //       textures: {
+  //         map: 'assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg',
+  //         // displacementMap: 'assets/textures/Road007_1K-JPG/Road007_1K_Displacement.jpg',
+  //         normalMap: 'assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.jpg',
+  //         roughnessMap: 'assets/textures/Road007_1K-JPG/Road007_1K_Roughness.jpg',
+  //       },
+  //       // displacamentScale: 0.5,
+  //       // displacementBias: 0.,
+  //       emissiveIntensity: 1.,
+  //       emissive: 'black',
+  //       normalScale: [1, 1],
+  //       roughness: 1.0,
+  //     },
+  //     dimensions: { x: 7, y: 10, z: 0.1},
+  //     textureRepeat: {x: 7, y: 10}
+  //   },
+  //   tree: {modelPath: 'assets/models/tree.glb', scale: 1},
+  //   commercial: {
+  //     material: {
 
-        color: 'blue',
-      },
-      dimensions: { x: 10, y: 10, z: 10}},
-    polygon: {
-      material: {
-        textures: {
-          map: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Color.jpg',
-          // displacementMap: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.jpg',
-          emmissiveMap: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.jpg',
-          normalMap: 'assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.jpg',
-          roughnessMap: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.jpg',
-        },
-        // color: 'grey',
-        // displacamentScale: 0.05,
-        // displacementBias: 1,
-        emissiveIntensity: 1.,
-        emissive: 'black',
-        normalScale: [1, 1],
-        roughness: 1.0,
-      }, 
-      textureRepeat: {x: 10, y: 10},
-      polygonExtrusionHeight: 30
-    }
-  };
+  //       color: 'blue',
+  //     },
+  //     dimensions: { x: 10, y: 10, z: 10}},
+  //   polygon: {
+  //     material: {
+  //       textures: {
+  //         map: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Color.jpg',
+  //         // displacementMap: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.jpg',
+  //         emmissiveMap: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.jpg',
+  //         normalMap: 'assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.jpg',
+  //         roughnessMap: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.jpg',
+  //       },
+  //       // color: 'grey',
+  //       // displacamentScale: 0.05,
+  //       // displacementBias: 1,
+  //       emissiveIntensity: 1.,
+  //       emissive: 'black',
+  //       normalScale: [1, 1],
+  //       roughness: 1.0,
+  //     }, 
+  //     textureRepeat: {x: 10, y: 10},
+  //     polygonExtrusionHeight: 30
+  //   }
+  // };
 
   templatesArray = [];
 

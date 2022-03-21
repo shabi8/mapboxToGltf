@@ -1,8 +1,8 @@
 {
     "templates" : [
         {
-            "templateName" : "office building",
-            "itemType": "office building",
+            "templateName" : "office",
+            "itemType": "office",
             "materials" : [
                 {
                     "textures": [
@@ -215,8 +215,8 @@
             }
         },
         {
-            "templateName" : "Residential building",
-            "itemType": "Residential building",
+            "templateName" : "residential",
+            "itemType": "residential",
             "materials" : [
                 {
                     "textures": [

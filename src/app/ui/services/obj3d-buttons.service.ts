@@ -6,7 +6,7 @@ import { Subject, BehaviorSubject } from 'rxjs';
 })
 export class Obj3dButtonsService {
 
-  private _obj3dButtonOnSource = new BehaviorSubject<string>('office building');
+  private _obj3dButtonOnSource = new BehaviorSubject<string>('office');
   obj3dButtonOn$ = this._obj3dButtonOnSource.asObservable();
 
   constructor() { }

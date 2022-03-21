@@ -40,9 +40,14 @@ mat-radio-button {
     /* width: 100%; */
     text-align: center;
     white-space: normal;
+    font-size: 12px;
 }
 
 /* :host ::ng-deep .mat-radio-label-content {
     display: flex;
     justify-content: center;
 } */
+
+mat-radio-button.active-button {
+    background: linear-gradient(157deg, rgba(63,81,181,0.5) 0%, rgba(249,252,252,0.9976365546218487) 100%);
+}

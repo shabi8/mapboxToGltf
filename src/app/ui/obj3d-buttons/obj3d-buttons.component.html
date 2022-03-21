@@ -20,16 +20,14 @@
 
 <mat-grid-list cols="3" rowHeight="4:3">
     <mat-radio-group
-    aria-labelledby="example-radio-group-label"
-    class="example-radio-group"
     [(ngModel)]="obj3d"
     (ngModelChange)="onChange($event)"
     >
         <mat-grid-tile *ngFor="let button of obj3dButtonsList">
 
-                <mat-radio-button  class="example-radio-button" [value]="button">
+                <mat-radio-button  [value]="button" [ngClass]="{'active-button': button === obj3d}">
                     <div class="radio-button-icon-container">
-                        <mat-icon>business</mat-icon>
+                        <mat-icon>apartment</mat-icon>
                     </div>
                     <div class="radio-button-text-container">
                         <span>{{button | uppercase}}</span>

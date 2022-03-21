@@ -3,6 +3,10 @@ import { Subject } from 'rxjs';
 import { LngLatLike, LngLat } from 'mapbox-gl';
 import * as THREE from 'three';
 import {GLTFExporter} from 'three/examples/jsm/exporters/GLTFExporter';
+import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { KTX2Loader } from "three/examples/jsm/loaders/KTX2Loader.js";
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { Item3d } from './map.component';
 import { Item3dListService } from '../ui/services/item3d-list.service';
 import { IItem3d, IMaterial, ITexture } from 'application-types';
@@ -91,6 +95,7 @@ export class MapCustomService {
       map.getCanvas().getContext('webgl'),
       options
     );
+    console.log(window['tb']);
   }
 
 
@@ -123,8 +128,14 @@ export class MapCustomService {
             }
           } 
           
+          
+
           const repeatTexure = new THREE.Vector2(xRepeat, yRepeat);
           const textureLoader = new THREE.TextureLoader();
+
+          const ktx2Loader = new KTX2Loader();
+          ktx2Loader.setTranscoderPath('assets/basis/');
+          ktx2Loader.detectSupport( window['tb'].renderer );
 
 
           const geometry = new THREE.BoxGeometry(item3d.dimensions.x, item3d.dimensions.y, item3d.dimensions.z, item3d.segments.x, item3d.segments.y, item3d.segments.z);
@@ -137,14 +148,23 @@ export class MapCustomService {
             this.setMaterial(textureLoader, mat, material, repeatTexure)
             materials.push(material)
           });
-          console.log(materials)
 
           if (materials.length === 1) {
             materials = materials[0];
           }
 
-          let cube = new THREE.Mesh(geometry, materials);
-          cube = window['tb'].Object3D({ obj: cube, units: 'meters'});
+          let cubea = new THREE.Mesh(geometry, materials);
+          let cube = window['tb'].Object3D({ obj: cubea, units: 'meters'});
+
+          // const transform = new TransformControls(window['tb'].camera, map.getCanvas());
+          // transform.attach(cubea)
+          // transform.setMode('scale');
+          // transform.addEventListener('change', (e) => {
+          //   console.log(e);
+          //   console.log('FFFF')
+          // })
+          // window['tb'].scene.add(transform);
+          // console.log(transform);
           
           cube.castShadow = true;
           cube.name = item3d.name
@@ -155,6 +175,9 @@ export class MapCustomService {
             this.onObjectDragged(e, item3d);
           }, false)
           cube.addEventListener('SelectedChange', (e) => {
+            // map.dragPan.disable();
+            // transform.attach(cube);
+            // console.log(transform)
             this.onObjectSelected(e, item3d);
 
           }, false)
@@ -182,14 +205,22 @@ export class MapCustomService {
       type: 'custom',
       renderingMode: '3d',
       onAdd: (map, mbxContext) => {
+        const dracoLoader = new DRACOLoader();
+        dracoLoader.setDecoderPath('assets/draco/');
+
+        const ktx2Loader = new KTX2Loader();
+        ktx2Loader.setTranscoderPath('assets/basis/');
+        ktx2Loader.detectSupport( window['tb'].renderer );
+
         const options = {
           obj: item3d.modelPath,
           type: 'gltf',
           scale: item3d.scale,
           units: 'meters',
-          rotation: { x: 90, y: 0, z: 0 }
+          rotation: { x: 90, y: 0, z: 0 },
+          draco: dracoLoader,
+          ktx2: ktx2Loader
         }
-
 
         window['tb'].loadObj(options, (model) => {
           let loadedItem = model.setCoords([item3d.coordinates['lng'], item3d.coordinates['lat']]);
@@ -338,8 +369,7 @@ export class MapCustomService {
   }
 
 
-  loadAlltextures(loader: THREE.TextureLoader, textures: Array<ITexture>, material, repeatTexure, flipY) {
-    console.log(textures);
+  loadAlltextures(loader: THREE.TextureLoader | KTX2Loader, textures: Array<ITexture>, material, repeatTexure, flipY) {
 
     textures.forEach((txture, index) => {
       const texture = loader.load(txture.path);
@@ -352,7 +382,6 @@ export class MapCustomService {
       if (flipY) {
         // texture.flipY = flipY;
         texture.rotation = Math.PI / 2;
-        console.log(texture);
       }
       material[txture.type] = texture;
     });
