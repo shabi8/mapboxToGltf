@@ -30,7 +30,7 @@
               "./node_modules/@mapbox/mapbox-gl-geocoder/lib/mapbox-gl-geocoder.css"
             ],
             "scripts": [
-              "src/assets/tb/dist/threebox.min.js"
+              "src/assets/tb/dist/threebox.js"
             ]
           },
           "configurations": {

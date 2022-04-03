@@ -1,0 +1,13 @@
+diff --git a/node_modules/three/examples/jsm/controls/TransformControls.js b/node_modules/three/examples/jsm/controls/TransformControls.js
+index fdb770e..66cd080 100644
+--- a/node_modules/three/examples/jsm/controls/TransformControls.js
++++ b/node_modules/three/examples/jsm/controls/TransformControls.js
+@@ -638,7 +638,7 @@ function getPointer( event ) {
+ 
+ 	} else {
+ 
+-		const rect = this.domElement.getBoundingClientRect();
++		const rect = this.domElement.children[0].getBoundingClientRect();
+ 
+ 		return {
+ 			x: ( event.clientX - rect.left ) / rect.width * 2 - 1,

@@ -13,8 +13,6 @@ import { IItem3d, IMaterial, ITexture } from 'application-types';
 
 
 
-
-
 declare const Threebox: any;
 
 @Injectable({
@@ -41,6 +39,8 @@ export class MapCustomService {
   };
 
   threeBox;
+
+  transformControl;
 
   constructor( private item3dListService: Item3dListService) { }
 
@@ -96,6 +96,7 @@ export class MapCustomService {
       options
     );
     console.log(window['tb']);
+    console.log(window['tb'].camera);
   }
 
 
@@ -153,18 +154,9 @@ export class MapCustomService {
             materials = materials[0];
           }
 
-          let cubea = new THREE.Mesh(geometry, materials);
-          let cube = window['tb'].Object3D({ obj: cubea, units: 'meters'});
+          let cubeA = new THREE.Mesh(geometry, materials);
+          let cube = window['tb'].Object3D({ obj: cubeA, units: 'meters'});
 
-          // const transform = new TransformControls(window['tb'].camera, map.getCanvas());
-          // transform.attach(cubea)
-          // transform.setMode('scale');
-          // transform.addEventListener('change', (e) => {
-          //   console.log(e);
-          //   console.log('FFFF')
-          // })
-          // window['tb'].scene.add(transform);
-          // console.log(transform);
           
           cube.castShadow = true;
           cube.name = item3d.name
@@ -175,9 +167,53 @@ export class MapCustomService {
             this.onObjectDragged(e, item3d);
           }, false)
           cube.addEventListener('SelectedChange', (e) => {
-            // map.dragPan.disable();
-            // transform.attach(cube);
-            // console.log(transform)
+            let selectedObject = e.detail;
+            let selectedValue = selectedObject.selected;
+            let spaceDown = false;
+            
+            // let transform;
+            if (selectedValue) {
+              this.transformControl = new TransformControls(window['tb'].camera, map.getCanvasContainer());
+
+              this.transformControl.setMode('scale');
+              this.transformControl.setSize(0.5)
+              this.transformControl.addEventListener('dragging-changed', (e) => {
+                console.log(e);
+                console.log('dragging-changed')
+                console.log(this.transformControl);
+                console.log(this.transformControl.object);
+              });
+              this.transformControl.addEventListener('change', (e) => {
+                map.triggerRepaint();
+              });
+              window['tb'].scene.add(this.transformControl);
+
+              document.body.onkeydown = (ev) => {
+                console.log(spaceDown)
+                if ((ev.key == " " || ev.code == "Space") && !spaceDown) {
+                  console.log('YYYY')
+                  spaceDown = !spaceDown
+                  map.dragPan.disable();
+                  // map.dragRotate.disable();
+                  this.transformControl.attach(cube);
+                  map.triggerRepaint();
+                } else if ((ev.key == " " || ev.code == "Space") && spaceDown) {
+                  spaceDown = !spaceDown
+                  map.dragPan.enable();
+                  // map.dragRotate.disable();
+                  this.transformControl.detach(cube);
+                  map.triggerRepaint();
+                }
+              }
+            } else if (!selectedValue) {
+              console.log("WWW")
+              spaceDown = false
+              this.transformControl.detach(cubeA);
+              map.dragPan.enable();
+              this.transformControl.dispose();
+              map.triggerRepaint();
+            }
+            
             this.onObjectSelected(e, item3d);
 
           }, false)

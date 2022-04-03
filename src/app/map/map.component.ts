@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IItem3d } from 'application-types'
 import { LngLatLike, LngLat } from 'mapbox-gl';
 import { MapCustomService } from './map-custom.service';
@@ -11,9 +11,6 @@ import { Item3dListService } from '../ui/services/item3d-list.service';
 import { PolygonItems3dService } from '../services/polygon-items3d.service';
 import { TimeSliderService } from '../ui/services/time-slider.service';
 import { ItemTemplatesService } from '../services/item-templates.service';
-import { ContentObserver } from '@angular/cdk/observers';
-import { element } from 'protractor';
-
 
 
 
