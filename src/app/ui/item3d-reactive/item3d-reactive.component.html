@@ -95,9 +95,22 @@
                             </div>
                             <div *ngIf="item.scale">
                                 <mat-form-field appearance="outline" >
-                                    <mat-label>Scale</mat-label>
-                                    <input matInput type="number" step="0.1" formControlName="scale">
+                                    <mat-label>ScaleX</mat-label>
+                                    <input matInput type="number" step="0.001" formControlName="scaleX">
                                 </mat-form-field>
+
+                                <mat-form-field appearance="outline" >
+                                    <mat-label>ScaleY</mat-label>
+                                    <input matInput type="number" step="0.001" formControlName="scaleY">
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" >
+                                    <mat-label>ScaleZ</mat-label>
+                                    <input matInput type="number" step="0.001" formControlName="scaleZ">
+                                </mat-form-field>
+                                <div>
+                                    {{ item.scale | json}}
+                                </div>
                             </div>
                         </div>
                     </mat-card>

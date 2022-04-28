@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Item3d } from 'src/app/map/map.component';
+// import { Item3d } from 'src/app/map/map.component';
 import { IItem3d } from 'application-types';
 
 @Injectable({

@@ -17806,7 +17806,8 @@ Objects.prototype = {
 				//clone also the model inside it's the one who keeps the real size
 				if (obj.model) {
 					//let's clone the object before manipulate it
-					let dup = obj.clone(true);
+					// [shabi8] removed dup - not applied and gave serialise warning with ktx2 
+					// let dup = obj.clone(true);
 					let model = obj.model.clone();
 					//get the size of the model because the object is translated and has boundingBoxShadow
 					bounds = new THREE.Box3().setFromObject(model);
@@ -17817,7 +17818,8 @@ Objects.prototype = {
 						let rmi = new THREE.Matrix4();
 						obj.matrix.extractRotation(rm);
 						rmi.copy(rm).invert();
-						dup.setRotationFromMatrix(rmi);
+						// [shabi8] removed dup - not applied and gave serialise warning with ktx2 
+						// dup.setRotationFromMatrix(rmi);
 						//now the object inside will give us a NAABB Non-Axes Aligned Bounding Box 
 						bounds = new THREE.Box3().setFromObject(model);
 					}

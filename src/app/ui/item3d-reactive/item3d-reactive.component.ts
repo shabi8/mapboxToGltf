@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, DoCheck, Input, KeyValueDiffer, KeyValueDiffers, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Item3dListService } from '../services/item3d-list.service';
-import { Item3d } from 'src/app/map/map.component';
+// import { Item3d } from 'src/app/map/map.component';
 import { IItem3d, IMaterial, ITexture } from 'application-types';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -12,19 +12,14 @@ import { Observable } from 'rxjs';
   templateUrl: './item3d-reactive.component.html',
   styleUrls: ['./item3d-reactive.component.css']
 })
-export class Item3dReactiveComponent implements OnInit {
+export class Item3dReactiveComponent implements OnInit, OnChanges, DoCheck {
   @Input()
   item: IItem3d;
 
   @Input()
   expand: boolean;
 
-  textures: any[] = [
-    {value: 'assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg', viewValue: 'Bricks'},
-    {value: 'assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg', viewValue: 'Road'},
-    {value: 'assets/textures/JerusalemStone/Bricks075A_1K_Color.jpg', viewValue: 'Stone'},
-    {value: 'assets/textures/Facade014_1K-JPG/Facade014_1K_Color.jpg', viewValue: 'Office'},
-  ];
+  differ: KeyValueDiffer<any, any>;
 
 
   texturesSelection = [
@@ -33,19 +28,19 @@ export class Item3dReactiveComponent implements OnInit {
       textures: [
         {
         "type": "map",
-        "path": "assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg"     
+        "path": "assets/textures/Road007_1K-JPG/Road007_1K_Color.ktx2"     
         },
         {
         "type": "displacementMap",
-        "path": "assets/textures/Road007_1K-JPG/Road007_1K_Displacement.jpg"     
+        "path": "assets/textures/Road007_1K-JPG/Road007_1K_Displacement.ktx2"     
         },
         {
         "type": "normalMap",
-        "path": "assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.jpg"     
+        "path": "assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.ktx2"     
         },
         {
         "type": "roughnessMap",
-        "path": "assets/textures/Road007_1K-JPG/Road007_1K_Roughness.jpg"     
+        "path": "assets/textures/Road007_1K-JPG/Road007_1K_Roughness.ktx2"     
         }
       ]
     },
@@ -54,23 +49,23 @@ export class Item3dReactiveComponent implements OnInit {
       textures: [
         {
             "type": "map",
-            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Color.jpg"     
+            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Color.ktx2"     
         },
         {
             "type": "displacementMap",
-            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.jpg"     
+            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.ktx2"     
         },
         {
             "type": "emmissiveMap",
-            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.jpg"     
+            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.ktx2"     
         },
         {
             "type": "normalMap",
-            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.jpg"     
+            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.ktx2"     
         },
         {
             "type": "roughnessMap",
-            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.jpg"     
+            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.ktx2"     
         }
       ]
     },
@@ -79,23 +74,23 @@ export class Item3dReactiveComponent implements OnInit {
       textures: [
         {
             "type": "map",
-            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg"     
+            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.ktx2"     
         },
         {
             "type": "displacementMap",
-            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.jpg"     
+            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.ktx2"     
         },
         {
             "type": "aoMap",
-            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.jpg"     
+            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.ktx2"     
         },
         {
             "type": "normalMap",
-            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.jpg"     
+            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.ktx2"     
         },
         {
             "type": "roughnessMap",
-            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.jpg"     
+            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.ktx2"     
         }
       ]
     },
@@ -104,7 +99,7 @@ export class Item3dReactiveComponent implements OnInit {
       textures: [
         {
             "type": "map",
-            "path": "assets/textures/rusty_metal/rusty_metal_02_diff_4k.jpg"     
+            "path": "assets/textures/rusty_metal/rusty_metal_02_diff_4k.ktx2"     
         },
         {
             "type": "displacementMap",
@@ -112,15 +107,15 @@ export class Item3dReactiveComponent implements OnInit {
         },
         {
             "type": "aoMap",
-            "path": "assets/textures/rusty_metal/rusty_metal_02_ao_4k.jpg"     
+            "path": "assets/textures/rusty_metal/rusty_metal_02_ao_4k.ktx2"     
         },
         {
             "type": "normalMap",
-            "path": "assets/textures/rusty_metal/rusty_metal_02_nor_gl_4k.jpg"     
+            "path": "assets/textures/rusty_metal/rusty_metal_02_nor_gl_4k.ktx2"     
         },
         {
             "type": "roughnessMap",
-            "path": "assets/textures/rusty_metal/rusty_metal_02_rough_4k.jpg"     
+            "path": "assets/textures/rusty_metal/rusty_metal_02_rough_4k.ktx2"     
         }
       ]
     },
@@ -169,8 +164,16 @@ export class Item3dReactiveComponent implements OnInit {
       Validators.max(999),
     ]],
     materials: this.fb.array([]),
-    scale: ['', [
-      Validators.min(0.1),
+    scaleX: ['', [
+      Validators.min(0.001),
+      Validators.max(10),
+    ]],
+    scaleY: ['', [
+      Validators.min(0.001),
+      Validators.max(10),
+    ]],
+    scaleZ: ['', [
+      Validators.min(0.001),
       Validators.max(10),
     ]]
   });
@@ -181,7 +184,7 @@ export class Item3dReactiveComponent implements OnInit {
 
 
 
-  constructor(private item3dListService: Item3dListService, private fb: FormBuilder) { }
+  constructor(private item3dListService: Item3dListService, private fb: FormBuilder, private differService: KeyValueDiffers) { }
 
   ngOnInit(): void {
     this.inputItemForm(this.item);
@@ -219,8 +222,14 @@ export class Item3dReactiveComponent implements OnInit {
             case 'repeatZ':
               this.item.textureNeedRepeat.z = val.repeatZ;
               break;           
-            case 'scale': 
-              this.item.scale = val.scale;
+            case 'scaleX': 
+              this.item.scale.x = val.scaleX;
+              break;
+            case 'scaleY': 
+              this.item.scale.y = val.scaleY;
+              break;
+            case 'scaleZ': 
+              this.item.scale.z = val.scaleZ;
               break;
             case 'polygonHeight':
               this.item.polygonExtrusionHeight = val.polygonHeight;
@@ -234,6 +243,47 @@ export class Item3dReactiveComponent implements OnInit {
       console.log('UPDATED BY FORM', this.item);
       this.item3dListService.sendItem3dToEdit(this.item);
     });
+    this.differ = this.differService.find(this.item).create();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+      console.log("INPUT CHANGE", changes)
+  }
+
+  ngDoCheck(): void {
+    if (this.differ) {
+      const changes = this.differ.diff(this.item);
+      // console.log(changes, this.differ)
+      if (changes) {
+        changes.forEachChangedItem(r => {
+          console.log("CHANGE!!!")
+          console.log(r.key, r.currentValue)
+          if (r.key === 'scale') {
+            console.log(r.key, r.currentValue)
+            this.form.patchValue({
+              scaleX: r.currentValue.x,
+              scaleY: r.currentValue.y,
+              scaleZ: r.currentValue.z
+            })
+          }
+        })
+        changes.forEachAddedItem( r => {
+          // console.log("Added", r);
+          if (r.key === 'scale') {
+            console.log(r.key, r.currentValue)
+            // this.form.patchValue({
+            //   scaleX: r.currentValue.x,
+            //   scaleY: r.currentValue.y,
+            //   scaleZ: r.currentValue.z
+            // })
+          }
+        });
+        changes.forEachRemovedItem( r => {
+          console.log("removed", r);
+        })
+      }
+    }
+      
   }
 
 
@@ -250,7 +300,9 @@ export class Item3dReactiveComponent implements OnInit {
       repeatY: item.textureNeedRepeat?.y,
       repeatZ: item.textureNeedRepeat?.z,
       polygonHeight: item.polygonExtrusionHeight,
-      scale: item.scale
+      scaleX: item.scale?.x,
+      scaleY: item.scale?.y,
+      scaleZ: item.scale?.z
     });
     if (item.materials){
       this.form.setControl('materials', this.setExistingsMaterials(item.materials))

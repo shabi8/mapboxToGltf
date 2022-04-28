@@ -63,7 +63,7 @@ declare module "application-types" {
     segments?: any;
     textureNeedRepeat?: { x: number, y: number, z?: number}
     modelPath?: string;
-    scale?: number;
+    scale?: any;
     polygonExtrusionHeight?: number;
   }
 

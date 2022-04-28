@@ -8,23 +8,23 @@
                     "textures": [
                         {
                             "type": "map",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Color.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Color.ktx2"     
                         },
                         {
                             "type": "displacementMap",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.ktx2"     
                         },
                         {
                             "type": "emmissiveMap",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.ktx2"     
                         },
                         {
                             "type": "normalMap",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.ktx2"     
                         },
                         {
                             "type": "roughnessMap",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.ktx2"     
                         }
 
                     ],
@@ -42,23 +42,23 @@
                     "textures": [
                         {
                             "type": "map",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Color.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Color2.ktx2"     
                         },
                         {
                             "type": "displacementMap",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.ktx2"     
                         },
                         {
                             "type": "emmissiveMap",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.ktx2"     
                         },
                         {
                             "type": "normalMap",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.ktx2"     
                         },
                         {
                             "type": "roughnessMap",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.ktx2"     
                         }
 
                     ],
@@ -76,23 +76,23 @@
                     "textures": [
                         {
                             "type": "map",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Color.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Color.ktx2"     
                         },
                         {
                             "type": "displacementMap",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.ktx2"     
                         },
                         {
                             "type": "emmissiveMap",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.ktx2"     
                         },
                         {
                             "type": "normalMap",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.ktx2"     
                         },
                         {
                             "type": "roughnessMap",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.ktx2"     
                         }
 
                     ],
@@ -109,23 +109,23 @@
                     "textures": [
                         {
                             "type": "map",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Color.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Color.ktx2"     
                         },
                         {
                             "type": "displacementMap",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.ktx2"     
                         },
                         {
                             "type": "emmissiveMap",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.ktx2"     
                         },
                         {
                             "type": "normalMap",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.ktx2"     
                         },
                         {
                             "type": "roughnessMap",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.ktx2"     
                         }
 
                     ],
@@ -142,15 +142,15 @@
                     "textures": [
                         {
                             "type": "map",
-                            "path": "assets/textures/concrete_floor/concrete_floor_01_diff_4k.jpg"     
+                            "path": "assets/textures/concrete_floor/concrete_floor_01_diff_4k.ktx2"     
                         },
                         {
                             "type": "displacementMap",
-                            "path": "assets/textures/concrete_floor/concrete_floor_01_disp_4k.png"     
+                            "path": "assets/textures/concrete_floor/concrete_floor_01_disp_4k.ktx2"     
                         },
                         {
                             "type": "roughnessMap",
-                            "path": "assets/textures/concrete_floor/concrete_floor_01_rough_4k.jpg"     
+                            "path": "assets/textures/concrete_floor/concrete_floor_01_rough_4k.ktx2"     
                         }
 
                     ],
@@ -167,23 +167,23 @@
                     "textures": [
                         {
                             "type": "map",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Color.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Color.ktx2"     
                         },
                         {
                             "type": "displacementMap",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Displacement.ktx2"     
                         },
                         {
                             "type": "emmissiveMap",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Emission.ktx2"     
                         },
                         {
                             "type": "normalMap",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_NormalGL.ktx2"     
                         },
                         {
                             "type": "roughnessMap",
-                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.jpg"     
+                            "path": "assets/textures/Facade014_1K-JPG/Facade014_1K_Roughness.ktx2"     
                         }
 
                     ],
@@ -222,23 +222,23 @@
                     "textures": [
                         {
                             "type": "map",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg"     
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.ktx2"     
                         },
                         {
                             "type": "displacementMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.jpg"    
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.ktx2"    
                         },
                         {
                             "type": "aoMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.jpg"    
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.ktx2"    
                         },
                         {
                             "type": "normalMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.jpg"     
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.ktx2"     
                         },
                         {
                             "type": "roughnessMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.jpg"     
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.ktx2"     
                         }
 
                     ],
@@ -255,23 +255,23 @@
                     "textures": [
                         {
                             "type": "map",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg"     
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.ktx2"     
                         },
                         {
                             "type": "displacementMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.jpg"    
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.ktx2"    
                         },
                         {
                             "type": "aoMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.jpg"    
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.ktx2"    
                         },
                         {
                             "type": "normalMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.jpg"     
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.ktx2"     
                         },
                         {
                             "type": "roughnessMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.jpg"     
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.ktx2"     
                         }
 
                     ],
@@ -288,23 +288,23 @@
                     "textures": [
                         {
                             "type": "map",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg"     
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.ktx2"     
                         },
                         {
                             "type": "displacementMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.jpg"    
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.ktx2"    
                         },
                         {
                             "type": "aoMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.jpg"    
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.ktx2"    
                         },
                         {
                             "type": "normalMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.jpg"     
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.ktx2"     
                         },
                         {
                             "type": "roughnessMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.jpg"     
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.ktx2"     
                         }
 
                     ],
@@ -321,23 +321,23 @@
                     "textures": [
                         {
                             "type": "map",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg"     
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.ktx2"     
                         },
                         {
                             "type": "displacementMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.jpg"    
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.ktx2"    
                         },
                         {
                             "type": "aoMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.jpg"    
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.ktx2"    
                         },
                         {
                             "type": "normalMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.jpg"     
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.ktx2"     
                         },
                         {
                             "type": "roughnessMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.jpg"     
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.ktx2"     
                         }
 
                     ],
@@ -354,23 +354,23 @@
                     "textures": [
                         {
                             "type": "map",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg"     
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.ktx2"     
                         },
                         {
                             "type": "displacementMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.jpg"    
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.ktx2"    
                         },
                         {
                             "type": "aoMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.jpg"    
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.ktx2"    
                         },
                         {
                             "type": "normalMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.jpg"     
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.ktx2"     
                         },
                         {
                             "type": "roughnessMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.jpg"     
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.ktx2"     
                         }
 
                     ],
@@ -387,23 +387,23 @@
                     "textures": [
                         {
                             "type": "map",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.jpg"     
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Color.ktx2"     
                         },
                         {
                             "type": "displacementMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.jpg"    
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Displacement.ktx2"    
                         },
                         {
                             "type": "aoMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.jpg"    
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_AmbientOcclusion.ktx2"    
                         },
                         {
                             "type": "normalMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.jpg"     
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_NormalGL.ktx2"     
                         },
                         {
                             "type": "roughnessMap",
-                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.jpg"     
+                            "path": "assets/textures/Bricks038_1K-JPG/Bricks038_1K_Roughness.ktx2"     
                         }
 
                     ],
@@ -441,19 +441,19 @@
                     "textures": [
                         {
                             "type": "map",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Color.ktx2"     
                         },
                         {
                             "type": "displacementMap",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Displacement.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Displacement.ktx2"     
                         },
                         {
                             "type": "normalMap",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.ktx2"     
                         },
                         {
                             "type": "roughnessMap",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Roughness.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Roughness.ktx2"     
                         }
 
                     ],
@@ -470,19 +470,19 @@
                     "textures": [
                         {
                             "type": "map",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Color.ktx2"     
                         },
                         {
                             "type": "displacementMap",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Displacement.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Displacement.ktx2"     
                         },
                         {
                             "type": "normalMap",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.ktx2"     
                         },
                         {
                             "type": "roughnessMap",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Roughness.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Roughness.ktx2"     
                         }
 
                     ],
@@ -499,19 +499,19 @@
                     "textures": [
                         {
                             "type": "map",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Color.ktx2"     
                         },
                         {
                             "type": "displacementMap",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Displacement.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Displacement.ktx2"     
                         },
                         {
                             "type": "normalMap",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.ktx2"     
                         },
                         {
                             "type": "roughnessMap",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Roughness.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Roughness.ktx2"     
                         }
 
                     ],
@@ -528,19 +528,19 @@
                     "textures": [
                         {
                             "type": "map",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Color.ktx2"     
                         },
                         {
                             "type": "displacementMap",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Displacement.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Displacement.ktx2"     
                         },
                         {
                             "type": "normalMap",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.ktx2"     
                         },
                         {
                             "type": "roughnessMap",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Roughness.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Roughness.ktx2"     
                         }
 
                     ],
@@ -557,19 +557,19 @@
                     "textures": [
                         {
                             "type": "map",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Color.ktx2"     
                         },
                         {
                             "type": "displacementMap",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Displacement.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Displacement.ktx2"     
                         },
                         {
                             "type": "normalMap",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.ktx2"     
                         },
                         {
                             "type": "roughnessMap",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Roughness.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Roughness.ktx2"     
                         }
 
                     ],
@@ -586,19 +586,19 @@
                     "textures": [
                         {
                             "type": "map",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Color.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Color.ktx2"     
                         },
                         {
                             "type": "displacementMap",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Displacement.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Displacement.ktx2"     
                         },
                         {
                             "type": "normalMap",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_NormalGL.ktx2"     
                         },
                         {
                             "type": "roughnessMap",
-                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Roughness.jpg"     
+                            "path": "assets/textures/Road007_1K-JPG/Road007_1K_Roughness.ktx2"     
                         }
 
                     ],
@@ -631,7 +631,11 @@
             "templateName": "tree",
             "itemType": "tree",
             "modelPath": "assets/models/tree.glb",
-            "scale": 1
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
         },
         {
             "templateName" : "commercial",

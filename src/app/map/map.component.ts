@@ -251,7 +251,7 @@ export class MapComponent implements OnInit {
   onRender(event) {
     // console.log(event)
     if (window['tb'] && this.obj3dButtonOn !== 'polygon') {
-      console.log('SUNLIGHT')
+      // console.log('SUNLIGHT')
       window['tb'].setSunlight(this.date);
       window['tb'].update();
     }

@@ -7,7 +7,7 @@ import { TransformControls } from 'three/examples/jsm/controls/TransformControls
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { KTX2Loader } from "three/examples/jsm/loaders/KTX2Loader.js";
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
-import { Item3d } from './map.component';
+// import { Item3d } from './map.component';
 import { Item3dListService } from '../ui/services/item3d-list.service';
 import { IItem3d, IMaterial, ITexture } from 'application-types';
 
@@ -19,6 +19,10 @@ declare const Threebox: any;
   providedIn: 'root'
 })
 export class MapCustomService {
+
+  private ktx2Loader: KTX2Loader;
+
+  private textureCache = {};
 
   objectSelected;
   private _objectSelectedSource = new Subject<IItem3d>();
@@ -65,11 +69,18 @@ export class MapCustomService {
     } else if (item3d.itemType === 'polygon'){
       map.addLayer(this.createExtrudeShapeCustomLayer(item3d, downloadGltf, date))
     } else {
+      console.log(window['tb'].memory());
+      console.log(window['tb'].programs());
+      console.log(window['tb'].renderer.info);
+
       map.addLayer(this.createCustomLayer(item3d, downloadGltf, date));
     }
 
     const layerAdded = map.getLayer(item3d.name);
     if (layerAdded) {
+      console.log('Layer Added', window['tb'].memory());
+      console.log('Layer Added', window['tb'].programs());
+      console.log('Layer Added', window['tb'].renderer.info);
       this.item3dListService.sendItem3dAdded(item3d);
       return true;
     } else {
@@ -96,7 +107,7 @@ export class MapCustomService {
       options
     );
     console.log(window['tb']);
-    console.log(window['tb'].camera);
+    // THREE.Cache.enabled = true;
   }
 
 
@@ -134,9 +145,9 @@ export class MapCustomService {
           const repeatTexure = new THREE.Vector2(xRepeat, yRepeat);
           const textureLoader = new THREE.TextureLoader();
 
-          const ktx2Loader = new KTX2Loader();
-          ktx2Loader.setTranscoderPath('assets/basis/');
-          ktx2Loader.detectSupport( window['tb'].renderer );
+          this.ktx2Loader = new KTX2Loader();
+          this.ktx2Loader.setTranscoderPath('assets/basis/');
+          this.ktx2Loader.detectSupport( window['tb'].renderer );
 
 
           const geometry = new THREE.BoxGeometry(item3d.dimensions.x, item3d.dimensions.y, item3d.dimensions.z, item3d.segments.x, item3d.segments.y, item3d.segments.z);
@@ -146,7 +157,7 @@ export class MapCustomService {
           item3d.materials.forEach((mat, index) => {
             const material = new THREE.MeshStandardMaterial();
             // let flip = index == 0 || index == 1 ? false : true;
-            this.setMaterial(textureLoader, mat, material, repeatTexure)
+            this.setMaterial(this.ktx2Loader, mat, material, repeatTexure)
             materials.push(material)
           });
 
@@ -154,11 +165,14 @@ export class MapCustomService {
             materials = materials[0];
           }
 
+          console.log("Materials list", materials)
           let cubeA = new THREE.Mesh(geometry, materials);
           let cube = window['tb'].Object3D({ obj: cubeA, units: 'meters'});
-
           
+
+          if (item3d.scale) cube.setScale(item3d.scale);
           cube.castShadow = true;
+          cube.receiveShadow = true;
           cube.name = item3d.name
           // cube.addEventListener('ObjectChanged', (e) => {
           //   console.log('ObjectChange', e);
@@ -170,6 +184,7 @@ export class MapCustomService {
             let selectedObject = e.detail;
             let selectedValue = selectedObject.selected;
             let spaceDown = false;
+            console.log("Selected Object", selectedObject)
             
             // let transform;
             if (selectedValue) {
@@ -178,18 +193,26 @@ export class MapCustomService {
               this.transformControl.setMode('scale');
               this.transformControl.setSize(0.5)
               this.transformControl.addEventListener('dragging-changed', (e) => {
-                console.log(e);
-                console.log('dragging-changed')
-                console.log(this.transformControl);
-                console.log(this.transformControl.object);
+                // console.log(e);
+                // console.log('dragging-changed')
+                // console.log(this.transformControl);
+                // console.log("scale:", this.transformControl.object.scale);
+                // item3d.scale = this.transformControl.object.scale;
+                // console.log("scale:", item3d.scale);
+                // this.item3dListService.sendItem3dChanged(item3d);
               });
               this.transformControl.addEventListener('change', (e) => {
+                let trScale = this.transformControl.object.scale ? this.transformControl.object.scale : item3d.scale;
+                item3d.scale = new THREE.Vector3(trScale.x, trScale.y, trScale.z);
+                // console.log("scale:", this.transformControl.object.scale);
+                this.item3dListService.sendItem3dChanged(item3d);
+
                 map.triggerRepaint();
               });
               window['tb'].scene.add(this.transformControl);
 
               document.body.onkeydown = (ev) => {
-                console.log(spaceDown)
+                // console.log(spaceDown)
                 if ((ev.key == " " || ev.code == "Space") && !spaceDown) {
                   console.log('YYYY')
                   spaceDown = !spaceDown
@@ -220,6 +243,7 @@ export class MapCustomService {
           cube.setCoords([item3d.coordinates['lng'], item3d.coordinates['lat']]);
           window['tb'].add(cube);
           window['tb'].lights.dirLight.target = cube;
+          console.log("CUBE" , cube)
 
 
           if (downloadGltf) {
@@ -406,9 +430,19 @@ export class MapCustomService {
 
 
   loadAlltextures(loader: THREE.TextureLoader | KTX2Loader, textures: Array<ITexture>, material, repeatTexure, flipY) {
-
+    console.log(textures);
     textures.forEach((txture, index) => {
-      const texture = loader.load(txture.path);
+      // console.log(txture)
+      let texture;
+      if (txture.path in this.textureCache) {
+        console.log("Cache ", this.textureCache)
+        texture = this.textureCache[txture.path];
+      } else {
+        texture = loader.load(txture.path);
+        this.textureCache[txture.path] = texture;
+      }
+      
+      // console.log(texture);
       
       texture.repeat = repeatTexure;
       // texture.repeat.y = 3;
@@ -420,10 +454,12 @@ export class MapCustomService {
         texture.rotation = Math.PI / 2;
       }
       material[txture.type] = texture;
+      console.log(material);
     });
   }
 
   setMaterial(loader, materialConfig: IMaterial, material, repeatTexure) {
+    console.log(THREE.Cache)
     for (const [key, value] of Object.entries(materialConfig)) {
       if (key === 'textures') {
         this.loadAlltextures(loader, materialConfig.textures, material, repeatTexure, materialConfig.flipY)
@@ -437,6 +473,7 @@ export class MapCustomService {
         material[key] = value;
       }
     }
+    console.log("Done Set Material")
   }
 
   
