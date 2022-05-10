@@ -31,7 +31,7 @@ export class MapCustomService {
   tbOptions = {
     defaultLights: true,
     realSunlight: true,
-    realSunlightHelper: true,
+    // realSunlightHelper: true,
     sky: true,
     // terrain: true,
     enableSelectingFeatures: true,
@@ -165,7 +165,7 @@ export class MapCustomService {
             materials = materials[0];
           }
 
-          console.log("Materials list", materials)
+          // console.log("Materials list", materials)
           let cubeA = new THREE.Mesh(geometry, materials);
           let cube = window['tb'].Object3D({ obj: cubeA, units: 'meters'});
           
@@ -173,7 +173,26 @@ export class MapCustomService {
           if (item3d.scale) cube.setScale(item3d.scale);
           cube.castShadow = true;
           cube.receiveShadow = true;
-          cube.name = item3d.name
+          cube.name = item3d.name;
+
+          if (this.objectSelected?.name === item3d.name) {
+            map.selectedObject = cube;
+            map.selectedObject.selected = true;
+            map.selectedObject.dispatchEvent({ type: 'Wireframed', detail: map.selectedObject });
+            map.selectedObject.dispatchEvent({ type: 'IsPlayingChanged', detail: map.selectedObject });
+
+            map.repaint = true;
+          }
+
+          // map.selectedObject = cube;
+          // map.selectedObject.selected = true;
+          // map.selectedObject.dispatchEvent({ type: 'Wireframed', detail: map.selectedObject });
+					// map.selectedObject.dispatchEvent({ type: 'IsPlayingChanged', detail: map.selectedObject });
+
+					// map.repaint = true;
+
+          console.log("ITEM3D", item3d);
+          console.log(map)
           // cube.addEventListener('ObjectChanged', (e) => {
           //   console.log('ObjectChange', e);
           // }, false)
@@ -184,10 +203,13 @@ export class MapCustomService {
             let selectedObject = e.detail;
             let selectedValue = selectedObject.selected;
             let spaceDown = false;
-            console.log("Selected Object", selectedObject)
+            console.log("Selected Object", selectedObject);
+            console.log("Selected value", selectedValue)
+            // item3d.selected = selectedValue;
             
             // let transform;
-            if (selectedValue) {
+            if (selectedValue || this.objectSelected.selected === true) {
+              this.objectSelected = selectedObject;
               this.transformControl = new TransformControls(window['tb'].camera, map.getCanvasContainer());
 
               this.transformControl.setMode('scale');
@@ -321,6 +343,10 @@ export class MapCustomService {
 
           const textureLoader = new THREE.TextureLoader();
 
+          this.ktx2Loader = new KTX2Loader();
+          this.ktx2Loader.setTranscoderPath('assets/basis/');
+          this.ktx2Loader.detectSupport( window['tb'].renderer );
+
           let xRepeat = 1, yRepeat = 1;
           if (item3d.textureNeedRepeat  && item3d.textureNeedRepeat.x > 0) {
             xRepeat = Math.ceil(item3d.polygonExtrusionHeight / item3d.textureNeedRepeat.x)
@@ -332,7 +358,7 @@ export class MapCustomService {
           
           const repeatTexure = new THREE.Vector2(xRepeat, yRepeat)
           const material = new THREE.MeshStandardMaterial();
-          this.setMaterial(textureLoader,item3d.materials[0], material, repeatTexure)
+          this.setMaterial(this.ktx2Loader, item3d.materials[0], material, repeatTexure)
 
           material.needsUpdate = true;
           let center = [item3d.coordinates['lng'], item3d.coordinates['lat']];
@@ -435,7 +461,7 @@ export class MapCustomService {
       // console.log(txture)
       let texture;
       if (txture.path in this.textureCache) {
-        console.log("Cache ", this.textureCache)
+        // console.log("Cache ", this.textureCache)
         texture = this.textureCache[txture.path];
       } else {
         texture = loader.load(txture.path);
@@ -454,7 +480,7 @@ export class MapCustomService {
         texture.rotation = Math.PI / 2;
       }
       material[txture.type] = texture;
-      console.log(material);
+      // console.log(material);
     });
   }
 
@@ -473,7 +499,6 @@ export class MapCustomService {
         material[key] = value;
       }
     }
-    console.log("Done Set Material")
   }
 
   

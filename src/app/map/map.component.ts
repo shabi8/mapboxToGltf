@@ -220,8 +220,6 @@ export class MapComponent implements OnInit {
     });
     this.item3dListService.item3dToEdit$.subscribe((item) => {
       this.mapService.add3dBoxLayer(this.map, item, false, this.date);
-      console.log(item)
-      console.log('YES it is edited!!')
     });
     this.obj3dButtonService.obj3dButtonOn$.subscribe(buttonName => {
       if (buttonName === 'polygon service') {

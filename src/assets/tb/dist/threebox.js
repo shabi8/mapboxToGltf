@@ -545,7 +545,7 @@ Threebox.prototype = {
 							this.unselectObject();
 							return;
 						}
-
+						console.log("THIS IS", this)
 						// fire the Wireframed event to notify UI status change
 						this.selectedObject.dispatchEvent({ type: 'Wireframed', detail: this.selectedObject });
 						this.selectedObject.dispatchEvent({ type: 'IsPlayingChanged', detail: this.selectedObject });
