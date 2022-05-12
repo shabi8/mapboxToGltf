@@ -300,6 +300,7 @@ export class MapCustomService {
           scale: item3d.scale,
           units: 'meters',
           rotation: { x: 90, y: 0, z: 0 },
+          clone: false,
           draco: dracoLoader,
           ktx2: ktx2Loader
         }
