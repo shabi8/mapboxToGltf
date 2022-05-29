@@ -17901,8 +17901,14 @@ Objects.prototype = {
 			obj.setScale = function (scale) {
 				// scale the model so that its units are interpreted as meters at the given latitude
 				if (obj.userData.units != 'scene') {
-					let s = obj.unitsPerMeter;
-					obj.scale.set(s, s, s);
+					// [shabi8] to keep scale in dragg
+					if (obj.userData.transformControlScale) {
+						obj.scale.set(obj.userData.transformControlScale.x, obj.userData.transformControlScale.y, obj.userData.transformControlScale.z)
+					} else {
+						let s = obj.unitsPerMeter;
+						obj.scale.set(s, s, s);
+					}
+					
 				} else if (obj.fixedZoom) {
 					if (scale) obj.userData.mapScale = scale;
 					obj.setFixedZoom(obj.userData.mapScale); //apply fixed zoom

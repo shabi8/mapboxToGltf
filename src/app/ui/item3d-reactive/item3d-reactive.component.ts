@@ -192,7 +192,7 @@ export class Item3dReactiveComponent implements OnInit, OnChanges, DoCheck {
       console.log('Value CHANGED', val)
       for (const [key, value] of Object.entries(val)) {
         if (value) {
-          console.log(value);
+          // console.log(value);
           switch (key) {
             case 'dimensionsX':
               console.log('gggg')
@@ -240,14 +240,14 @@ export class Item3dReactiveComponent implements OnInit, OnChanges, DoCheck {
           }
         }
       }
-      console.log('UPDATED BY FORM', this.item);
+      // console.log('UPDATED BY FORM', this.item);
       this.item3dListService.sendItem3dToEdit(this.item);
     });
     this.differ = this.differService.find(this.item).create();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-      console.log("INPUT CHANGE", changes)
+      // console.log("INPUT CHANGE", changes)
   }
 
   ngDoCheck(): void {
@@ -256,10 +256,10 @@ export class Item3dReactiveComponent implements OnInit, OnChanges, DoCheck {
       // console.log(changes, this.differ)
       if (changes) {
         changes.forEachChangedItem(r => {
-          console.log("CHANGE!!!")
-          console.log(r.key, r.currentValue)
+          // console.log("CHANGE!!!")
+          // console.log(r.key, r.currentValue)
           if (r.key === 'scale') {
-            console.log(r.key, r.currentValue)
+            // console.log(r.key, r.currentValue)
             this.form.patchValue({
               scaleX: r.currentValue.x,
               scaleY: r.currentValue.y,
@@ -270,7 +270,7 @@ export class Item3dReactiveComponent implements OnInit, OnChanges, DoCheck {
         changes.forEachAddedItem( r => {
           // console.log("Added", r);
           if (r.key === 'scale') {
-            console.log(r.key, r.currentValue)
+            // console.log(r.key, r.currentValue)
             // this.form.patchValue({
             //   scaleX: r.currentValue.x,
             //   scaleY: r.currentValue.y,
@@ -279,7 +279,7 @@ export class Item3dReactiveComponent implements OnInit, OnChanges, DoCheck {
           }
         });
         changes.forEachRemovedItem( r => {
-          console.log("removed", r);
+          // console.log("removed", r);
         })
       }
     }
@@ -288,7 +288,7 @@ export class Item3dReactiveComponent implements OnInit, OnChanges, DoCheck {
 
 
   inputItemForm(item: IItem3d) {
-    console.log('THISISITEM', item)
+    // console.log('THISISITEM', item)
     this.form.patchValue({
       dimensionsX: item.dimensions?.x,
       segmentsX: item.segments?.x,
@@ -333,7 +333,7 @@ export class Item3dReactiveComponent implements OnInit, OnChanges, DoCheck {
       }
       formArray.push(materialFormGroup);
     });
-    console.log('AFTER PATCH',formArray)
+    // console.log('AFTER PATCH',formArray)
 
     return formArray;
   }

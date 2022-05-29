@@ -69,9 +69,9 @@ export class MapCustomService {
     } else if (item3d.itemType === 'polygon'){
       map.addLayer(this.createExtrudeShapeCustomLayer(item3d, downloadGltf, date))
     } else {
-      console.log(window['tb'].memory());
-      console.log(window['tb'].programs());
-      console.log(window['tb'].renderer.info);
+      // console.log(window['tb'].memory());
+      // console.log(window['tb'].programs());
+      // console.log(window['tb'].renderer.info);
 
       map.addLayer(this.createCustomLayer(item3d, downloadGltf, date));
     }
@@ -167,10 +167,11 @@ export class MapCustomService {
 
           // console.log("Materials list", materials)
           let cubeA = new THREE.Mesh(geometry, materials);
+          // if (item3d.scale) cubeA.scale.set(item3d.scale);
           let cube = window['tb'].Object3D({ obj: cubeA, units: 'meters'});
           
 
-          if (item3d.scale) cube.setScale(item3d.scale);
+          
           cube.castShadow = true;
           cube.receiveShadow = true;
           cube.name = item3d.name;
@@ -197,6 +198,7 @@ export class MapCustomService {
           //   console.log('ObjectChange', e);
           // }, false)
           cube.addEventListener('ObjectDragged', (e) => {
+            if (item3d.scale) cube.scale.set(item3d.scale.x, item3d.scale.y, item3d.scale.z);
             this.onObjectDragged(e, item3d);
           }, false)
           cube.addEventListener('SelectedChange', (e) => {
@@ -213,8 +215,30 @@ export class MapCustomService {
               this.transformControl = new TransformControls(window['tb'].camera, map.getCanvasContainer());
 
               this.transformControl.setMode('scale');
-              this.transformControl.setSize(0.5)
-              this.transformControl.addEventListener('dragging-changed', (e) => {
+              this.transformControl.setSize(0.5);
+
+              this.transformControl.addEventListener('objectChange', (e) => {
+                // console.log(e);
+                // console.log(this.transformControl.object)
+                this.transformControl.object.userData.transformControlScale = this.transformControl.object.scale;
+                console.log(this.transformControl.object.userData.transformControlScale);
+              });
+              
+              this.transformControl.addEventListener('change', (e) => {
+                map.triggerRepaint();
+              })
+              this.transformControl.addEventListener('mouseUp', (e) => {
+                console.log(e);
+                console.log("Mouse UP", this.transformControl.object);
+                console.log(this.transformControl.object.scale);
+
+                let trScale = this.transformControl.object.scale;
+                item3d.scale = new THREE.Vector3(trScale.x, trScale.y, trScale.z);
+                console.log("Item3D", item3d);
+
+                this.item3dListService.sendItem3dChanged(item3d);
+              })
+              // this.transformControl.addEventListener('dragging-changed', (e) => {
                 // console.log(e);
                 // console.log('dragging-changed')
                 // console.log(this.transformControl);
@@ -222,15 +246,15 @@ export class MapCustomService {
                 // item3d.scale = this.transformControl.object.scale;
                 // console.log("scale:", item3d.scale);
                 // this.item3dListService.sendItem3dChanged(item3d);
-              });
-              this.transformControl.addEventListener('change', (e) => {
-                let trScale = this.transformControl.object.scale ? this.transformControl.object.scale : item3d.scale;
-                item3d.scale = new THREE.Vector3(trScale.x, trScale.y, trScale.z);
-                // console.log("scale:", this.transformControl.object.scale);
-                this.item3dListService.sendItem3dChanged(item3d);
+              // });
+              // this.transformControl.addEventListener('change', (e) => {
+              //   let trScale = this.transformControl.object.scale ? this.transformControl.object.scale : item3d.scale;
+              //   item3d.scale = new THREE.Vector3(trScale.x, trScale.y, trScale.z);
+              //   // console.log("scale:", this.transformControl.object.scale);
+              //   this.item3dListService.sendItem3dChanged(item3d);
 
-                map.triggerRepaint();
-              });
+              //   map.triggerRepaint();
+              // });
               window['tb'].scene.add(this.transformControl);
 
               document.body.onkeydown = (ev) => {
@@ -246,14 +270,14 @@ export class MapCustomService {
                   spaceDown = !spaceDown
                   map.dragPan.enable();
                   // map.dragRotate.disable();
-                  this.transformControl.detach(cube);
+                  this.transformControl.detach();
                   map.triggerRepaint();
                 }
               }
             } else if (!selectedValue) {
               console.log("WWW")
               spaceDown = false
-              this.transformControl.detach(cubeA);
+              this.transformControl.detach();
               map.dragPan.enable();
               this.transformControl.dispose();
               map.triggerRepaint();
@@ -263,8 +287,9 @@ export class MapCustomService {
 
           }, false)
           cube.setCoords([item3d.coordinates['lng'], item3d.coordinates['lat']]);
+          if (item3d.scale) cube.scale.set(item3d.scale.x, item3d.scale.y, item3d.scale.z);
           window['tb'].add(cube);
-          window['tb'].lights.dirLight.target = cube;
+          // window['tb'].lights.dirLight.target = cube;
           console.log("CUBE" , cube)
 
 
@@ -300,7 +325,7 @@ export class MapCustomService {
           scale: item3d.scale,
           units: 'meters',
           rotation: { x: 90, y: 0, z: 0 },
-          clone: false,
+          // clone: false,
           draco: dracoLoader,
           ktx2: ktx2Loader
         }
@@ -308,6 +333,7 @@ export class MapCustomService {
         window['tb'].loadObj(options, (model) => {
           let loadedItem = model.setCoords([item3d.coordinates['lng'], item3d.coordinates['lat']]);
           loadedItem.castShadow = true;
+          loadedItem.setReceiveShadowFloor();
           loadedItem.name = item3d.name
           // loadedItem.addEventListener('ObjectChanged', (e) => {
           //   console.log('ObjectChange', e);
